@@ -1,6 +1,16 @@
 {
-    "project_name": "my_project",
-    "_copy_without_render": [
-        "Justfile"
-    ]
+  "author": "author",
+  "author_email": "author@email.com",
+  "project_name": "my-project",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "ci_framework": ["all", "gitlab", "github"],
+  "ci_code_quality_check": ["yes", "no"],
+  "include_docs": ["yes", "no"],
+  "_copy_without_render": ["Justfile"],
+  "__prompts__": {
+    "author": "Enter the authors name",
+    "author_email": "Enter the authors email",
+    "project_slug": "This is your python module name",
+    "project_name": "Select your project name"
+  }
 }
