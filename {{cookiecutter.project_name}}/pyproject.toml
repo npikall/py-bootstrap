@@ -1,0 +1,59 @@
+[project]
+authors = [{ name = "{{cookiecutter.author}}", email = "{{cookiecutter.author_email}}" }]
+name = "{{cookiecutter.project_slug}}"
+version = "0.0.0"
+description = "The project description..."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: POSIX",
+    "Natural Language :: English",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.6,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = []
+test = [
+    "pytest",
+    "pytest-cov"
+]
+
+# Uncomment the next section to add pre-built wheel files of non-python
+# libraries to your project. In this example GDAL has been choosen.
+#
+# [tool.uv]
+# find-links = ["https://girder.github.io/large_image_wheels"]
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "COM812",  # missing-trailing-comma (may conflict with ruff formatter)
+    "D203",    # incorrect-blank-line-before-class (conflicts with D211)
+    "D213",    # multi-line-summary-second-line (conflicts with D212)
+]
+fixable = ["ALL"]
+unfixable = []
+
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = false
+docstring-code-line-length = "dynamic"
