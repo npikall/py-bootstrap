@@ -1,5 +1,11 @@
 name: Run Tests
-
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   build:
     name: continuous-integration
@@ -18,7 +24,7 @@ jobs:
       - name: Install uv and set the python version
         uses: astral-sh/setup-uv@v6
         with:
-          version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python-version }}
           enable-cache: true
 
       - name: Set up Python
@@ -28,4 +34,4 @@ jobs:
         run: uv sync --locked --all-extras --dev
 
       - name: Run Tests
-        run: uv run pytest tests
+        run: uv run --with pytest pytest tests
