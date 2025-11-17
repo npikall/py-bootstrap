@@ -6,7 +6,7 @@
   "ci_framework": ["all", "gitlab", "github"],
   "ci_code_quality_check": ["yes", "no"],
   "include_docs": ["yes", "no"],
-  "_copy_without_render": ["Justfile"],
+  "_copy_without_render": ["Justfile", ".github/workflows/run_tests.yml"],
   "__prompts__": {
     "author": "Enter the authors name",
     "author_email": "Enter the authors email",
