@@ -11,6 +11,9 @@ TODO: Add documentation!
 > To install `uv` check the [uv Docs].
 > To install `Just`, follow the instructions in the [Just Docs].
 
+> [!NOTE]
+> This cookiecutter tries to adhere to the [Python Developer Tooling Handbook](https://pydevtools.com/handbook/explanation/modern-python-project-setup-guide-for-ai-assistants/)
+
 ## First Steps
 
 After you have just used the `cookiecutter` to create this repo, you might want to follow these steps:
