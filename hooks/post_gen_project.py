@@ -3,6 +3,8 @@ import shutil
 from enum import StrEnum, auto
 from pathlib import Path
 
+from rich import print
+
 PROJECT_DIRECTORY = Path.cwd().resolve()
 
 
@@ -58,6 +60,7 @@ def main() -> None:
     if has_ci_code_quality == PromptBool.NO:
         remove_file(".github/workflows/code_quality.yml")
         remove_file(".github/actions/setup/action.yml")
+    print(":rocket: [green bold] Project successfully initialized.")
 
 
 if __name__ == "__main__":
