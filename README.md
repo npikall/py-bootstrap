@@ -1,12 +1,12 @@
 # Cookiecutter `Py-Lib`
 
-This template or cookiecutter sets up a structure for you to write you python package.
+This template or cookiecutter sets up a structure for you to write a python package.
 It comes filled with a bunch of modern features from the python ecosystem.
 
 ## :battery: All Batteries included
 
 - :wrench: CI pipelines for `Github Actions` and `Gitlab`
-- :scroll: Documentation from [Zensical] (the Makers of [Material for MKDocs])
+- :scroll: Documentation from [Zensical] (the followup project to [Material for MKDocs])
 - :zap: Fast environment and project management with [uv]
 - :musical_note: Task orchestration with [Just]
 - :black_nib: Preconfigured Licenses to choose from
