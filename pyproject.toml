@@ -5,11 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "httpx>=0.28.1",
-    "packaging>=25.0",
-    "pydantic>=2.12.4",
     "rich>=14.2.0",
-    "semver>=3.0.4",
 ]
 
 
