@@ -26,10 +26,11 @@ testall:
     uv run --python=3.12 --group test pytest
     uv run --python=3.13 --group test pytest
 
-# print the current version of the project and python
+# print the current status of the project
 status:
-    @echo "Current project version is {{ PROJ_VERSION }}"
-    @echo "Current python version is {{ PY_VERSION }}"
+    @echo "Project Version: {{ PROJ_VERSION }}"
+    @echo "Python Version: {{ PY_VERSION }}"
+    @echo "Running on: `uname`"
 
 # clean all python build/compilation files and directories
 clean: clean-build clean-pyc clean-test
@@ -90,14 +91,17 @@ hooks:
 prompt-confirm:
 
 # bump the version, commit the changes and add a tag (increment can be major, minor, patch,...)
-bump INCREMENT:
+bump INCREMENT: && tag
     @uv version --bump {{ INCREMENT }} --dry-run
     @just prompt-confirm
     uv version --bump {{ INCREMENT }}
+
+# tag the latest version
+tag VERSION=`uv version --short`:
     git add pyproject.toml
-    git commit -m "Bumped version to `uv version --short`"
-    git tag "v`uv version --short`"
-    @echo "{{ GREEN }}{{ BOLD }}Version has been bumped to `uv version --short`.{{ NORMAL }}"
+    git commit -m "Bumped version to {{VERSION}}"
+    git tag "v{{VERSION}}"
+    @echo "{{ GREEN }}{{ BOLD }}Version has been bumped to {{VERSION}}.{{ NORMAL }}"
 
 # build the source distribution and wheel file with uv (bump version first)
 dist:
