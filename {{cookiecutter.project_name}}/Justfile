@@ -1,6 +1,6 @@
 # Default command lists all available recipes
 _default:
-    @just --list
+    @just --list --unsorted
 
 alias b := bump
 alias c := clean
@@ -9,33 +9,61 @@ alias h := hooks
 alias q := check
 alias t := test
 
-PROJ_VERSION := `uv version --short`
-PY_VERSION := `cat .python-version`
+PROJ := `uv version --short`
+PY := `cat .python-version`
+
+# lint python code using ruff
+[private]
+check-lint:
+    uv run ruff check . --fix
+
+# format python code using ruff
+[private]
+check-format:
+    uv run ruff format .
+
+# run the type checker ty
+[private]
+check-types:
+    uv run ty check
+
+# lint, format with ruff and type-check with ty
+check: check-lint check-format check-types
+
+# run tests with coverage
+test:
+    uv run pytest tests/
+
+# run tests for all the supported Python versions
+testall:
+    uv run --python=[PY_VERSION_3] pytest
+    uv run --python=[PY_VERSION_2] pytest
+    uv run --python=[PY_VERSION_1] pytest
+    uv run --python=[PY_VERSION_C] pytest
+    uv run --python=[PY_VERSION_F] pytest
 
 # run all the formatting, linting, and testing commands
-ci PYTHON=PY_VERSION:
-    uv run --python={{ PYTHON }} --dev ruff format .
-    uv run --python={{ PYTHON }} --dev ruff check . --fix
-    uv run --python={{ PYTHON }} --dev ty check .
-    uv run --python={{ PYTHON }} --dev --group test pytest tests/
+ci PYTHON=PY:
+    uv run --python={{ PYTHON }} ruff format .
+    uv run --python={{ PYTHON }} ruff check . --fix
+    uv run --python={{ PYTHON }} ty check .
+    uv run --python={{ PYTHON }} pytest tests/
 
-# run all the tests for all the supported Python versions
-testall:
-    uv run --python=3.10 --group test pytest
-    uv run --python=3.11 --group test pytest
-    uv run --python=3.12 --group test pytest
-    uv run --python=3.13 --group test pytest
+# setup the pre-commit hooks
+hooks:
+    uvx pre-commit install
 
 # print the current status of the project
 status:
-    @echo "Project Version: {{ PROJ_VERSION }}"
-    @echo "Python Version: {{ PY_VERSION }}"
+    @echo "Project Version: {{ PROJ }}"
+    @echo "Python Version: {{ PY }}"
     @echo "Running on: `uname`"
 
 # clean all python build/compilation files and directories
 clean: clean-build clean-pyc clean-test
 
 # remove build artifacts
+[private]
 clean-build:
     rm -fr build/
     rm -fr dist/
@@ -44,6 +72,7 @@ clean-build:
     find . -name '*.egg' -exec rm -f {} +
 
 # remove Python file artifacts
+[private]
 clean-pyc:
     find . -name '*.pyc' -exec rm -f {} +
     find . -name '*.pyo' -exec rm -f {} +
@@ -51,6 +80,7 @@ clean-pyc:
     find . -name '__pycache__' -exec rm -fr {} +
 
 # remove test and coverage artifacts
+[private]
 clean-test:
     rm -f .coverage
     rm -fr htmlcov/
@@ -58,33 +88,8 @@ clean-test:
 
 # install dependencies in local venv
 venv:
-    uv sync --group test --group dev
+    uv sync
 
-# run test with coverage
-test:
-    uv run pytest tests/ -rsx --verbose --color=yes
-
-# lint python code using ruff
-[private]
-lint:
-    uvx ruff check . --fix
-
-# format python code using ruff
-[private]
-format:
-    uvx ruff format .
-
-# run the type checker ty
-[private]
-types:
-    uvx ty check
-
-# lint and format python code (ruff) and run the type checker (ty)
-check: lint format types
-
-# setup the pre-commit hooks
-hooks:
-    uvx pre-commit install
 
 [confirm("Do you really want to bump? (y/n)")]
 [private]
@@ -97,6 +102,7 @@ bump INCREMENT: && tag
     uv version --bump {{ INCREMENT }}
 
 # tag the latest version
+[private]
 tag VERSION=`uv version --short`:
     git add pyproject.toml
     git commit -m "Bumped version to {{VERSION}}"

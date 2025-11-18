@@ -22,11 +22,12 @@ requires = ["uv_build>=0.9.6,<0.10.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
+# Unlike optional dependencies, development dependencies are local-only
+# and will not be included in the project requirements when
+# published to PyPI or other indexes
 dev = [
     "ruff",
     "ty",
-]
-test = [
     "pytest",
     "pytest-cov"
 ]
@@ -60,3 +61,6 @@ skip-magic-trailing-comma = false
 line-ending = "auto"
 docstring-code-format = false
 docstring-code-line-length = "dynamic"
+
+[tool.pytest.ini_options]
+addopts = "--cov={{ cookiecutter.project_slug }} --cov-report term-missing -rsx --verbose --color=yes"

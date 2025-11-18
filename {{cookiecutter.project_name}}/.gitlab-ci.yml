@@ -15,7 +15,7 @@ uv:
   image: ghcr.io/astral-sh/uv:$UV_VERSION-python$PYTHON_VERSION-$BASE_LAYER
   script:
     # your `uv` commands
-    - uv sync --group test
+    - uv sync
     - uv run pytest tests/ -rsx --verbose --color=yes --cov={{cookiecutter.project_slug}} --cov-report term-missing
 
 .base_ruff:
