@@ -4,15 +4,18 @@ name = "{{cookiecutter.project_slug}}"
 version = "0.0.0"
 description = "The project description..."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=[P_YVERSION_3]"
 dependencies = []
 classifiers = [
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering",
     "Topic :: Software Development :: Libraries",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: [PY_VERSION_3]",
+    "Programming Language :: Python :: [PY_VERSION_2]",
+    "Programming Language :: Python :: [PY_VERSION_1]",
+    "Programming Language :: Python :: [PY_VERSION_C]",
+    "Programming Language :: Python :: [PY_VERSION_F]",
     "Operating System :: POSIX",
     "Natural Language :: English",
 ]

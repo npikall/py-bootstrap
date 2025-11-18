@@ -13,10 +13,11 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          - "3.13"
+          - "[PY_VERSION_3]"
+          - "[PY_VERSION_2]"
+          - "[PY_VERSION_1]"
+          - "[PY_VERSION_C]"
+          - "[PY_VERSION_F]"
         os:
           - ubuntu-latest
           - windows-latest
