@@ -9,16 +9,51 @@ alias h := hooks
 alias q := check
 alias t := test
 
+PROJ_VERSION := `uv version --short`
+PY_VERSION := `cat .python-version`
+
+# run all the formatting, linting, and testing commands
+ci PYTHON=PY_VERSION:
+    uv run --python={{ PYTHON }} --dev ruff format .
+    uv run --python={{ PYTHON }} --dev ruff check . --fix
+    uv run --python={{ PYTHON }} --dev ty check .
+    uv run --python={{ PYTHON }} --dev --group test pytest tests/
+
+# run all the tests for all the supported Python versions
+testall:
+    uv run --python=3.10 --group test pytest
+    uv run --python=3.11 --group test pytest
+    uv run --python=3.12 --group test pytest
+    uv run --python=3.13 --group test pytest
+
+# print the current version of the project and python
+status:
+    @echo "Current project version is {{ PROJ_VERSION }}"
+    @echo "Current python version is {{ PY_VERSION }}"
+
 # clean all python build/compilation files and directories
-clean:
-    find . -name '*.pyc' -exec rm --force {} +
-    find . -name '*.pyo' -exec rm --force {} +
-    find . -name '*~' -exec rm --force {} +
-    rm --force .coverage
-    rm --force --recursive .pytest_cache
-    rm --force --recursive build/
-    rm --force --recursive dist/
-    rm --force --recursive *.egg-info
+clean: clean-build clean-pyc clean-test
+
+# remove build artifacts
+clean-build:
+    rm -fr build/
+    rm -fr dist/
+    rm -fr .eggs/
+    find . -name '*.egg-info' -exec rm -fr {} +
+    find . -name '*.egg' -exec rm -f {} +
+
+# remove Python file artifacts
+clean-pyc:
+    find . -name '*.pyc' -exec rm -f {} +
+    find . -name '*.pyo' -exec rm -f {} +
+    find . -name '*~' -exec rm -f {} +
+    find . -name '__pycache__' -exec rm -fr {} +
+
+# remove test and coverage artifacts
+clean-test:
+    rm -f .coverage
+    rm -fr htmlcov/
+    rm -fr .pytest_cache
 
 # install dependencies in local venv
 venv:
