@@ -7,7 +7,12 @@
   "ci_code_quality_check": ["yes", "no"],
   "include_docs": ["yes", "no"],
   "license": ["MIT", "Unlicense", "Apache License 2.0", "None"],
-  "_copy_without_render": ["Justfile", ".github/workflows/run_tests.yml"],
+  "_py_past_3": "3.10",
+  "_py_past_2": "3.11",
+  "_py_past_1": "3.12",
+  "_py_current": "3.13",
+  "_py_future": "3.14",
+  "_copy_without_render": [],
   "__prompts__": {
     "author": "Enter the authors name",
     "author_email": "Enter the authors email",

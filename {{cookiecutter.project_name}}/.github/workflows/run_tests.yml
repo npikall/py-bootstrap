@@ -1,3 +1,4 @@
+{% raw %}
 name: Run Tests
 on:
   push:
@@ -12,12 +13,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version:
-          - "[PY_VERSION_3]"
-          - "[PY_VERSION_2]"
-          - "[PY_VERSION_1]"
-          - "[PY_VERSION_C]"
-          - "[PY_VERSION_F]"
+        python-version: {% endraw %}
+          - "{{ cookiecutter._py_past_3 }}"
+          - "{{ cookiecutter._py_past_2 }}"
+          - "{{ cookiecutter._py_past_1 }}"
+          - "{{ cookiecutter._py_current }}"
+          - "{{ cookiecutter._py_future }}" {% raw %}
         os:
           - ubuntu-latest
           - windows-latest
@@ -39,4 +40,4 @@ jobs:
         run: uv sync --locked --all-extras --dev
 
       - name: Run Tests
-        run: uv run --with pytest pytest tests
+        run: uv run --with pytest pytest tests {% endraw %}

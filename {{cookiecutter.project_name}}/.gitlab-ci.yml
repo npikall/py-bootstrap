@@ -4,7 +4,7 @@ stages:
 
 variables:
   UV_VERSION: "0.9"
-  PYTHON_VERSION: "[PY_VERSION_C]"
+  PYTHON_VERSION: "{{ cookiecutter._py_current }}"
   BASE_LAYER: bookworm-slim
   # GitLab CI creates a separate mountpoint for the build directory,
   # so we need to copy instead of using hard links.

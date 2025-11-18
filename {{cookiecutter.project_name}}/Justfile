@@ -36,12 +36,13 @@ test:
 
 # run tests for all the supported Python versions
 testall:
-    uv run --python=[PY_VERSION_3] pytest
-    uv run --python=[PY_VERSION_2] pytest
-    uv run --python=[PY_VERSION_1] pytest
-    uv run --python=[PY_VERSION_C] pytest
-    uv run --python=[PY_VERSION_F] pytest
+    uv run --python={{ cookiecutter._py_past_3}} pytest
+    uv run --python={{ cookiecutter._py_past_2}} pytest
+    uv run --python={{ cookiecutter._py_past_1}} pytest
+    uv run --python={{ cookiecutter._py_current}} pytest
+    uv run --python={{ cookiecutter._py_future}} pytest
 
+{% raw %}
 # run all the formatting, linting, and testing commands
 ci PYTHON=PY:
     uv run --python={{ PYTHON }} ruff format .
@@ -119,3 +120,4 @@ init:
     git add .
     git commit -m "initial commit"
     @echo "{{ GREEN }}{{ BOLD }}Git has been initialized{{ NORMAL }}"
+{% endraw %}
