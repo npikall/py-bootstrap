@@ -6,25 +6,18 @@ site_author = "<your name here>"
 copyright = """
 Copyright &copy; 2025 The authors
 """
-# Read more: https://zensical.org/docs/setup/navigation/
 # nav = [
 #   { "Get started" = "index.md" },
 #   { "Markdown in 5min" = "markdown.md" },
 # ]
-
-# Read more: https://zensical.org/docs/customization/#additional-css
 #extra_css = ["assets/stylesheets/extra.css"]
-
-# Read more: https://zensical.org/docs/customization/#additional-javascript
 #extra_javascript = ["assets/javascript/extra.js"]
 
 [project.theme]
 # change this to "classic" to use the traditional Material for MkDocs look.
 #variant = "classic"
 
-# Read more: https://zensical.org/docs/customization/#extending-the-theme
 #custom_dir = "overrides"
-
 #favicon = "assets/images/favicon.png"
 language = "en"
 
@@ -47,7 +40,6 @@ features = [
     "search.highlight",
 ]
 
-# Read more: https://zensical.org/docs/setup/colors/
 [[project.theme.palette]]
 scheme = "default"
 toggle.icon = "lucide/sun"
