@@ -29,10 +29,10 @@ build-backend = "uv_build"
 # and will not be included in the project requirements when
 # published to PyPI or other indexes
 dev = [
-    "ruff",
-    "ty",
-    "pytest",
-    "pytest-cov"
+ "pytest>=9.0.1",
+ "pytest-cov>=7.0.0",
+ "ruff>=0.14.5",
+ "ty>=0.0.1a27",
 ]
 
 # Uncomment the next section to add pre-built wheel files of non-python
