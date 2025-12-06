@@ -103,7 +103,6 @@ bump INCREMENT: && tag
     uv version --bump {{ INCREMENT }}
 
 # tag the latest version
-[private]
 tag VERSION=`uv version --short`:
     git add pyproject.toml
     git commit -m "Bumped version to {{VERSION}}"
