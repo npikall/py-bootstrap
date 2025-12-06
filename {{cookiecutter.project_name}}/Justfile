@@ -114,6 +114,10 @@ tag VERSION=`uv version --short`:
 dist:
     uv build
 
+# serve the documentation
+docs:
+    uv run zensical serve
+
 # initialize a git repo and add all files
 init:
     git init
