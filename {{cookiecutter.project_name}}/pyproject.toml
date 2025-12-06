@@ -34,6 +34,10 @@ dev = [
  "ruff>=0.14.5",
  "ty>=0.0.1a27",
 ]
+{% if cookiecutter.include_docs == "yes" -%}
+docs = [
+    "zensical>=0.0.11",
+]{% endif %}
 
 # Uncomment the next section to add pre-built wheel files of non-python
 # libraries to your project. In this example GDAL has been choosen.

@@ -116,10 +116,11 @@ dist:
 
 # serve the documentation
 docs:
+    uv sync --group docs
     uv run zensical serve
 
 # initialize a git repo and add all files
-init:
+init: venv
     git init
     git add .
     git commit -m "initial commit"

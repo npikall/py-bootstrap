@@ -57,6 +57,7 @@ cover/*
 MANIFEST
 /**/*.html
 /**/*_files/
+site/
 
 
 # Data
