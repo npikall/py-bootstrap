@@ -1,5 +1,5 @@
 {% raw %}
-name: Run Tests
+name: Run Tests for different Platforms
 on:
   push:
     branches:
