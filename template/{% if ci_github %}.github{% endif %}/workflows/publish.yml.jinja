@@ -20,8 +20,8 @@ jobs:
         uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v6
-      - name: Install Python {{ cookiecutter._py_current }}
-        run: uv python install {{ cookiecutter._py_current }}
+      - name: Install Python {{py_version_current}}
+        run: uv python install {{ py_version_current }}
       - name: Build
         run: uv build
       # Check that basic features work and we didn't miss to include crucial files
