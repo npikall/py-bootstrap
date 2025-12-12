@@ -1,0 +1,11 @@
+"""{{ py_dist_name }}: A Package to..."""
+
+from importlib.metadata import version
+
+__version__ = version(__name__)
+
+name = "{{ py_import_name }}"
+
+
+def greet() -> str:
+    return "Hello from {{ py_dist_name }}"

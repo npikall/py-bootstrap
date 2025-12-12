@@ -1,27 +1,25 @@
 [project]
-authors = [{ name = "{{cookiecutter.author}}", email = "{{cookiecutter.author_email}}" }]
-name = "{{cookiecutter.project_slug}}"
-version = "0.0.0"
+authors = [{ name = "{{author_fullname}}", email = "{{author_email}}" }]
+name = "{{project_name}}"
+version = "0.1.0"
 description = "The project description..."
 readme = "README.md"
-requires-python = ">={{ cookiecutter._py_current }}"
+requires-python = ">={{py_version_past}}"
 dependencies = []
 classifiers = [
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering",
     "Topic :: Software Development :: Libraries",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: {{ cookiecutter._py_past_3}}",
-    "Programming Language :: Python :: {{ cookiecutter._py_past_2}}",
-    "Programming Language :: Python :: {{ cookiecutter._py_past_1}}",
-    "Programming Language :: Python :: {{ cookiecutter._py_current}}",
-    "Programming Language :: Python :: {{ cookiecutter._py_future}}",
+    "Programming Language :: Python :: {{py_version_past}}",
+    "Programming Language :: Python :: {{py_version_current}}",
+    "Programming Language :: Python :: {{py_version_future}}",
     "Operating System :: POSIX",
     "Natural Language :: English",
 ]
 
 [build-system]
-requires = ["uv_build>=0.9.6,<0.10.0"]
+requires = ["uv_build>=0.9.17,<0.10.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
@@ -39,11 +37,19 @@ docs = [
     "zensical>=0.0.11",
 ]{% endif %}
 
-# Uncomment the next section to add pre-built wheel files of non-python
+# NOTE: Uncomment the next section to add pre-built wheel files of non-python
 # libraries to your project. In this example GDAL has been choosen.
+# Read more at:
+# https://github.com/astral-sh/uv/issues/11466
 #
-# [tool.uv]
-# find-links = ["https://girder.github.io/large_image_wheels"]
+# [[tool.uv.index]]
+# name = "girder"
+# url = "https://girder.github.io/large_image_wheels"
+# explicit = true
+#
+# [tool.uv.sources]
+# gdal = { index = "girder" }
+
 
 [tool.ruff]
 line-length = 88
@@ -74,4 +80,7 @@ docstring-code-format = false
 docstring-code-line-length = "dynamic"
 
 [tool.pytest.ini_options]
-addopts = "--cov={{ cookiecutter.project_slug }} --cov-report term-missing -rsx --verbose --color=yes"
+addopts = "--cov={{py_dist_name}} --cov-report term-missing -rsx --verbose --color=yes"
+
+[tool.coverage.run]
+relative_files = true

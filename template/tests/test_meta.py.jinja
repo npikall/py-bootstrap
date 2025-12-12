@@ -1,0 +1,7 @@
+from {{ py_import_name }} import greet
+
+def test_that_testing_package_is_working():
+    got = greet()
+    want = "Hello from {{ py_dist_name }}"
+
+    assert got == want

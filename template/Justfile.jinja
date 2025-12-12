@@ -10,7 +10,6 @@ alias q := check
 alias t := test
 
 PROJ := `uv version --short`
-PY := `cat .python-version`
 
 # lint python code using ruff
 [private]
@@ -36,11 +35,9 @@ test:
 
 # run tests for all the supported Python versions
 testall:
-    uv run --python={{ cookiecutter._py_past_3}} pytest
-    uv run --python={{ cookiecutter._py_past_2}} pytest
-    uv run --python={{ cookiecutter._py_past_1}} pytest
-    uv run --python={{ cookiecutter._py_current}} pytest
-    uv run --python={{ cookiecutter._py_future}} pytest
+    uv run --python={{py_version_past}} pytest
+    uv run --python={{py_version_current}} pytest
+    uv run --python={{py_version_future}} pytest
 
 {% raw %}
 # run all the formatting, linting, and testing commands
@@ -57,7 +54,6 @@ hooks:
 # print the current status of the project
 status:
     @echo "Project Version: {{ PROJ }}"
-    @echo "Python Version: {{ PY }}"
     @echo "Running on: `uname`"
 
 # clean all python build/compilation files and directories
@@ -67,6 +63,7 @@ clean: clean-build clean-pyc clean-test
 [private]
 clean-build:
     rm -fr build/
+    rm -fr site/
     rm -fr dist/
     rm -fr .eggs/
     find . -name '*.egg-info' -exec rm -fr {} +

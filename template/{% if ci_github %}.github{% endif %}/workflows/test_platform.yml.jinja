@@ -14,11 +14,9 @@ jobs:
     strategy:
       matrix:
         python-version: {% endraw %}
-          - "{{ cookiecutter._py_past_3 }}"
-          - "{{ cookiecutter._py_past_2 }}"
-          - "{{ cookiecutter._py_past_1 }}"
-          - "{{ cookiecutter._py_current }}"
-          - "{{ cookiecutter._py_future }}" {% raw %}
+          - "{{py_version_past}}"
+          - "{{py_version_current}}"
+          - "{{py_version_future}}" {% raw %}
         os:
           - ubuntu-latest
           - windows-latest
