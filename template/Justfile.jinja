@@ -86,7 +86,7 @@ clean-test:
 
 # install dependencies in local venv
 venv:
-    uv sync
+    uv sync --all-groups --all-extras
 
 
 [confirm("Do you really want to bump? (y/n)")]
@@ -116,7 +116,7 @@ docs:
     uv run zensical serve
 
 # initialize a git repo and add all files
-init: venv
+init: venv && hooks
     git init
     git add .
     git commit -m "initial commit"

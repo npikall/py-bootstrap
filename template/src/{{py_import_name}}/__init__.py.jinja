@@ -7,5 +7,5 @@ __version__ = version(__name__)
 name = "{{ py_import_name }}"
 
 
-def greet() -> str:
+def greet() -> str:  # noqa: D103
     return "Hello from {{ py_dist_name }}"
