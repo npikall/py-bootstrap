@@ -1,5 +1,8 @@
 # Cookiecutter `Py-Lib`
 
+> [!WARNING]  
+> This cookiecutter has been deprecated in favor of `copier`
+
 This template or cookiecutter sets up a structure for you to write a python package.
 It comes filled with a bunch of modern features from the python ecosystem.
 
@@ -20,10 +23,10 @@ To initialize a new repository with this `cookiecutter` template run the followi
 
 ```bash
 # if you have cookiecutter installed
-cookiecutter https://github.com/npikall/cookiecutter-py-lib.git
+cookiecutter https://github.com/npikall/py-bootstrap.git -c cookiecutter
 
 # or if you are using uv
-uvx cookiecutter https://github.com/npikall/cookiecutter-py-lib.git
+uvx cookiecutter https://github.com/npikall/py-bootstrap.git -c cookiecutter
 ```
 
 You will be prompted and then your repo will be setup.
