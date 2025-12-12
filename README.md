@@ -1,4 +1,4 @@
-# Cookiecutter `Py-Lib`
+# PyBootstrap
 
 This template sets up a structure for you to write a python package.
 It comes filled with a bunch of modern features from the python ecosystem.
@@ -25,7 +25,7 @@ uv tool install copier --with copier-templates-extensions
 To initialize a new repository with the `copier` template run the following command:
 
 ```console
-copier copy --trust "gh:npikall/cookiecutter-py-lib" path/to/project/
+copier copy --trust "gh:npikall/py-bootstrap" path/to/project/
 ```
 
 You will be prompted and then your repo will be setup.
