@@ -1,6 +1,6 @@
 # Cookiecutter `Py-Lib`
 
-This template or cookiecutter sets up a structure for you to write a python package.
+This template sets up a structure for you to write a python package.
 It comes filled with a bunch of modern features from the python ecosystem.
 
 ## :battery: All Batteries included
@@ -16,14 +16,16 @@ It comes filled with a bunch of modern features from the python ecosystem.
 
 ## Useage
 
-To initialize a new repository with this `cookiecutter` template run the following command:
+To install the `copier` tool with [uv] run:
 
-```bash
-# if you have cookiecutter installed
-cookiecutter https://github.com/npikall/cookiecutter-py-lib.git
+```console
+uv tool install copier --with copier-templates-extensions
+```
 
-# or if you are using uv
-uvx cookiecutter https://github.com/npikall/cookiecutter-py-lib.git
+To initialize a new repository with the `copier` template run the following command:
+
+```console
+copier copy --trust "gh:npikall/cookiecutter-py-lib" path/to/project/
 ```
 
 You will be prompted and then your repo will be setup.
