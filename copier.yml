@@ -10,7 +10,6 @@ _jinja_extensions:
   - extensions.py:CurrentYearExtension
   - extensions.py:GitExtension
   - extensions.py:SlugifyExtension
-  - extensions.py:GitHubIDsforGiscusExtension
 
 # PROMPT --------------------------------
 project_name:

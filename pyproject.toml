@@ -24,6 +24,9 @@ ignore = [
 fixable = ["ALL"]
 unfixable = []
 
+[tool.ruff.lint.per-file-ignores]
+"extensions.py" = ["D"]
+
 
 [tool.ruff.format]
 quote-style = "double"
