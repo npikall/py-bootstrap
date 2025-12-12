@@ -7,24 +7,24 @@
 > To install [uv] check the [uv Docs][uv].
 > To install [Just], follow the instructions in the [Just Docs][Just].
 
-> [!NOTE]
-> This template tries to adhere to the [Python Developer Tooling Handbook][Handbook]
-
 ## First Steps
 
 After you have just used the `copier` to create this repo, you might want to run the following commands:
 
 - `just init` to initialize a `git` repository
-- `just hooks` to install the `pre-commit` hooks
 - `just venv` to create a virtual environment
 
 ## Development
+
+### Pre-Commit Hooks
 
 The Pre-commit Hooks will lint and format your code, aswell as running some checks.
 
 ```console
 just hooks
 ```
+
+### Quality Assurance
 
 By default cody quality checks (formatter, linter and type-checker) are inplace, via `Github Actions` and/or `GitLab CI/CD`,
 which does the same as the `pre-commit` hooks.
@@ -38,6 +38,8 @@ just check
 > [!IMPORTANT]
 > The configuration for the linter, the formatter and the typechecker can be done in the `pyproject.toml` file.
 > By default ALL Linting Rules are enabled. If some rule are not desired in the project use the `exclude` field to disregard them.
+
+### Docs
 
 Further more there are example `docs` in this repository, which you can use as a startingpoint for your code documentation.
 Run the following command to start serving your documentation locally:

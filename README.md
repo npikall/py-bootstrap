@@ -3,6 +3,9 @@
 This template sets up a structure for you to write a python package.
 It comes filled with a bunch of modern features from the python ecosystem.
 
+> [!NOTE]
+> This template tries to follow the [Python Developer Tooling Handbook][Handbook]
+
 ## :battery: All Batteries included
 
 - :wrench: CI pipelines for `Github Actions` and `Gitlab`
@@ -29,6 +32,13 @@ copier copy --trust "gh:npikall/py-bootstrap" path/to/project/
 ```
 
 You will be prompted and then your repo will be setup.
+
+## First Steps
+
+After you have just used the `copier` to create this repo, you might want to run the following commands:
+
+- `just init` to initialize a `git` repository
+- `just venv` to create a virtual environment
 
 [Just]: https://github.com/casey/just
 [Zensical]: https://zensical.org/
