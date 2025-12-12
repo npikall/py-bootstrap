@@ -41,7 +41,7 @@ testall:
 
 {% raw %}
 # run all the formatting, linting, and testing commands
-ci PYTHON=PY:
+ci PYTHON="3.12":
     uv run --python={{ PYTHON }} ruff format .
     uv run --python={{ PYTHON }} ruff check . --fix
     uv run --python={{ PYTHON }} ty check .

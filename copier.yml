@@ -86,17 +86,17 @@ include_docs:
 py_version_past:
   type: str
   when: false
-  default: 3.10
+  default: "3.10"
 
 py_version_current:
   type: str
   when: false
-  default: 3.12
+  default: "3.12"
 
 py_version_future:
   type: str
   when: false
-  default: 3.14
+  default: "3.14"
 
 py_dist_name:
   type: str
