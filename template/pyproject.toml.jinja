@@ -32,7 +32,7 @@ dev = [
  "ruff>=0.14.5",
  "ty>=0.0.1a27",
 ]
-{% if cookiecutter.include_docs == "yes" -%}
+{% if include_docs -%}
 docs = [
     "zensical>=0.0.11",
 ]{% endif %}

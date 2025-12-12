@@ -14,66 +14,74 @@ _jinja_extensions:
 # PROMPT --------------------------------
 project_name:
   type: str
-  qmark: ""
+  qmark: "->"
   help: Set the project name
 
 author_fullname:
   type: str
-  qmark: ""
+  qmark: "->"
   help: Set the authors full name
   default: "{{ 'Niko Pikall' | git_user_name }}"
 
 author_email:
   type: str
-  qmark: ""
+  qmark: "->"
   help: Set the authors email
   default: "{{ 'nikolas.pikall@gmail.com' | git_user_email }}"
 
 author_username:
   type: str
-  qmark: ""
+  qmark: "->"
   help: Set the username (e.g. on GitHub)
   default: npikall
 
 ci_github:
   type: bool
-  qmark: ""
+  qmark: "->"
   help: Use GitHub CI?
   default: true
 
 ci_gitlab:
   type: bool
-  qmark: ""
+  qmark: "->"
   help: Use GitLab CI?
   default: true
 
 repo_name:
   type: str
-  qmark: ""
+  qmark: "->"
   help: Your repository name
   default: "{{ project_name | slugify }}"
 
 copyright_holder:
   type: str
-  qmark: ""
+  qmark: "->"
+  when: false
   help: The name of the person/entity holding the copyright
   default: "{{ author_fullname }}"
 
 copyright_date:
   type: str
-  qmark: ""
+  qmark: "->"
+  when: false
   help: The copyright date
   default: "{{ current_year }}"
 
 copyright_license:
   type: str
-  qmark: ""
+  qmark: "->"
   help: Set the project's license
   default: MIT
   choices:
     Apache License 2.0: Apache-2.0
     MIT License: MIT
     The Unlicense: Unlicense
+
+include_docs:
+  type: bool
+  qmark: "->"
+  help: Include Docs from Zensical
+  default: true
 
 py_version_past:
   type: str
@@ -92,12 +100,14 @@ py_version_future:
 
 py_dist_name:
   type: str
-  qmark: ""
+  qmark: "->"
+  when: false
   help: The Python package distribution name (for `pip install NAME`)
   default: "{{ project_name | slugify }}"
 
 py_import_name:
   type: str
-  qmark: ""
+  qmark: "->"
+  when: false
   help: The Python package import name (for `import NAME` in Python code)
   default: "{{ project_name | slugify('_') }}"
