@@ -1,11 +1,12 @@
 [project]
-name = "cookiecutter-py-lib"
+name = "py-bootstrap"
 version = "0.1.0"
-description = "Add your description here"
+description = "Bootstrap your Python Package Development"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "rich>=14.2.0",
+    "copier-template-extensions>=0.3.3",
+    "jinja2>=3.1.6",
 ]
 
 
@@ -35,3 +36,8 @@ skip-magic-trailing-comma = false
 line-ending = "auto"
 docstring-code-format = false
 docstring-code-line-length = "dynamic"
+
+[dependency-groups]
+dev = [
+    "zensical>=0.0.11",
+]
