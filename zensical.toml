@@ -1,0 +1,79 @@
+[project]
+# Read more: https://zensical.org/docs/setup/basics/#site_name
+site_name = "Py-Bootstrap"
+site_description = "Bootstrap your Python Development Experience."
+site_author = "Niko Pikall"
+repo_url = "https://github.com/npikall/py-bootstrap"
+repo_name = "npikall/py-bootstrap"
+copyright = """
+Copyright &copy; 2025 Niko Pikall
+"""
+nav = [
+  { "Home" = "index.md" },
+  { "Setup" = "setup.md" },
+  { "Create new Project" = "create.md" },
+  { "Template" = "template.md" },
+  { "Update a Project" = "update.md" },
+]
+#extra_css = ["assets/stylesheets/extra.css"]
+#extra_javascript = ["assets/javascript/extra.js"]
+
+[project.theme]
+# change this to "classic" to use the traditional Material for MkDocs look.
+variant = "classic"
+
+
+#custom_dir = "overrides"
+#favicon = "assets/images/favicon.png"
+language = "en"
+
+features = [
+    "announce.dismiss",
+    "content.code.annotate",
+    "content.code.copy",
+    "content.code.select",
+    "content.footnote.tooltips",
+    "content.tabs.link",
+    "content.tooltips",
+    "navigation.footer",
+    "navigation.indexes",
+    "navigation.instant",
+    "navigation.instant.prefetch",
+    "navigation.path",
+    "navigation.sections",
+    # "navigation.tabs",
+    "navigation.top",
+    "navigation.tracking",
+    "search.highlight",
+]
+
+# Palette toggle for automatic mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+# Palette toggle for light mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+accent = "blue"
+primary = "indigo"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+# Palette toggle for dark mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+accent = "blue"
+primary = "indigo"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+[project.theme.icon]
+logo = "lucide/rocket"
+
+# TODO: Wait till Zensical is mature enough to work with that
+# [project.markdown_extensions.toc]
+# permalink = "⚓︎"
