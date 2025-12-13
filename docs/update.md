@@ -1,9 +1,12 @@
 ---
 icon: lucide/refresh-cw
+tags:
+  - copier
+  - update
 ---
 
 # Update an existing Project
 
 !!! warning
 
-    This Site us under Construction :lucide-construction:
+    This Site is under Construction :lucide-construction:

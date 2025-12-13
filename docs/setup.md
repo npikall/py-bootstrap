@@ -1,5 +1,7 @@
 ---
 icon: lucide/hammer
+tags:
+  - setup
 ---
 
 # Setup
@@ -8,7 +10,7 @@ icon: lucide/hammer
 
 In order to have no issues useing this Template make sure the following software is installed.
 
-- [`Git v2`](https://git-scm.com), a version controll system
+- [`Git v2`](https://git-scm.com), a version control system
 - [`Python 3`][Python], which can be managed with [uv]
 - [`Copier`][Copier], the Python Program that creates the templates
 - [`uv`][uv], a Python Package Manager (optional)

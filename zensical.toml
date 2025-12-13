@@ -20,7 +20,7 @@ nav = [
 
 [project.theme]
 # change this to "classic" to use the traditional Material for MkDocs look.
-variant = "classic"
+# variant = "classic"
 
 
 #custom_dir = "overrides"

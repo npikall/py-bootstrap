@@ -1,5 +1,8 @@
 ---
 icon: lucide/file-plus
+tags:
+  - create
+  - new
 ---
 
 # Creating a new project
