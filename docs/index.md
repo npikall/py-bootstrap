@@ -1,0 +1,58 @@
+---
+icon: lucide/rocket
+---
+
+# Py-Bootstrap
+
+[![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-teal.json)](https://github.com/copier-org/copier)
+
+This template sets up a structure for you to write a python package.
+It comes filled with a bunch of modern features from the python ecosystem.
+
+!!! note
+
+    This template follows the [Python Developer Tooling Handbook][Handbook]
+
+## :lucide-battery-full: All Batteries included
+
+- :lucide-flask-conical: Testing setup with [pytest]
+- :lucide-git-pull-request-arrow: [Pre-commit] Hooks
+- :lucide-music: Task orchestration with [Just]
+- :lucide-scale: Preconfigured Licenses to choose from
+- :lucide-scroll-text: Documentation from [Zensical] (the followup project to [Material for MKDocs])
+- :lucide-shield-check: Code Quality assurance with [ruff] and [ty]
+- :lucide-wrench: CI pipelines for `Github Actions` and `Gitlab`
+- :lucide-zap: Fast environment and project management with [uv]
+
+## Useage
+
+To install the `copier` tool with [uv] run:
+
+```console
+uv tool install copier --with copier-templates-extensions
+```
+
+To initialize a new repository with the `copier` template run the following command:
+
+```console
+copier copy --trust "gh:npikall/py-bootstrap" path/to/project/
+```
+
+You will be prompted and then your repo will be setup.
+
+## First Steps
+
+After you have just used the `copier` to create this repo, you might want to run the following commands:
+
+- `just init` to initialize a `git` repository
+- `just venv` to create a virtual environment
+
+[Just]: https://github.com/casey/just
+[Zensical]: https://zensical.org/
+[Material for MKDocs]: https://squidfunk.github.io/mkdocs-material/
+[pytest]: https://docs.pytest.org/en/stable/
+[Pre-commit]: https://pre-commit.com
+[uv]: https://docs.astral.sh/uv/
+[ruff]: https://docs.astral.sh/ruff/
+[ty]: https://docs.astral.sh/ty/
+[Handbook]: https://pydevtools.com/handbook/explanation/modern-python-project-setup-guide-for-ai-assistants/
