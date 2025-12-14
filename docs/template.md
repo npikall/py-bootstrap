@@ -10,7 +10,7 @@ tags:
 
 The template generates a package structure that reflects common best practices for Python projects. The layout shown below represents the full set of files and directories that may be created by the template. Depending on the configuration choices you made during setup, some of these files or components may be omitted automatically.
 
-```console
+```bash
 <PROJECT> ---------------------- # your freshly created project!
 ├── .copier-answers.yml -------- # Copier Answer to update project
 ├── .gitignore ----------------- #
@@ -47,7 +47,7 @@ Under `.github/workflows`, the configuration is split into focused pipelines:
 
 Together, these workflows provide a lightweight but complete CI/CD setup that supports the project from development through distribution.
 
-```console
+```bash
 └── .github -------------------- # Github CI Config
     ├── actions/setup ---------- #
     │   └── setup.yml ---------- #
@@ -59,7 +59,7 @@ Together, these workflows provide a lightweight but complete CI/CD setup that su
         └── test_platform.yml -- # Test different platforms and versions
 ```
 
-## Taskorchestration with `Justfile`
+## Task Orchestration with `Justfile`
 
 The template uses a `Justfile` to provide a simple and consistent interface for task orchestration. It groups common development, quality assurance, and release tasks behind short, memorable commands, reducing the need to remember long tool-specific invocations. Most commands are built on top of uv, ensuring fast and reproducible execution.
 
@@ -145,6 +145,10 @@ Overall, this configuration provides a concise yet effective CI setup for GitLab
 The template allows you to choose between several widely used open-source licenses. Each option provides a different balance between permissiveness, attribution requirements, and legal protection. Selecting an appropriate license early helps set clear expectations for users and contributors of your project.
 
 <!-- TODO: Verify table, as it might be faulty -->
+
+??? note "Choose a License"
+
+    Checkout [ChooseALicense](https://choosealicense.com/licenses/) to find more detailed explanations of the Licenses.
 
 | License        | Permissive | Requires Attribution | Patent Grant | Warranty Disclaimer | Typical Use Case                                                           |
 | -------------- | ---------- | -------------------- | ------------ | ------------------- | -------------------------------------------------------------------------- |

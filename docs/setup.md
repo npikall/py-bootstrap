@@ -20,13 +20,13 @@ In order to have no issues useing this Template make sure the following software
 
 Install [`uv`][uv] with the following command.
 
-```console
+```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 And install [`Python`][Python] with [`uv`][uv] by running
 
-```console
+```bash
 uv python install 3.12
 ```
 
@@ -36,13 +36,13 @@ Run the following commands to install [`Copier`][Copier] as a `CLI` Tool.
 
 === "`uv`"
 
-    ```console
+    ```bash
     uv tool install copier --with copier-templates-extensions
     ```
 
 === "`pipx`"
 
-    ```console
+    ```bash
     pipx install copier
     pipx inject copier copier-templates-extensions
     ```
