@@ -27,6 +27,7 @@ unfixable = []
 
 [tool.ruff.lint.per-file-ignores]
 "extensions.py" = ["D"]
+"**/{tests}/*" = ["E402", "ANN201", "D", "INP001", "S101", "ANN001"]
 
 
 [tool.ruff.format]
@@ -39,5 +40,13 @@ docstring-code-line-length = "dynamic"
 
 [dependency-groups]
 dev = [
+    "pydantic>=2.12.5",
+    "pytest>=9.0.2",
     "zensical>=0.0.11",
+]
+
+[tool.pytest]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    'ignore:Dirty template changes included automatically'
 ]
