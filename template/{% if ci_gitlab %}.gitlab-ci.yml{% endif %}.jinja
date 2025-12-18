@@ -4,7 +4,7 @@ stages:
 
 variables:
   UV_VERSION: "0.9"
-  PYTHON_VERSION: "{{ _py_current }}"
+  PYTHON_VERSION: "{{ py_version_current }}"
   BASE_LAYER: bookworm-slim
   # GitLab CI creates a separate mountpoint for the build directory,
   # so we need to copy instead of using hard links.
@@ -16,7 +16,7 @@ uv:
   script:
     # your `uv` commands
     - uv sync
-    - uv run pytest tests/ -rsx --verbose --color=yes --cov={{project_slug}} --cov-report term-missing
+    - uv run pytest tests/ -rsx --verbose --color=yes --cov={{py_import_name}} --cov-report term-missing
 
 .base_ruff:
   stage: build

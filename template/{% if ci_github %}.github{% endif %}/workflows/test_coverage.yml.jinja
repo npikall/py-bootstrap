@@ -28,7 +28,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          uv run pytest tests --verbose --color=yes --cov={{project_slug}} --cov-report term-missing
+          uv run pytest tests --verbose --color=yes --cov={{project_name}} --cov-report term-missing
 
       - name: Coverage comment
         id: coverage_comment
