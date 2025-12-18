@@ -1,7 +1,7 @@
-import sys  # noqa: D100, INP001
+import sys
 
 
-def main() -> int:  # noqa: D103
+def main() -> int:
     return 0
 
 
