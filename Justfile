@@ -36,3 +36,10 @@ clean:
     rm -f .coverage
     rm -fr htmlcov/
     rm -fr .pytest_cache
+
+# run all the formatting, linting, and testing commands
+ci:
+    uv run ruff format .
+    uv run ruff check . --fix
+    uv run ty check .
+    uv run pytest tests/

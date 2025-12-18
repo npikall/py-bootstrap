@@ -42,6 +42,8 @@ docstring-code-line-length = "dynamic"
 dev = [
     "pydantic>=2.12.5",
     "pytest>=9.0.2",
+    "ruff>=0.14.9",
+    "ty>=0.0.3",
     "zensical>=0.0.11",
 ]
 
