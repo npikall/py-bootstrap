@@ -10,7 +10,7 @@ setup:
 
 # update dependencies
 update:
-    cd template && uvx pre-commit autoupdate
+    cd template && uvx prek autoupdate
 
 # serve the documentation
 docs:
