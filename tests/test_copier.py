@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 from copier import run_copy
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 # NOTE: Keep synced with 'copier.yml'
 PY_VERSION = "3.12"
@@ -13,15 +13,17 @@ CUR_YEAR = datetime.today().year  # noqa: DTZ002
 
 
 class UserAnswers(BaseModel):
-    project_name: str = Field(default="example")
-    author_fullname: str = Field(default="John Doe")
-    author_email: str = Field(default="john.doe@mail.com")
-    author_username: str = Field(default="jdoe")
-    ci_github: bool = Field(default=True)
-    ci_gitlab: bool = Field(default=True)
-    repo_name: str = Field(default="example")
-    copyright_license: str = Field(default="MIT")
-    include_docs: bool = Field(default=True)
+    project_name: str = "example"
+    author_fullname: str = "John Doe"
+    author_email: str = "john.doe@mail.com"
+    author_username: str = "jdoe"
+    ci_github: bool = True
+    ci_gitlab: bool = True
+    repo_name: str = "example"
+    copyright_license: str = "MIT"
+    include_docs: bool = True
+    docs_generator: str = "zensical"
+    pre_commit: str = "prek"
 
 
 @pytest.fixture(scope="session")
@@ -126,13 +128,15 @@ def test_justfile_renders_correct(session_tmp_path):
     got = (session_tmp_path / "Justfile").read_text()
     # should be rendered
     want_1 = f"uv run --python={PY_VERSION} pytest"
+    want_2 = "hooks:\n    uvx prek install"
 
     # No rendering
-    want_2 = r"uv run --python={{ PYTHON }} ruff format ."
-    want_3 = r"uv version --bump {{ INCREMENT }}"
+    want_3 = r"uv run --python={{ PYTHON }} ruff format ."
+    want_4 = r"uv version --bump {{ INCREMENT }}"
     assert want_1 in got
     assert want_2 in got
     assert want_3 in got
+    assert want_4 in got
 
 
 def test_gitlab_ci_renders_correct(session_tmp_path):
