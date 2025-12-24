@@ -20,7 +20,7 @@ It comes filled with a bunch of modern features from the python ecosystem.
 ## :lucide-battery-full: All Batteries included
 
 - :lucide-flask-conical: Testing setup with [pytest]
-- :lucide-git-pull-request-arrow: [Pre-commit] Hooks
+- :lucide-git-pull-request-arrow: [Pre-commit] Hooks (optional from [Prek])
 - :lucide-music: Task orchestration with [Just]
 - :lucide-scale: Preconfigured Licenses to choose from
 - :lucide-scroll-text: Documentation from [Zensical] (the followup project to [Material for MKDocs])
@@ -56,6 +56,7 @@ After you have just used the `copier` to create this repo, you might want to run
 [Material for MKDocs]: https://squidfunk.github.io/mkdocs-material/
 [pytest]: https://docs.pytest.org/en/stable/
 [Pre-commit]: https://pre-commit.com
+[Prek]: https://prek.j178.dev
 [uv]: https://docs.astral.sh/uv/
 [ruff]: https://docs.astral.sh/ruff/
 [ty]: https://docs.astral.sh/ty/

@@ -14,7 +14,7 @@ It comes filled with a bunch of modern features from the python ecosystem.
 - :musical_note: Task orchestration with [Just]
 - :black_nib: Preconfigured Licenses to choose from
 - :straight_ruler: Testing setup with `pytest`
-- :fishing_pole_and_fish: Pre-commit Hooks
+- :fishing_pole_and_fish: Pre-commit Hooks with [`Pre-commit`][Pre-commit] or [`Prek`][Prek]
 - :mag: Code Quality assurance with [ruff] and [ty]
 
 ## Useage
@@ -47,3 +47,5 @@ After you have just used the `copier` to create this repo, you might want to run
 [ruff]: https://docs.astral.sh/ruff/
 [ty]: https://docs.astral.sh/ty/
 [Handbook]: https://pydevtools.com/handbook/explanation/modern-python-project-setup-guide-for-ai-assistants/
+[Prek]: https://prek.j178.dev
+[Pre-commit]: https://pre-commit.com

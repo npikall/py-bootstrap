@@ -47,9 +47,15 @@ ci PYTHON="3.12":
     uv run --python={{ PYTHON }} ty check .
     uv run --python={{ PYTHON }} pytest tests/
 
+{% endraw %}
 # setup the pre-commit hooks
 hooks:
+    {% if pre_commit == "prek" -%}
+    uvx prek install
+    {% elif pre_commit == "pre-commit" -%}
     uvx pre-commit install
+    {%- endif -%}
+{% raw %}
 
 # print the current status of the project
 status:
