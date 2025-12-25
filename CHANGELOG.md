@@ -7,17 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- insertion marker -->
 
-## [v0.2.0](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.0) - 2025-12-25
-
-<small>[Compare with v0.1.5](https://github.com/npikall/py-bootstrap/compare/v0.1.5...v0.2.0)</small>
-
-### Features
-
-- added mkdocs option ([36fc5f5](https://github.com/npikall/py-bootstrap/commit/36fc5f57aa7f2deb9c44fbcc5adc9a1ee6706aee) by Nikolas Pikall).
-- added a MIT License ([bdd5a21](https://github.com/npikall/py-bootstrap/commit/bdd5a2109d385c36861e075eedb7e4e07000e458) by Nikolas Pikall).
-- prompt for optional goreleaser ([088f8b0](https://github.com/npikall/py-bootstrap/commit/088f8b049b9e50e4879f26c960feced4fb98d1ba) by Nikolas Pikall).
-- added goreleaser config ([c07f5b0](https://github.com/npikall/py-bootstrap/commit/c07f5b0d8950db8f852742d764d3faf20d8597a5) by Nikolas Pikall).
-
 ## [v0.1.5](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.5) - 2025-12-24
 
 <small>[Compare with v0.1.4](https://github.com/npikall/py-bootstrap/compare/v0.1.4...v0.1.5)</small>
