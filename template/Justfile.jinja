@@ -127,4 +127,8 @@ init: venv && hooks
     git add .
     git commit -m "initial commit"
     @echo "{{ GREEN }}{{ BOLD }}Git has been initialized{{ NORMAL }}"
+
+# write the changelog
+changelog:
+    uvx git-changelog -Tio CHANGELOG.md -Bauto -c angular -n pep440
 {% endraw %}
