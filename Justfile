@@ -47,3 +47,18 @@ ci:
 # write the changelog
 changelog:
     uvx git-changelog -Tio CHANGELOG.md -Bauto -c angular -n pep440
+
+
+# bump the version, commit the changes and add a tag (increment can be major, minor, patch,...)
+bump VERSION: && tag
+    uv version  {{ VERSION }}
+
+# tag the latest version
+tag VERSION=`uv version --short`:
+    git add pyproject.toml
+    git commit -m "Bumped version to {{VERSION}}"
+    git tag "v{{VERSION}}"
+
+# make a new release (after all changes have been commited)
+release VERSION: changelog (bump VERSION)
+    echo "Git Push {{VERSION}}"
