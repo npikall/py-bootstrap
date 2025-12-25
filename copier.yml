@@ -82,6 +82,12 @@ pre_commit:
     - pre-commit
     - prek
 
+use_goreleaser:
+  type: bool
+  qmark: "->"
+  help: Use GoReleaser?
+  default: true
+
 # NEVER PROMPT --------------------------
 copyright_holder:
   type: str
