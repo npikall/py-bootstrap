@@ -34,7 +34,13 @@ dev = [
 ]
 {% if include_docs -%}
 docs = [
+    {% if docs_engine == "zensical" -%}
     "zensical>=0.0.11",
+    {% elif docs_engine == "mkdocs" -%}
+    "mdx-include>=1.4.2",
+    "mkdocs-material>=9.7.0",
+    "mkdocstrings-python>=2.0.1",
+    {%- endif -%}
 ]{% endif %}
 
 # NOTE: Uncomment the next section to add pre-built wheel files of non-python

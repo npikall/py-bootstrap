@@ -116,10 +116,18 @@ tag VERSION=`uv version --short`:
 dist:
     uv build
 
+{% endraw %}
+{% if include_docs -%}
 # serve the documentation
 docs:
     uv sync --group docs
+    {% if docs_engine == "zensical" -%}
     uv run zensical serve
+    {% elif docs_engine == "mkdocs" -%}
+    uv run mkdocs serve
+    {%- endif -%}
+{% endif %}
+{% raw %}
 
 # initialize a git repo and add all files
 init: venv && hooks

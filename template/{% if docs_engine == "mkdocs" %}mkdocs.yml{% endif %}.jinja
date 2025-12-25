@@ -1,7 +1,7 @@
 site_name: {{ project_name }}
-site_url: https://tu-cookbook-python-504808.git-pages.tuwien.ac.at/
-repo_name: tu-cookbooks-python
-repo_url: https://gitlab.tuwien.ac.at/cookbooks/templates/tu-cookbook-python
+site_url: https://{{ author_username }}.github.io/{{ project_name }}
+repo_name: {{ project_name }}
+repo_url: https://github.com/{{ author_username }}/{{ project_name }}
 theme:
   name: material
   palette:
@@ -46,7 +46,6 @@ theme:
     - search.share
     - search.suggest
     - toc.follow
-  logo: assets/favicon.svg
 markdown_extensions:
   material.extensions.preview:
     targets:
@@ -95,17 +94,15 @@ markdown_extensions:
     emoji_index: !!python/name:material.extensions.emoji.twemoji
     emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
+plugins:
+  - search
+  - mkdocstrings
+
 nav:
-  - TU Cookbooks:
-      - index.md
-      - contributing.md
-  - Setup:
-      - copy.md
-      - update.md
-  - Template: layout.md
-extra_javascript:
-  - js/termynal.js
-  - js/custom.js
-extra_css:
-  - css/termynal.css
-  - css/custom.css
+- Home:
+  - Overview: index.md
+  - Changelog: changelog.md
+  - License: license.md
+- API Reference: reference/api.md
+- Development:
+  - Contributing: contributing.md
