@@ -43,6 +43,7 @@ def test_copier_links_all_files_correct(
         ".goreleaser.yaml",
         # REGULAR FILES
         "CONTRIBUTING.md",
+        "CHANGELOG.md",
         "Justfile",
         "README.md",
         "pyproject.toml",
@@ -90,7 +91,7 @@ def test_pyproject_toml_renders_correct(session_tmp_path):
 authors = [{ name = "John Doe", email = "john.doe@mail.com" }]
 name = "example"
 """
-    want_2 = 'docs = [\n    "zensical>=0.0.11",\n]'
+    want_2 = '\ndocs = [\n    "zensical>=0.0.11",\n]'
     want_3 = 'addopts = "--cov=example'
     assert want_1 in got
     assert want_2 in got
