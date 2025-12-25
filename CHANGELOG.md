@@ -6,6 +6,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [0.1.6](https://github.com/npikall/py-bootstrap/releases/tag/0.1.6) - 2025-12-25
+
+<small>[Compare with v0.1.5](https://github.com/npikall/py-bootstrap/compare/v0.1.5...0.1.6)</small>
+
+### Features
+
+- added mkdocs ([7201e9d](https://github.com/npikall/py-bootstrap/commit/7201e9db31f33275f9d8544b48d6341cbf2975af) by Nikolas Pikall).
+- added changelog ([4870c0c](https://github.com/npikall/py-bootstrap/commit/4870c0cde7f4acc324951f76253ff09b9dd90e54) by Nikolas Pikall).
+- added changelog ([3151d31](https://github.com/npikall/py-bootstrap/commit/3151d31511fe35197a9c5bfc637b51f19b16e354) by Nikolas Pikall).
+- added mkdocs option ([36fc5f5](https://github.com/npikall/py-bootstrap/commit/36fc5f57aa7f2deb9c44fbcc5adc9a1ee6706aee) by Nikolas Pikall).
+- added a MIT License ([bdd5a21](https://github.com/npikall/py-bootstrap/commit/bdd5a2109d385c36861e075eedb7e4e07000e458) by Nikolas Pikall).
+- prompt for optional goreleaser ([088f8b0](https://github.com/npikall/py-bootstrap/commit/088f8b049b9e50e4879f26c960feced4fb98d1ba) by Nikolas Pikall).
+- added goreleaser config ([c07f5b0](https://github.com/npikall/py-bootstrap/commit/c07f5b0d8950db8f852742d764d3faf20d8597a5) by Nikolas Pikall).
+
+### Bug Fixes
+
+- run tests before release ([d41a3dd](https://github.com/npikall/py-bootstrap/commit/d41a3ddafc56fe46d58e59d1156acd8bf28343b0) by Nikolas Pikall).
+- actually push relase to remote ([6998bb9](https://github.com/npikall/py-bootstrap/commit/6998bb9fd7e9bc15ca2bbc66ff05807be5ef5204) by Nikolas Pikall).
+
+### Reverts
+
+- removed latest version from changelog ([02d1e0e](https://github.com/npikall/py-bootstrap/commit/02d1e0ed739d5161a11bf3ac623aab789c0e7305) by Nikolas Pikall).
+
 
 ## [v0.1.5](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.5) - 2025-12-24
 
