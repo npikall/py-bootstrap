@@ -64,10 +64,17 @@ copyright_license:
     The Unlicense: Unlicense
     None: None
 
-docs_generator:
+include_docs:
+  type: bool
+  qmark: "->"
+  help: Include Docs
+  default: true
+
+docs_engine:
   type: str
   qmark: "->"
   help: Set the documentation generator
+  when: "{{ include_docs }}"
   default: zensical
   choices:
     - zensical
@@ -102,12 +109,6 @@ copyright_date:
   when: false
   help: The copyright date
   default: "{{ current_year }}"
-
-include_docs:
-  type: bool
-  qmark: "->"
-  help: Include Docs
-  default: true
 
 py_version_past:
   type: str

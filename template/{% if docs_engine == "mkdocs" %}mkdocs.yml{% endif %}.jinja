@@ -1,0 +1,111 @@
+site_name: {{ project_name }}
+site_url: https://tu-cookbook-python-504808.git-pages.tuwien.ac.at/
+repo_name: tu-cookbooks-python
+repo_url: https://gitlab.tuwien.ac.at/cookbooks/templates/tu-cookbook-python
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/lightbulb-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to system preference
+  features:
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.footnote.tooltips
+    - content.tabs.link
+    - content.tooltips
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+  logo: assets/favicon.svg
+markdown_extensions:
+  material.extensions.preview:
+    targets:
+      include:
+        - "*"
+  abbr: null
+  admonition: null
+  attr_list: null
+  footnotes: null
+  md_in_html: null
+  tables: null
+  toc:
+    permalink: true
+  pymdownx.betterem: null
+  pymdownx.caret: null
+  pymdownx.details: null
+  pymdownx.highlight:
+    line_spans: __span
+  pymdownx.inlinehilite: null
+  pymdownx.keys: null
+  pymdownx.mark: null
+  pymdownx.superfences:
+    custom_fences:
+      - name: mermaid
+        class: mermaid
+        format: !!python/name:pymdownx.superfences.fence_code_format ""
+  pymdownx.tilde: null
+  pymdownx.snippets: null
+  pymdownx.blocks.admonition:
+    types:
+      - note
+      - attention
+      - caution
+      - danger
+      - error
+      - tip
+      - hint
+      - warning
+      - info
+      - check
+  pymdownx.blocks.details: null
+  pymdownx.blocks.tab:
+    alternate_style: true
+  mdx_include: null
+  pymdownx.emoji:
+    emoji_index: !!python/name:material.extensions.emoji.twemoji
+    emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - TU Cookbooks:
+      - index.md
+      - contributing.md
+  - Setup:
+      - copy.md
+      - update.md
+  - Template: layout.md
+extra_javascript:
+  - js/termynal.js
+  - js/custom.js
+extra_css:
+  - css/termynal.css
+  - css/custom.css

@@ -10,7 +10,7 @@ class BaseUserAnswers(BaseModel):
     ci_gitlab: bool = True
     repo_name: str = "example"
     include_docs: bool = True
-    docs_generator: str = "zensical"
+    docs_engine: str = "zensical"
     pre_commit: str = "prek"
     use_goreleaser: bool = True
 
