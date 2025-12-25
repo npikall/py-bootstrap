@@ -45,20 +45,26 @@ ci:
     uv run pytest tests/
 
 # write the changelog
-changelog:
-    uvx git-changelog -Tio CHANGELOG.md -Bauto -c angular -n pep440
+changelog VERSION="auto":
+    uvx git-changelog -Tio CHANGELOG.md -B="{{VERSION}}" -c angular -n pep440
 
 
 # bump the version, commit the changes and add a tag (increment can be major, minor, patch,...)
 bump VERSION: && tag
     uv version  {{ VERSION }}
+    uv lock
 
 # tag the latest version
 tag VERSION=`uv version --short`:
     git add pyproject.toml
+    git add uv.lock
     git commit -m "Bumped version to {{VERSION}}"
-    git tag "v{{VERSION}}"
+    git tag -a "v{{VERSION}}"
 
 # make a new release (after all changes have been commited)
-release VERSION: changelog (bump VERSION)
+release VERSION:
+    @just changelog "{{VERSION}}"
+    git add CHANGELOG.md
+    git commit -m "chore: updated Changelog"
+    @just bump "{{VERSION}}"
     echo "Git Push {{VERSION}}"
