@@ -2,28 +2,14 @@ from datetime import datetime
 from pathlib import Path
 
 import pytest
+from conftest import FullUserAnswers as UserAnswers
 from copier import run_copy
-from pydantic import BaseModel
 
 # NOTE: Keep synced with 'copier.yml'
 PY_VERSION = "3.12"
 PY_VERSION_PAST = "3.10"
 PY_VERSION_FUTURE = "3.14"
 CUR_YEAR = datetime.today().year  # noqa: DTZ002
-
-
-class UserAnswers(BaseModel):
-    project_name: str = "example"
-    author_fullname: str = "John Doe"
-    author_email: str = "john.doe@mail.com"
-    author_username: str = "jdoe"
-    ci_github: bool = True
-    ci_gitlab: bool = True
-    repo_name: str = "example"
-    copyright_license: str = "MIT"
-    include_docs: bool = True
-    docs_generator: str = "zensical"
-    pre_commit: str = "prek"
 
 
 @pytest.fixture(scope="session")
@@ -54,6 +40,7 @@ def test_copier_links_all_files_correct(
         ".python-version",
         ".pre-commit-config.yaml",
         ".gitlab-ci.yml",
+        ".goreleaser.yaml",
         # REGULAR FILES
         "CONTRIBUTING.md",
         "Justfile",
