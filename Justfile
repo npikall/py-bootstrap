@@ -62,7 +62,7 @@ tag VERSION=`uv version --short`:
     git tag -a "v{{VERSION}}"
 
 # make a new release (after all changes have been commited)
-release VERSION:
+release VERSION: test
     @just changelog "{{VERSION}}"
     git add CHANGELOG.md
     git commit -m "chore: updated Changelog"
