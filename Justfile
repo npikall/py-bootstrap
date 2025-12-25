@@ -43,3 +43,7 @@ ci:
     uv run ruff check . --fix
     uv run ty check .
     uv run pytest tests/
+
+# write the changelog
+changelog:
+    uvx git-changelog -Tio CHANGELOG.md -Bauto -c angular -n pep440
