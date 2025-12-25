@@ -116,7 +116,7 @@ def test_justfile_renders_correct(session_tmp_path):
     got = (session_tmp_path / "Justfile").read_text()
     # should be rendered
     want_1 = f"uv run --python={PY_VERSION} pytest"
-    want_2 = "hooks:\n    uvx prek install"
+    want_2 = "\nhooks:\n    uvx prek install\n\n#"
 
     # No rendering
     want_3 = r"uv run --python={{ PYTHON }} ruff format ."

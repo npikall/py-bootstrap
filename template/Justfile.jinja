@@ -38,7 +38,6 @@ testall:
     uv run --python={{py_version_past}} pytest
     uv run --python={{py_version_current}} pytest
     uv run --python={{py_version_future}} pytest
-
 {% raw %}
 # run all the formatting, linting, and testing commands
 ci PYTHON="3.12":
@@ -46,17 +45,15 @@ ci PYTHON="3.12":
     uv run --python={{ PYTHON }} ruff check . --fix
     uv run --python={{ PYTHON }} ty check .
     uv run --python={{ PYTHON }} pytest tests/
-
 {% endraw %}
 # setup the pre-commit hooks
 hooks:
-    {% if pre_commit == "prek" -%}
+    {%- if pre_commit == "prek" %}
     uvx prek install
-    {% elif pre_commit == "pre-commit" -%}
+    {%- elif pre_commit == "pre-commit" %}
     uvx pre-commit install
-    {%- endif -%}
+    {%- endif %}
 {% raw %}
-
 # print the current status of the project
 status:
     @echo "Project Version: {{ PROJ }}"
@@ -94,7 +91,6 @@ clean-test:
 venv:
     uv sync --all-groups --all-extras
 
-
 [confirm("Do you really want to bump? (y/n)")]
 [private]
 prompt-confirm:
@@ -108,14 +104,14 @@ bump INCREMENT: && tag
 # tag the latest version
 tag VERSION=`uv version --short`:
     git add pyproject.toml
-    git commit -m "Bumped version to {{VERSION}}"
-    git tag "v{{VERSION}}"
-    @echo "{{ GREEN }}{{ BOLD }}Version has been bumped to {{VERSION}}.{{ NORMAL }}"
+    git add uv.lock
+    git commit -m "Bumped version to {{ VERSION }}"
+    git tag "v{{ VERSION }}"
+    @echo "{{ GREEN }}{{ BOLD }}Version has been bumped to {{ VERSION }}.{{ NORMAL }}"
 
 # build the source distribution and wheel file with uv (bump version first)
 dist:
     uv build
-
 {% endraw %}
 {% if include_docs -%}
 # serve the documentation
@@ -128,10 +124,10 @@ docs:
     {%- endif -%}
 {% endif %}
 {% raw %}
-
 # initialize a git repo and add all files
-init: venv && hooks
+init: venv
     git init
+    just hooks
     git add .
     git commit -m "initial commit"
     @echo "{{ GREEN }}{{ BOLD }}Git has been initialized{{ NORMAL }}"
@@ -139,4 +135,14 @@ init: venv && hooks
 # write the changelog
 changelog:
     uvx git-changelog -Tio CHANGELOG.md -Bauto -c angular -n pep440
-{% endraw %}
+
+# release a new version
+release VERSION: changelog && (bump VERSION)
+    git add CHANGELOG.md
+
+# release and push references
+[private]
+release-push VERSION: (release VERSION)
+    git push
+    git push --tags
+{% endraw -%}
