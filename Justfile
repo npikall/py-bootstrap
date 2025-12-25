@@ -67,4 +67,6 @@ release VERSION:
     git add CHANGELOG.md
     git commit -m "chore: updated Changelog"
     @just bump "{{VERSION}}"
-    echo "Git Push {{VERSION}}"
+    git push
+    git push --tags
+    @echo "{{GREEN}}Released {{VERSION}}{{NORMAL}}"
