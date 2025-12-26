@@ -15,9 +15,11 @@ The template generates a package structure that reflects common best practices f
 ├── .copier-answers.yml -------- # Copier Answer to update project
 ├── .gitignore ----------------- #
 ├── .gitlab-ci.yml ------------- # Gitlab CI Config
+├── .goreleaser.yaml ----------- #
 ├── .pre-commit-config.yml ----- #
 ├── .python-version ------------ #
 ├── CONTRIBUTING.md ------------ #
+├── CHANGELOG.md --------------- #
 ├── Justfile ------------------- # Taskrunner
 ├── LICENSE -------------------- #
 ├── README.md ------------------ #
@@ -29,6 +31,7 @@ The template generates a package structure that reflects common best practices f
 ├── docs ----------------------- # Documentation pages
 │   └── index.md --------------- #
 ├── zensical.toml -------------- #
+├── mkdocs.yml ----------------- #
 └── .github -------------------- # Github CI Config
     └── ... -------------------- #
 ```
@@ -83,6 +86,10 @@ Here are some of the core tasks provided:
 
 The template comes with a curated set of _pre-commit hooks_ that enforce code quality and repository hygiene before changes are committed. These hooks run automatically on each commit, providing fast feedback and preventing common issues from entering the codebase. They are designed to align with the checks performed in CI, ensuring consistency between local development and automated pipelines.
 
+!!! tip
+
+    You can choose between the original `python` based [`Pre-Commit`][Pre-Commit] or the `rust` based [`Prek`][Prek]
+
 Provided hooks include:
 
 - **Ruff linting and formatting**
@@ -108,11 +115,25 @@ Pre-commit hook versions are pinned in `.pre-commit-config.yaml` and should be u
     pre-commit autoupdate
     ```
 
-=== "`uvx`"
+=== "`uvx pre-commit`"
 
     If the `pre-commit` tool is not installed.
     ```console
     uvx pre-commit autoupdate
+    ```
+
+=== "`prek`"
+
+    If the `prek` tool is installed.
+    ```console
+    prek autoupdate
+    ```
+
+=== "`uvx prek`"
+
+    If the `prek` tool is not installed.
+    ```console
+    uvx prek autoupdate
     ```
 
 ## GitLab CI
@@ -169,3 +190,27 @@ By maintaining this answers file, you ensure that updates to the template, such 
 The template includes a `pyproject.toml` configuration file that defines project-wide settings for tools like _ruff_. The linting rules follow a simple philosophy: **enable all rules by default** to maximize code quality, and **disable only those that are non-sensical or conflict with project conventions**.
 
 This approach ensures comprehensive static analysis while minimizing unnecessary noise, helping maintain a clean and consistent codebase.
+
+## Changelog
+
+In order to keep a Changelog run the following command.
+
+```bash
+just changelog
+```
+
+For more details on the tool check out the [Documentation of Git Changelog][Git Changelog]
+
+!!! tip
+
+    For the Changelog to work correct, it is **important** to adhere to [Conventional Commits]
+
+## GoReleaser
+
+This Template uses [GoReleaser] to build the Wheel Files and Source Distributions and upload them to the `GitHub` Release Page
+
+[Pre-Commit]: https://pre-commit.com
+[Prek]: https://prek.j178.dev
+[Git Changelog]: https://pawamoy.github.io/git-changelog/
+[GoReleaser]: https://goreleaser.com
+[Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
