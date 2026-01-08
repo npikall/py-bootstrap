@@ -1,8 +1,8 @@
 ---
 icon: lucide/refresh-cw
 tags:
-  - copier
-  - update
+  - "#copier"
+  - "#update"
 ---
 
 # Update an existing Project

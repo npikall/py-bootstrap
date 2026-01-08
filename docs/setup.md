@@ -1,7 +1,7 @@
 ---
 icon: lucide/hammer
 tags:
-  - setup
+  - "#setup"
 ---
 
 # Setup

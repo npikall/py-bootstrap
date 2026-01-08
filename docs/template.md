@@ -1,12 +1,10 @@
 ---
 icon: lucide/layout-template
 tags:
-  - template
+  - "#template"
 ---
 
 # The Template
-
-## Layout
 
 The template generates a package structure that reflects common best practices for Python projects. The layout shown below represents the full set of files and directories that may be created by the template. Depending on the configuration choices you made during setup, some of these files or components may be omitted automatically.
 
@@ -36,6 +34,8 @@ The template generates a package structure that reflects common best practices f
     └── ... -------------------- #
 ```
 
+---
+
 ## Github CI
 
 The template includes a set of `GitHub Actions` workflows that automate common development and release tasks. These workflows ensure code quality, reliability, and consistency without requiring manual intervention.
@@ -62,6 +62,8 @@ Together, these workflows provide a lightweight but complete CI/CD setup that su
         └── test_platform.yml -- # Test different platforms and versions
 ```
 
+---
+
 ## Task Orchestration with `Justfile`
 
 The template uses a `Justfile` to provide a simple and consistent interface for task orchestration. It groups common development, quality assurance, and release tasks behind short, memorable commands, reducing the need to remember long tool-specific invocations. Most commands are built on top of uv, ensuring fast and reproducible execution.
@@ -81,6 +83,8 @@ Here are some of the core tasks provided:
 - `just dist` or `just d` Build the source distribution and wheel.
 - `just docs` Serve the documentation locally.
 - `just init` Initialize a Git repository, install dependencies and hooks, and create the initial commit.
+
+---
 
 ## Pre-commit Hooks
 
@@ -136,6 +140,8 @@ Pre-commit hook versions are pinned in `.pre-commit-config.yaml` and should be u
     uvx prek autoupdate
     ```
 
+---
+
 ## GitLab CI
 
 The template includes a lightweight `GitLab CI` configuration that mirrors the most important quality checks performed locally and in GitHub Actions. It is designed to provide fast feedback while remaining easy to adapt to project-specific requirements.
@@ -161,6 +167,8 @@ Key components include:
 
 Overall, this configuration provides a concise yet effective CI setup for GitLab, ensuring code quality and test coverage while keeping the pipeline easy to maintain.
 
+---
+
 ## Licenses
 
 The template allows you to choose between several widely used open-source licenses. Each option provides a different balance between permissiveness, attribution requirements, and legal protection. Selecting an appropriate license early helps set clear expectations for users and contributors of your project.
@@ -179,17 +187,23 @@ The template allows you to choose between several widely used open-source licens
 
 In short, **MIT** is a lightweight and popular choice, **Apache 2.0** adds explicit patent protections, and **Unlicense** removes nearly all restrictions by dedicating the work to the public domain.
 
+---
+
 ## Copier Answers
 
 The template includes a `.copier-answers.yml` that records the choices you made when generating the project. This file allows the project to be _updateable_: when the template is updated in the future, Copier can reapply the changes to your existing project while preserving your customizations.
 
 By maintaining this answers file, you ensure that updates to the template, such as new workflows, configuration improvements, or additional files, can be integrated safely and consistently without overwriting your work.
 
+---
+
 ## Pyproject
 
 The template includes a `pyproject.toml` configuration file that defines project-wide settings for tools like _ruff_. The linting rules follow a simple philosophy: **enable all rules by default** to maximize code quality, and **disable only those that are non-sensical or conflict with project conventions**.
 
 This approach ensures comprehensive static analysis while minimizing unnecessary noise, helping maintain a clean and consistent codebase.
+
+---
 
 ## Changelog
 
@@ -204,6 +218,8 @@ For more details on the tool check out the [Documentation of Git Changelog][Git 
 !!! tip
 
     For the Changelog to work correct, it is **important** to adhere to [Conventional Commits]
+
+---
 
 ## GoReleaser
 

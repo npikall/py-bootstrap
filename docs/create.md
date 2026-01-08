@@ -1,13 +1,13 @@
 ---
 icon: lucide/file-plus
 tags:
-  - create
-  - new
+  - "#create"
+  - "#new"
 ---
 
 # Creating a new project
 
-## Commandline
+Make sure all the [prerequisites](setup#install-copier) are being met.
 
 To create a new project from this template run the following command:
 

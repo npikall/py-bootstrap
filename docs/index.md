@@ -1,16 +1,18 @@
 ---
 icon: lucide/rocket
 tags:
-  - copier
-  - template
-  - python
+  - "#copier"
+  - "#template"
+  - "#python"
 ---
 
-# Py-Bootstrap
+# PyBootstrap
 
 [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-orange.json)](https://github.com/copier-org/copier)
 ![Code Quality](https://github.com/npikall/py-bootstrap/actions/workflows/code_quality.yml/badge.svg)
 ![Documentation](https://github.com/npikall/py-bootstrap/actions/workflows/docs.yml/badge.svg)
+
+---
 
 This template sets up a structure for you to write a python package.
 It comes filled with a bunch of modern features from the python ecosystem.
