@@ -1,10 +1,11 @@
 ---
 title: License
+icon: lucide/scale
+tags:
+  - "#license"
 hide:
-- feedback
+  - feedback
 ---
-
-# License
 
 ```
 --8<-- "LICENSE"
