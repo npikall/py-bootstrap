@@ -72,8 +72,8 @@ scheme = "slate"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to light mode"
 
-# [project.theme.icon]
-# logo = "lucide/rocket"
+[project.theme.icon]
+logo = "assets/rocket.svg"
 
 # TODO: Wait till Zensical is mature enough to work with that
 # [project.markdown_extensions.toc]
