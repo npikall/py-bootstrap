@@ -75,7 +75,7 @@ docs_engine:
   qmark: "->"
   help: Set the documentation generator
   when: "{{ include_docs }}"
-  default: mkdocs
+  default: zensical
   choices:
     - zensical
     - mkdocs
