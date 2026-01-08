@@ -1,5 +1,6 @@
 from datetime import datetime
 from pathlib import Path
+from typing import TypedDict
 
 import pytest
 from conftest import FullUserAnswers as UserAnswers
@@ -10,6 +11,18 @@ PY_VERSION = "3.12"
 PY_VERSION_PAST = "3.10"
 PY_VERSION_FUTURE = "3.14"
 CUR_YEAR = datetime.today().year  # noqa: DTZ002
+
+
+def get_lines(start: int, end: int, content: str) -> str:
+    return "\n".join(content.splitlines()[start:end])
+
+
+class Cases(TypedDict):
+    """Struct for table-driven tests"""
+
+    want: str
+    start: int
+    end: int
 
 
 @pytest.fixture(scope="session")
@@ -112,19 +125,20 @@ def test_contributing_renders_correct(session_tmp_path):
     assert want_2 in got
 
 
-def test_justfile_renders_correct(session_tmp_path):
+def test_justfile_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / "Justfile").read_text()
-    # should be rendered
-    want_1 = f"uv run --python={PY_VERSION} pytest"
-    want_2 = "\nhooks:\n    uvx prek install\n\n#"
-
-    # No rendering
-    want_3 = r"uv run --python={{ PYTHON }} ruff format ."
-    want_4 = r"uv version --bump {{ INCREMENT }}"
-    assert want_1 in got
-    assert want_2 in got
-    assert want_3 in got
-    assert want_4 in got
+    cases: list[Cases] = [
+        # Want Rendering
+        {"want": f"uv run --python={PY_VERSION} pytest", "start": 36, "end": 40},
+        {"want": "\nhooks:\n    uvx prek install\n\n#", "start": 48, "end": 53},
+        {"want": "    uv run zensical serve\n\n# initialize", "start": 113, "end": 119},
+        # No Rendering
+        {"want": r"uv run --python={{ PYTHON }} ruff format .", "start": 42, "end": 46},
+        {"want": r"uv version --bump {{ INCREMENT }}", "start": 96, "end": 100},
+    ]
+    for t in cases:
+        lines = get_lines(start=t["start"], end=t["end"], content=got)
+        assert t["want"] in lines
 
 
 def test_gitlab_ci_renders_correct(session_tmp_path):
