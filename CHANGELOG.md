@@ -6,7 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
-## [0.1.9](https://github.com/npikall/py-bootstrap/releases/tag/0.1.9) - 2026-01-08
+
+## [v0.1.9](https://github.com/npikall/py-bootstrap/releases/tag/0.1.9) - 2026-01-08
 
 <small>[Compare with v0.1.8](https://github.com/npikall/py-bootstrap/compare/v0.1.8...0.1.9)</small>
 
@@ -14,7 +15,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - whitespaces at end of line ([0a93c72](https://github.com/npikall/py-bootstrap/commit/0a93c7238d64afe820c782f7c39f54ad34f587d3) by Nikolas Pikall).
 - changelog ([64b0293](https://github.com/npikall/py-bootstrap/commit/64b0293aacefa17e0b33f159a538dbc91def1541) by Nikolas Pikall).
-
 
 ## [v0.1.8](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.8) - 2026-01-08
 
