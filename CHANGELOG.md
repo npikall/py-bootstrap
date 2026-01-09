@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.1.10](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.10) - 2026-01-09
+
+<small>[Compare with v0.1.9](https://github.com/npikall/py-bootstrap/compare/v0.1.9...v0.1.10)</small>
+
+### Features
+
+- add mkdocstrings configuration for nicer api references ([535c8ac](https://github.com/npikall/py-bootstrap/commit/535c8ac242b67bffa02167f4a92319334a02c70b) by npikall).
+
+### Bug Fixes
+
+- add v to version tag in changelog ([223ce3f](https://github.com/npikall/py-bootstrap/commit/223ce3f429362e85131bf4ff8a00a20e1d3f798b) by npikall).
+
 
 ## [v0.1.9](https://github.com/npikall/py-bootstrap/releases/tag/0.1.9) - 2026-01-08
 
