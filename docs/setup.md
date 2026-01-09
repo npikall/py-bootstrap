@@ -47,6 +47,29 @@ Run the following commands to install [`Copier`][Copier] as a `CLI` Tool.
     pipx inject copier copier-templates-extensions
     ```
 
+## Install Just
+
+[`uv`][uv] has a nice interface to install tools. One of them is [just]. In order to install the [just] binary you can run
+
+```bash
+# Install just
+uv tool install rust-just
+```
+
+Now you can invoke [just] Recipes by calling
+
+```bash
+# List all available recipes
+$ just
+Available Recipes:
+    build  # build the package
+    docs   # serve the dosumentation
+
+# Execute a recipe
+$ just docs
+serving docs at https://localhost:8000
+```
+
 [Python]: https://www.python.org
 [uv]: https://docs.astral.sh/uv/
 [Copier]: https://copier.readthedocs.io/en/stable/
