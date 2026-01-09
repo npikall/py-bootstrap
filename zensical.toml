@@ -106,6 +106,7 @@ emoji_index = "zensical.extensions.emoji.twemoji"
 alternate_style = true
 [project.markdown_extensions.pymdownx.tasklist]
 custom_checkbox = true
+clickable_checkbox = true
 [project.markdown_extensions.pymdownx.tilde]
 
 # Additional Extensions

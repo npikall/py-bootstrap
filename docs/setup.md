@@ -10,11 +10,11 @@ tags:
 
 In order to have no issues useing this Template make sure the following software is installed.
 
-- [`Git v2`](https://git-scm.com), a version control system
-- [`Python 3`][Python], which can be managed with [uv]
-- [`Copier`][Copier], the Python Program that creates the templates
-- [`uv`][uv], a Python Package Manager (optional)
-- [`just`][just], the Taskrunner used inside the template (recommended)
+- [ ] [`Git v2`](https://git-scm.com), a version control system
+- [ ] [`Python 3`][Python], which can be managed with [uv]
+- [ ] [`Copier`][Copier], the Python Program that creates the templates
+- [ ] [`uv`][uv], a Python Package Manager (optional)
+- [ ] [`just`][just], the Taskrunner used inside the template (recommended)
 
 ## Install Python
 
