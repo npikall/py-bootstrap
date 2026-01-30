@@ -41,6 +41,21 @@ ci_github:
   help: Use GitHub CI?
   default: true
 
+ci_github_workflows:
+  type: str
+  when: "{{ ci_github }}"
+  qmark: "->"
+  help: Select the Workflows that should be included.
+  default: '["Lint/Format", "Documentation", "Publish_PyPI", "Release_GitHub", "Test_Coverage", "Test_Platforms"]'
+  multiselect: true
+  choices:
+    - "Lint/Format"
+    - "Documentation"
+    - "Publish_PyPI"
+    - "Release_GitHub"
+    - "Test_Coverage"
+    - "Test_Platforms"
+
 ci_gitlab:
   type: bool
   qmark: "->"
