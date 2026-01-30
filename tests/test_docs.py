@@ -49,3 +49,23 @@ def test_mkdocs_copies_correct_files(
     for file in want:
         filepath = tmp_path / "docs" / file
         assert filepath.exists()
+
+
+def test_no_files_remain_when_no_docs(tmp_path: Path, capsys: pytest.CaptureFixture):
+    given = FullUserAnswers(include_docs=False, docs_engine="zensical")
+    cwd = Path(__file__).resolve().parent.parent
+
+    # Run copier with the given context
+    run_copy(
+        src_path=str(cwd),
+        dst_path=tmp_path,
+        unsafe=True,
+        data=given.model_dump(),
+        vcs_ref="HEAD",
+    )
+    _ = capsys.readouterr()
+
+    dont_want: list[str] = ["docs/*", "zensical.toml", "mkdocs.yml"]
+
+    for pattern in dont_want:
+        assert list(tmp_path.glob(pattern)) == []
