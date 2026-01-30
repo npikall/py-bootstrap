@@ -46,7 +46,7 @@ ci:
 
 # write the changelog
 changelog VERSION="auto":
-    uvx git-changelog -Tio CHANGELOG.md -B="{{VERSION}}" -c angular -n pep440
+    uvx git-changelog -Tio CHANGELOG.md -B="{{VERSION}}" -c angular
 
 
 # bump the version, commit the changes and add a tag (increment can be major, minor, patch,...)
@@ -61,12 +61,10 @@ tag VERSION=`uv version --short`:
     git commit -m "Bumped version to {{VERSION}}"
     git tag -a "v{{VERSION}}"
 
-# make a new release (after all changes have been commited)
+# make a new release (e.g. "just release 0.1.2") (after all changes have been commited)
 release VERSION: test
     @just changelog "v{{VERSION}}"
     git add CHANGELOG.md
     git commit -m "chore: updated Changelog"
     @just bump "{{VERSION}}"
-    git push
-    git push --tags
-    @echo "{{GREEN}}Released {{VERSION}}{{NORMAL}}"
+    @echo "{{GREEN}}Success! Run 'git push && git push --tags' now.{{NORMAL}}"
