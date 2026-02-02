@@ -46,10 +46,10 @@ ci_github_workflows:
   when: "{{ ci_github }}"
   qmark: "->"
   help: Select the Workflows that should be included.
-  default: '["Lint/Format", "Documentation", "Publish_PyPI", "Release_GitHub", "Test_Coverage", "Test_Platforms"]'
+  default: '["Lint_Format", "Documentation", "Publish_PyPI", "Release_GitHub", "Test_Coverage", "Test_Platforms"]'
   multiselect: true
   choices:
-    - "Lint/Format"
+    - "Lint_Format"
     - "Documentation"
     - "Publish_PyPI"
     - "Release_GitHub"
