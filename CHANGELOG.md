@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.1.12](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.12) - 2026-02-02
+
+<small>[Compare with v0.1.11](https://github.com/npikall/py-bootstrap/compare/v0.1.11...v0.1.12)</small>
+
+### Features
+
+- group just recipes ([6cb2b3a](https://github.com/npikall/py-bootstrap/commit/6cb2b3a927ca28a4d345a166a9663aec40baa640) by npikall).
+- select individual workflows ([7d2e87f](https://github.com/npikall/py-bootstrap/commit/7d2e87f900b38a107daee1103402573454a50067) by npikall).
+- add github workflow question ([c868faa](https://github.com/npikall/py-bootstrap/commit/c868faa75c8765cfe872b6f012255283ee3c4f42) by npikall).
+- add github release workflow ([56bc9a9](https://github.com/npikall/py-bootstrap/commit/56bc9a963e5bc3e23b8c17d96e916a9fffdc6ca9) by npikall).
+
+### Bug Fixes
+
+- rendering in release workflow ([a4d308f](https://github.com/npikall/py-bootstrap/commit/a4d308fa10c11d8b9cb4f32c5582ca277e93a73e) by npikall).
+- choices for github workflows ([43c039f](https://github.com/npikall/py-bootstrap/commit/43c039f9716ccd85eeab7e45c9f3bfe3d43f7f10) by npikall).
+
+### Code Refactoring
+
+- make tests more readable ([91680bc](https://github.com/npikall/py-bootstrap/commit/91680bc19bea5d8080a3855c81582f3d6030740c) by npikall).
+
 ## [v0.1.11](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.11) - 2026-01-30
 
 <small>[Compare with v0.1.10](https://github.com/npikall/py-bootstrap/compare/v0.1.10...v0.1.11)</small>
