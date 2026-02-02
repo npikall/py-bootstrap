@@ -131,12 +131,12 @@ def test_justfile_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / "Justfile").read_text()
     cases: list[Cases] = [
         # Want Rendering
-        {"want": f"uv run --python={PY_VERSION} pytest", "start": 36, "end": 40},
-        {"want": "\nhooks:\n    uvx prek install\n\n#", "start": 48, "end": 53},
-        {"want": "    uv run zensical serve\n\n# initialize", "start": 113, "end": 119},
+        {"want": f"uv run --python={PY_VERSION} pytest", "start": 40, "end": 42},
+        {"want": "\nhooks:\n    uvx prek install\n\n#", "start": 53, "end": 58},
+        {"want": "    uv run zensical serve\n\n# initialize", "start": 125, "end": 129},
         # No Rendering
-        {"want": r"uv run --python={{ PYTHON }} ruff format .", "start": 42, "end": 46},
-        {"want": r"uv version --bump {{ INCREMENT }}", "start": 96, "end": 100},
+        {"want": r"uv run --python={{ PYTHON }} ruff format .", "start": 47, "end": 49},
+        {"want": r"uv version --bump {{ INCREMENT }}", "start": 103, "end": 106},
     ]
     for t in cases:
         lines = get_lines(start=t["start"], end=t["end"], content=got)
