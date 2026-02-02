@@ -92,13 +92,13 @@ def test_copier_links_all_files_correct(
         assert rel_path in want
 
 
-def test_readme_renders_correct(session_tmp_path):
+def test_readme_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / "README.md").read_text()
     want = "# example"
     assert want in got
 
 
-def test_pyproject_toml_renders_correct(session_tmp_path):
+def test_pyproject_toml_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / "pyproject.toml").read_text()
     want_1 = """[project]
 authors = [{ name = "John Doe", email = "john.doe@mail.com" }]
@@ -111,18 +111,20 @@ name = "example"
     assert want_3 in got
 
 
-def test_python_version_renders_correct(session_tmp_path):
+def test_python_version_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / ".python-version").read_text()
     want = PY_VERSION
     assert want in got
 
 
-def test_contributing_renders_correct(session_tmp_path):
+def test_contributing_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / "CONTRIBUTING.md").read_text()
-    want_1 = "Report bugs at https://github.com/jdoe/example/issues."
-    want_2 = "example could always use more documentation"
-    assert want_1 in got
-    assert want_2 in got
+    cases: list[str] = [
+        "Report bugs at https://github.com/jdoe/example/issues.",
+        "example could always use more documentation",
+    ]
+    for want in cases:
+        assert want in got
 
 
 def test_justfile_renders_correct(session_tmp_path: Path):
@@ -141,7 +143,7 @@ def test_justfile_renders_correct(session_tmp_path: Path):
         assert t["want"] in lines
 
 
-def test_gitlab_ci_renders_correct(session_tmp_path):
+def test_gitlab_ci_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / ".gitlab-ci.yml").read_text()
     want_1 = f'PYTHON_VERSION: "{PY_VERSION}"'
     want_2 = "--cov=example"
@@ -149,29 +151,27 @@ def test_gitlab_ci_renders_correct(session_tmp_path):
     assert want_2 in got
 
 
-def test_license_MIT_renders_correct(session_tmp_path):  # noqa: N802
+def test_license_MIT_renders_correct(session_tmp_path: Path):  # noqa: N802
     got = (session_tmp_path / "LICENSE").read_text()
     want = f"Copyright (c) {CUR_YEAR} John Doe"
     assert want in got
 
 
-def test_zensical_renders_correct(session_tmp_path):
+def test_zensical_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / "zensical.toml").read_text()
-    want_1 = 'site_name = "Example - Documentation"'
-    want_2 = 'site_author = "John Doe"'
-    want_3 = 'copyright = """\nCopyright &copy; 2025 John Doe\n"""'
-    want_4 = 'media = "(prefers-color-scheme)"'
-    want_5 = 'media = "(prefers-color-scheme: light)"'
-    want_6 = 'media = "(prefers-color-scheme: dark)"'
-    assert want_1 in got
-    assert want_2 in got
-    assert want_3 in got
-    assert want_4 in got
-    assert want_5 in got
-    assert want_6 in got
+    cases: list[str] = [
+        'site_name = "Example - Documentation"',
+        'site_author = "John Doe"',
+        'copyright = """\nCopyright &copy; 2025 John Doe\n"""',
+        'media = "(prefers-color-scheme)"',
+        'media = "(prefers-color-scheme: light)"',
+        'media = "(prefers-color-scheme: dark)"',
+    ]
+    for want in cases:
+        assert want in got
 
 
-def test_test_platform_renders_correct(session_tmp_path):
+def test_test_platform_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / ".github/workflows/test_platform.yml").read_text()
     want_1 = (
         "python-version:\n"
@@ -182,7 +182,7 @@ def test_test_platform_renders_correct(session_tmp_path):
     assert want_1 in got
 
 
-def test_test_coverage_renders_correct(session_tmp_path):
+def test_test_coverage_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / ".github/workflows/test_coverage.yml").read_text()
     want_1 = "--cov=example"
     want_2 = "GITHUB_TOKEN: ${{ github.token }}"
@@ -190,7 +190,7 @@ def test_test_coverage_renders_correct(session_tmp_path):
     assert want_2 in got
 
 
-def test_publish_renders_correct(session_tmp_path):
+def test_publish_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / ".github/workflows/publish.yml").read_text()
     want = f"run: uv python install {PY_VERSION}"
     assert want in got
