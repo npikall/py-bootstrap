@@ -67,7 +67,7 @@ bump VERSION: && tag
 tag VERSION=`uv version --short`:
     git add pyproject.toml
     git add uv.lock
-    git commit -m "Bumped version to {{VERSION}}"
+    git commit -m "chore: bumped version to {{VERSION}}"
     git tag -a "v{{VERSION}}"
 
 # make a new release (e.g. "just release 0.1.2") (after all changes have been commited)
