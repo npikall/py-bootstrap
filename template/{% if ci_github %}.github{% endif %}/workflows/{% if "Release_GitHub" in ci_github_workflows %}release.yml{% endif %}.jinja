@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
 name: Release
+{% raw %}
 
 on:
   push:
@@ -32,7 +33,7 @@ jobs:
         run: |
           gh release create ${{ github.ref_name }} \
             --repo ${{ github.repository }} \
-            --title "PyBootstrap - ${{ github.ref_name }}" \
+            --title {% endraw %}"{{ project_name }}{% raw %} - ${{ github.ref_name }}" \
             --notes-file release-notes.md \
             --fail-on-no-commits \
-            --draft
+            --draft{% endraw %}
