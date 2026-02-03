@@ -1,90 +1,61 @@
+[build-system]
+build-backend = "uv_build"
+requires = [ "uv-build>=0.9.28,<0.10" ]
+
 [project]
-authors = [{ name = "{{author_fullname}}", email = "{{author_email}}" }]
 name = "{{project_name}}"
 version = "0.0.1"
 description = "The project description..."
 readme = "README.md"
+authors = [ { name = "{{author_fullname}}", email = "{{author_email}}" } ]
 requires-python = ">={{py_version_past}}"
-dependencies = []
 classifiers = [
-    "Intended Audience :: Science/Research",
-    "Topic :: Scientific/Engineering",
-    "Topic :: Software Development :: Libraries",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: {{py_version_past}}",
-    "Programming Language :: Python :: {{py_version_current}}",
-    "Programming Language :: Python :: {{py_version_future}}",
-    "Operating System :: POSIX",
-    "Natural Language :: English",
+  "Intended Audience :: Science/Research",
+  "Natural Language :: English",
+  "Operating System :: POSIX",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Software Development :: Libraries",
 ]
-
-[build-system]
-requires = ["uv_build>=0.9.17,<0.10.0"]
-build-backend = "uv_build"
+dependencies = [  ]
 
 [dependency-groups]
 # Unlike optional dependencies, development dependencies are local-only
 # and will not be included in the project requirements when
 # published to PyPI or other indexes
-dev = [
- "pytest>=9.0.1",
- "pytest-cov>=7.0.0",
- "ruff>=0.14.5",
- "ty>=0.0.1a27",
-]
+dev = [ "pytest>=9.0.1", "pytest-cov>=7", "ruff>=0.14.14", "ty>=0.0.14" ]
 {% if include_docs -%}
-docs = [
-    {% if docs_engine == "zensical" -%}
-    "zensical>=0.0.11",
-    "mkdocstrings-python>=2.0.1",
+docs = [ {% if docs_engine == "zensical" -%}
+    "mkdocstrings-python>=2.0.1", "zensical>=0.0.20"
     {%- elif docs_engine == "mkdocs" -%}
-    "mdx-include>=1.4.2",
-    "mkdocs-material>=9.7.0",
-    "mkdocstrings-python>=2.0.1",
-    {%- endif %}
-]{% endif %}
-
-# NOTE: Uncomment the next section to add pre-built wheel files of non-python
-# libraries to your project. In this example GDAL has been choosen.
-# Read more at:
-# https://github.com/astral-sh/uv/issues/11466
-#
-# [[tool.uv.index]]
-# name = "girder"
-# url = "https://girder.github.io/large_image_wheels"
-# explicit = true
-#
-# [tool.uv.sources]
-# gdal = { index = "girder" }
-
+    "mdx-include>=1.4.2", "mkdocs-material>=9.7.0", "mkdocstrings-python>=2.0.1"
+    {%- endif %} ]{% endif %}
 
 [tool.ruff]
 line-length = 88
 indent-width = 4
 
-
-[tool.ruff.lint]
-select = ["ALL"]
-ignore = [
-    "COM812",  # missing-trailing-comma (may conflict with ruff formatter)
-    "D203",    # incorrect-blank-line-before-class (conflicts with D211)
-    "D213",    # multi-line-summary-second-line (conflicts with D212)
+format.indent-style = "space"
+format.quote-style = "double"
+format.line-ending = "auto"
+format.skip-magic-trailing-comma = false
+format.docstring-code-line-length = "dynamic"
+format.docstring-code-format = false
+lint.select = [ "ALL" ]
+lint.ignore = [
+  "COM812", # missing-trailing-comma (may conflict with ruff formatter)
+  "D203",   # incorrect-blank-line-before-class (conflicts with D211)
+  "D213",   # multi-line-summary-second-line (conflicts with D212)
 ]
-fixable = ["ALL"]
-unfixable = []
-
-[tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["E402"]
-"**/{tests}/*" = ["E402", "ANN201", "D", "INP001", "S101"]
-
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-skip-magic-trailing-comma = false
-line-ending = "auto"
-docstring-code-format = false
-docstring-code-line-length = "dynamic"
+lint.per-file-ignores."**/{tests}/*" = [ "ANN201", "D", "E402", "INP001", "S101" ]
+lint.per-file-ignores."__init__.py" = [ "E402" ]
+lint.fixable = [ "ALL" ]
+lint.unfixable = [  ]
 
 [tool.pytest.ini_options]
 addopts = "--cov={{py_dist_name}} --cov-report term-missing -rsx --verbose --color=yes"
