@@ -9,10 +9,10 @@ alias d := docs
 setup:
     uv sync --all-groups
 
-# update dependencies
+# update pre-commit hooks
 [group("dev")]
 update:
-    cd template && uvx prek autoupdate
+    uvx prek autoupdate
 
 # serve the documentation
 [group("dev")]
@@ -64,6 +64,7 @@ bump VERSION: && tag
 
 # tag the latest version
 [group("chore")]
+[private]
 tag VERSION=`uv version --short`:
     git add pyproject.toml
     git add uv.lock
