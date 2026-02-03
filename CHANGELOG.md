@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.1.13](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.13) - 2026-02-03
+
+<small>[Compare with v0.1.12](https://github.com/npikall/py-bootstrap/compare/v0.1.12...v0.1.13)</small>
+
+### Features
+
+- improved release recipe ([0925864](https://github.com/npikall/py-bootstrap/commit/0925864bdaba5410b79c689d0103976c44321e40) by npikall).
+- add pyproject format hook ([4120c77](https://github.com/npikall/py-bootstrap/commit/4120c772741915d8799761c79b4ce2d6eb9623e9) by npikall).
+
+### Code Refactoring
+
+- set use_goreleaser default to false ([fb273b0](https://github.com/npikall/py-bootstrap/commit/fb273b0b269230b431c6ceadaa8f0bafea12f13c) by npikall).
+- set initial version to 0.0.0 ([052c203](https://github.com/npikall/py-bootstrap/commit/052c2036030a7723b202c05a83bd990c51b63d40) by npikall).
+
 ## [v0.1.12](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.12) - 2026-02-02
 
 <small>[Compare with v0.1.11](https://github.com/npikall/py-bootstrap/compare/v0.1.11...v0.1.12)</small>
