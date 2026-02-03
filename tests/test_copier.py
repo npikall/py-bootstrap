@@ -132,10 +132,9 @@ def test_justfile_renders_correct(session_tmp_path: Path):
         # Want Rendering
         {"want": f"uv run --python={PY_VERSION} pytest", "start": 40, "end": 42},
         {"want": "\nhooks:\n    uvx prek install\n\n#", "start": 53, "end": 58},
-        {"want": "    uv run zensical serve\n\n# initialize", "start": 125, "end": 129},
+        {"want": "    uv run zensical serve\n\n# initialize", "start": 106, "end": 110},
         # No Rendering
         {"want": r"uv run --python={{ PYTHON }} ruff format .", "start": 47, "end": 49},
-        {"want": r"uv version --bump {{ INCREMENT }}", "start": 103, "end": 106},
     ]
     for t in cases:
         lines = get_lines(start=t["start"], end=t["end"], content=got)
