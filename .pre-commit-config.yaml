@@ -23,3 +23,8 @@ repos:
       - id: check-added-large-files
       - id: detect-private-key
       - id: end-of-file-fixer
+
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: "v2.12.1"
+    hooks:
+      - id: pyproject-fmt
