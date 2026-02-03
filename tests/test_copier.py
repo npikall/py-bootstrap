@@ -100,15 +100,14 @@ def test_readme_renders_correct(session_tmp_path: Path):
 
 def test_pyproject_toml_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / "pyproject.toml").read_text()
-    want_1 = """[project]
-authors = [{ name = "John Doe", email = "john.doe@mail.com" }]
-name = "example"
-"""
-    want_2 = '\ndocs = [\n    "zensical>=0.0.11",\n    "mkdocstrings-python>=2.0.1",\n]'
-    want_3 = 'addopts = "--cov=example'
-    assert want_1 in got
-    assert want_2 in got
-    assert want_3 in got
+    cases = [
+        '[project]\nname = "example"',
+        'authors = [ { name = "John Doe", email = "john.doe@mail.com" } ]',
+        '\ndocs = [ "mkdocstrings-python>=2.0.1", "zensical>=0.0.20" ]',
+        'addopts = "--cov=example',
+    ]
+    for want in cases:
+        assert want in got
 
 
 def test_python_version_renders_correct(session_tmp_path: Path):
