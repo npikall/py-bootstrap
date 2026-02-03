@@ -108,7 +108,7 @@ use_goreleaser:
   type: bool
   qmark: "->"
   help: Use GoReleaser?
-  default: true
+  default: false
 
 # NEVER PROMPT --------------------------
 copyright_holder:
