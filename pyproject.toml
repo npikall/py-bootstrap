@@ -4,51 +4,52 @@ version = "0.1.12"
 description = "Bootstrap your Python Package Development"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = [
-    "copier-template-extensions>=0.3.3",
-    "jinja2>=3.1.6",
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
+dependencies = [ "copier-template-extensions>=0.3.3", "jinja2>=3.1.6" ]
 
+[dependency-groups]
+dev = [
+  "pydantic>=2.12.5",
+  "pytest>=9.0.2",
+  "ruff>=0.14.9",
+  "ty>=0.0.3",
+  "zensical>=0.0.15",
+]
 
 [tool.ruff]
 line-length = 88
 indent-width = 4
 
-
-[tool.ruff.lint]
-select = ["ALL"]
-ignore = [
-    "COM812",  # missing-trailing-comma (may conflict with ruff formatter)
-    "D203",    # incorrect-blank-line-before-class (conflicts with D211)
-    "D213",    # multi-line-summary-second-line (conflicts with D212)
+format.indent-style = "space"
+format.quote-style = "double"
+format.line-ending = "auto"
+format.skip-magic-trailing-comma = false
+format.docstring-code-line-length = "dynamic"
+format.docstring-code-format = false
+lint.select = [ "ALL" ]
+lint.ignore = [
+  "COM812", # missing-trailing-comma (may conflict with ruff formatter)
+  "D203",   # incorrect-blank-line-before-class (conflicts with D211)
+  "D213",   # multi-line-summary-second-line (conflicts with D212)
 ]
-fixable = ["ALL"]
-unfixable = []
-
-[tool.ruff.lint.per-file-ignores]
-"extensions.py" = ["D"]
-"**/{tests}/*" = ["E402", "ANN201", "D", "INP001", "S101", "ANN001"]
-
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-skip-magic-trailing-comma = false
-line-ending = "auto"
-docstring-code-format = false
-docstring-code-line-length = "dynamic"
-
-[dependency-groups]
-dev = [
-    "pydantic>=2.12.5",
-    "pytest>=9.0.2",
-    "ruff>=0.14.9",
-    "ty>=0.0.3",
-    "zensical>=0.0.15",
+lint.per-file-ignores."**/{tests}/*" = [
+  "ANN001",
+  "ANN201",
+  "D",
+  "E402",
+  "INP001",
+  "S101",
 ]
+lint.per-file-ignores."extensions.py" = [ "D" ]
+lint.fixable = [ "ALL" ]
+lint.unfixable = [  ]
 
 [tool.pytest]
 filterwarnings = [
-    "ignore::DeprecationWarning",
-    'ignore:Dirty template changes included automatically'
+  "ignore::DeprecationWarning",
+  'ignore:Dirty template changes included automatically',
 ]
