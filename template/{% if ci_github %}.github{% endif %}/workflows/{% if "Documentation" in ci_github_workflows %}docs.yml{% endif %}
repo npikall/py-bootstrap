@@ -1,9 +1,14 @@
 name: Documentation
 on:
   workflow_dispatch
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/*"
+      - "zensical.toml"
+      - "CHANGELOG.md"
+      - "README.md"
 permissions:
   contents: read
   pages: write
