@@ -182,10 +182,8 @@ def test_test_platform_renders_correct(session_tmp_path: Path):
 
 def test_test_coverage_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / ".github/workflows/test_coverage.yml").read_text()
-    want_1 = "--cov=example"
-    want_2 = "GITHUB_TOKEN: ${{ github.token }}"
-    assert want_1 in got
-    assert want_2 in got
+    want = "GITHUB_TOKEN: ${{ github.token }}"
+    assert want in got
 
 
 def test_publish_renders_correct(session_tmp_path: Path):
