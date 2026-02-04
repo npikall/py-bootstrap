@@ -36,4 +36,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - run: uv sync --locked --all-extras --dev
-      - run: uv run --with pytest pytest tests/ -rsx --verbose --color=yes
+      - run: uv tool install rust-just
+      - run: just test

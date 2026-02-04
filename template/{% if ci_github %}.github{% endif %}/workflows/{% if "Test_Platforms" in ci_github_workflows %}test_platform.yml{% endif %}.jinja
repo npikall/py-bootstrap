@@ -37,5 +37,8 @@ jobs:
       - name: Install the Project
         run: uv sync --locked --all-extras --dev
 
+      - name: Install Just Taskrunner
+        run: uv tool install rust-just
+
       - name: Run Tests
-        run: uv run --with pytest pytest tests{% endraw %}
+        run: just test{% endraw %}

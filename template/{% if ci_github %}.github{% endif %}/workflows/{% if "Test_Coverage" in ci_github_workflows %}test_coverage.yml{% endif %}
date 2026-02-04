@@ -26,13 +26,16 @@ jobs:
       - name: Install the Project
         run: uv sync --locked --all-extras --dev
 
+      - name: Install Just Taskrunner
+        run: uv tool install rust-just
+
       - name: Run Tests
         run: |
-          uv run pytest tests --verbose --color=yes --cov={{project_name}} --cov-report term-missing
+	  just test
 
       - name: Coverage comment
         id: coverage_comment
         uses: py-cov-action/python-coverage-comment-action@v3
-        with:{% raw %}
+        with:
           GITHUB_TOKEN: ${{ github.token }}
-          VERBOSE: false{% endraw %}
+          VERBOSE: false
