@@ -15,9 +15,8 @@ uv:
   stage: test
   image: ghcr.io/astral-sh/uv:$UV_VERSION-python$PYTHON_VERSION-$BASE_LAYER
   script:
-    # your `uv` commands
-    - uv sync
-    - uv run pytest tests/ -rsx --verbose --color=yes --cov={{py_import_name}} --cov-report term-missing
+    - uv tool install rust-just
+    - just test
 
 .base_ruff:
   stage: build
