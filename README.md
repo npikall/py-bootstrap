@@ -21,7 +21,6 @@ It comes filled with a bunch of modern features from the python ecosystem.
 - :straight_ruler: Testing setup with `pytest`
 - :fishing_pole_and_fish: Pre-commit Hooks with [`Pre-commit`][Pre-commit] or [`Prek`][Prek]
 - :mag: Code Quality assurance with [ruff] and [ty]
-- :rocket: Releases powered by [GoReleaser]
 
 ## Useage
 
@@ -56,4 +55,3 @@ After you have just used the `copier` to create this repo, you might want to run
 [Prek]: https://prek.j178.dev
 [Pre-commit]: https://pre-commit.com
 [Git Changelog]: https://pawamoy.github.io/git-changelog/
-[GoReleaser]: https://goreleaser.com

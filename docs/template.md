@@ -13,7 +13,6 @@ The template generates a package structure that reflects common best practices f
 ├── .copier-answers.yml -------- # Copier Answer to update project
 ├── .gitignore ----------------- #
 ├── .gitlab-ci.yml ------------- # Gitlab CI Config
-├── .goreleaser.yaml ----------- #
 ├── .pre-commit-config.yml ----- #
 ├── .python-version ------------ #
 ├── CONTRIBUTING.md ------------ #
@@ -221,12 +220,7 @@ For more details on the tool check out the [Documentation of Git Changelog][Git 
 
 ---
 
-## GoReleaser
-
-This Template uses [GoReleaser] to build the Wheel Files and Source Distributions and upload them to the `GitHub` Release Page
-
 [Pre-Commit]: https://pre-commit.com
 [Prek]: https://prek.j178.dev
 [Git Changelog]: https://pawamoy.github.io/git-changelog/
-[GoReleaser]: https://goreleaser.com
 [Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
