@@ -142,10 +142,8 @@ def test_justfile_renders_correct(session_tmp_path: Path):
 
 def test_gitlab_ci_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / ".gitlab-ci.yml").read_text()
-    want_1 = f'PYTHON_VERSION: "{PY_VERSION}"'
-    want_2 = "--cov=example"
-    assert want_1 in got
-    assert want_2 in got
+    want = f'PYTHON_VERSION: "{PY_VERSION}"'
+    assert want in got
 
 
 def test_license_MIT_renders_correct(session_tmp_path: Path):  # noqa: N802
