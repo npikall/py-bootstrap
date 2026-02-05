@@ -99,6 +99,11 @@ clean-test:
 venv:
     uv sync --all-groups --all-extras
 
+# update dependencies
+[group("repo")]
+update:
+    uv lock --upgrade
+
 # build the source distribution and wheel file with uv (bump version first)
 [group("repo")]
 dist:
