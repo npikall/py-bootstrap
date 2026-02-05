@@ -134,7 +134,7 @@ init: venv
 # write the changelog
 [group("chore")]
 changelog VERSION="auto":
-    uvx git-changelog -Tio CHANGELOG.md -B="{{VERSION}}" -c angular
+    uvx git-changelog -Tio CHANGELOG.md -B="{{VERSION}}" -c conventional
 
 
 # bump the version, commit and tag (<major, minor, patch> or semver)

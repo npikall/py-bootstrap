@@ -54,7 +54,7 @@ ci:
 # write the changelog
 [group("chore")]
 changelog VERSION="auto":
-    uvx git-changelog -Tio CHANGELOG.md -B="{{VERSION}}" -c angular
+    uvx git-changelog -Tio CHANGELOG.md -B="{{VERSION}}" -c conventional
 
 
 # bump the version, commit the changes and add a tag (increment can be major, minor, patch,...)
