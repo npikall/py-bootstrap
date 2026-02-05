@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.2.0](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.0) - 2026-02-05
+
+<small>[Compare with v0.1.13](https://github.com/npikall/py-bootstrap/compare/v0.1.13...v0.2.0)</small>
+
+### Features
+
+- use just recipe to run test ([6d5d3c9](https://github.com/npikall/py-bootstrap/commit/6d5d3c95d2303ba4af1da804899a3727e942677c) by npikall).
+- use conventional-commits in release recipes ([8358ef5](https://github.com/npikall/py-bootstrap/commit/8358ef5d65415b55a2afc9d8515a0ee3822ddddf) by npikall).
+- add release workflow for gitlab ([903a173](https://github.com/npikall/py-bootstrap/commit/903a17363125696473a61e489db4df710522ee57) by npikall).
+- update pre-commit hooks ([10f82f9](https://github.com/npikall/py-bootstrap/commit/10f82f98dd999b8f6b90a3c6266d50693029b210) by npikall).
+- add dependencie updating recipe ([8a16230](https://github.com/npikall/py-bootstrap/commit/8a16230a768003b3382c7aa5330d3e0011f143d3) by npikall).
+
 ## [v0.1.13](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.13) - 2026-02-03
 
 <small>[Compare with v0.1.12](https://github.com/npikall/py-bootstrap/compare/v0.1.12...v0.1.13)</small>
