@@ -13,6 +13,7 @@ setup:
 [group("dev")]
 update:
     uvx prek autoupdate
+    uv lock --upgrade
 
 # serve the documentation
 [group("dev")]
