@@ -53,7 +53,6 @@ def test_copier_links_all_files_correct(
         ".python-version",
         ".pre-commit-config.yaml",
         ".gitlab-ci.yml",
-        ".goreleaser.yaml",
         # REGULAR FILES
         "CONTRIBUTING.md",
         "CHANGELOG.md",

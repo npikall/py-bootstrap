@@ -29,7 +29,6 @@ class BaseUserAnswers(BaseModel):
     include_docs: bool = True
     docs_engine: DocsEngineOptions = "zensical"
     pre_commit: PreCommitOptions = "prek"
-    use_goreleaser: bool = True
 
 
 class FullUserAnswers(BaseUserAnswers):
