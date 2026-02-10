@@ -8,13 +8,16 @@ CWD = Path(__file__).parent.parent
 JINJA_VARIABLE = r"{{.[a-zA-Z0-9\s]*.}}"
 
 EXTEND_ALLOW = [
-    "PYTHON",
+    "python",
     "PROJ",
     "INCREMENT",
     "VERSION",
     "GREEN",
+    "CYAN",
     "BOLD",
     "NORMAL",
+    "version",
+    "target",
 ]
 
 
