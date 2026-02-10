@@ -16,6 +16,7 @@ nav = [
   { "Update a Project" = "update.md" },
   { "License" = "license.md" },
   { "Changelog" = "changelog.md" },
+  { "Contributing" = "contributing.md" },
 ]
 #extra_css = ["assets/stylesheets/extra.css"]
 #extra_javascript = ["assets/javascript/extra.js"]
