@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.2.1](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.1) - 2026-02-10
+
+<small>[Compare with v0.2.0](https://github.com/npikall/py-bootstrap/compare/v0.2.0...v0.2.1)</small>
+
+### Features
+
+- allow uv to set or bump the version in release ([496f1b9](https://github.com/npikall/py-bootstrap/commit/496f1b9a65ba6762727af79128421023b4c7893d) by npikall).
+- extract init recipe and make one-time only ([542ae84](https://github.com/npikall/py-bootstrap/commit/542ae840b1cf0b60780153695999c4ef0f460b59) by npikall).
+
+### Bug Fixes
+
+- release tag for changelog and add test ([d3104bc](https://github.com/npikall/py-bootstrap/commit/d3104bcc4233b843abea0abe3e0cf2e8d8d8ea14) by Nikolas Pikall).
+- init recipe removal for different platforms ([3b21957](https://github.com/npikall/py-bootstrap/commit/3b21957bf30be37f274e1ab7591732b7eb6f5bc1) by Nikolas Pikall).
+- changelog creation ([d2be4d8](https://github.com/npikall/py-bootstrap/commit/d2be4d8fda149de3ac54851e896679d0e18547b3) by npikall).
+
 ## [v0.2.0](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.0) - 2026-02-05
 
 <small>[Compare with v0.1.13](https://github.com/npikall/py-bootstrap/compare/v0.1.13...v0.2.0)</small>
