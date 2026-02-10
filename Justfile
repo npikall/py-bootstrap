@@ -48,6 +48,7 @@ clean:
     find . -name '*.pyo' -exec rm -f {} +
     find . -name '*~' -exec rm -f {} +
     find . -name '__pycache__' -exec rm -fr {} +
+    find . -name '.cache' -exec rm -fr {} +
     rm -f .coverage
     rm -fr htmlcov/
     rm -fr .pytest_cache
