@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.2.2](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.2) - 2026-02-11
+
+<small>[Compare with v0.2.1](https://github.com/npikall/py-bootstrap/compare/v0.2.1...v0.2.2)</small>
+
+### Features
+
+- update contribugting guide ([1ad2504](https://github.com/npikall/py-bootstrap/commit/1ad25049f3c1adaee8a2e2ac4aaac948f223980b) by Nikolas Pikall).
+
+### Bug Fixes
+
+- init recipe runs hooks to incorporate changes into commit ([3771825](https://github.com/npikall/py-bootstrap/commit/37718258d1a03fb94808dee7d29968b862b59823) by Nikolas Pikall).
+- add init recipe to gitignore ([e454342](https://github.com/npikall/py-bootstrap/commit/e4543420454a89d2bed91fd682dd7faeaa71197d) by Nikolas Pikall).
+
 ## [v0.2.1](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.1) - 2026-02-10
 
 <small>[Compare with v0.2.0](https://github.com/npikall/py-bootstrap/compare/v0.2.0...v0.2.1)</small>
