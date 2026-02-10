@@ -1,8 +1,17 @@
+[default]
 _default:
     @just --list
 
 alias t := test
 alias d := docs
+
+# display the system/project information
+[group("chore")]
+info:
+    @echo "{{ CYAN }}Arch{{ NORMAL }}: {{ arch() }}"
+    @echo "{{ CYAN }}OS{{ NORMAL }}: {{ os_family() }}, {{ os() }}"
+    @echo "{{ CYAN }}Num CPU's{{ NORMAL }}: {{ num_cpus() }}"
+    @echo "{{ CYAN }}Project{{ NORMAL }}: `uv version`"
 
 # setup the python virtual environment (with uv)
 [group("dev")]
@@ -51,32 +60,32 @@ ci:
     uv run ty check .
     uv run pytest tests/
 
-# write the changelog
-[group("chore")]
-changelog VERSION="auto":
-    uvx git-changelog -Tio CHANGELOG.md -B="{{VERSION}}" -c conventional
+_ensure_clean:
+    @git diff --quiet
+    @git diff --cached --quiet
 
-
-# bump the version, commit the changes and add a tag (increment can be major, minor, patch,...)
-[group("chore")]
-bump VERSION: && tag
-    uv version  {{ VERSION }}
+_set_version target:
+    case "{{ target }}" in \
+        [0-9]*.[0-9]*.[0-9]*) \
+            uv version {{ target }} ;; \
+        *) \
+            uv version --bump {{ target }} ;; \
+    esac
     uv lock
 
-# tag the latest version
-[group("chore")]
-[private]
-tag VERSION=`uv version --short`:
-    git add pyproject.toml
-    git add uv.lock
-    git commit -m "chore: bumped version to {{VERSION}}"
-    git tag -a "v{{VERSION}}"
+_generate_changelog version="auto":
+    uvx git-changelog -Tio CHANGELOG.md -B="{{ version }}" -c conventional
 
-# make a new release (e.g. "just release 0.1.2") (after all changes have been commited)
+_commit_and_tag version=`uv version --short`:
+    git add pyproject.toml uv.lock CHANGELOG.md
+    git commit -m "chore(release): bumped version to {{ version }}"
+    git tag -a "v{{ version }}"
+
+# make a new release (target can be <major,minor,patch,...> or semver)
 [group("chore")]
-release VERSION: test
-    @just changelog "v{{VERSION}}"
-    git add CHANGELOG.md
-    git commit -m "chore: updated Changelog"
-    @just bump "{{VERSION}}"
-    @echo "{{GREEN}}Success! Run 'git push && git push --tags' now.{{NORMAL}}"
+release target:
+    @just _ensure_clean
+    @just _set_version {{ target }}
+    @just _generate_changelog
+    @just _commit_and_tag
+    @echo "{{ GREEN }}Release complete. Run 'git push && git push --tags'.{{ NORMAL }}"
