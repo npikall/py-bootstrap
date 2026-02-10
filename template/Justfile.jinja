@@ -139,7 +139,7 @@ _set_version target:
 
 # write the changelog (using "github.com/pawamoy/git-changelog")
 [group("chore")]
-changelog version="auto":
+changelog version=`uv version --short`:
     uvx git-changelog -Tio CHANGELOG.md -B="{{ version }}" -c conventional
 
 _commit_and_tag version=`uv version --short`:

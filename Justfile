@@ -73,7 +73,9 @@ _set_version target:
     esac
     uv lock
 
-_generate_changelog version="auto":
+# write the changelog (using "github.com/pawamoy/git-changelog")
+[group("chore")]
+changelog version=`uv version --short`:
     uvx git-changelog -Tio CHANGELOG.md -B="{{ version }}" -c conventional
 
 _commit_and_tag version=`uv version --short`:
@@ -86,6 +88,6 @@ _commit_and_tag version=`uv version --short`:
 release target:
     @just _ensure_clean
     @just _set_version {{ target }}
-    @just _generate_changelog
+    @just changelog
     @just _commit_and_tag
     @echo "{{ GREEN }}Release complete. Run 'git push && git push --tags'.{{ NORMAL }}"
