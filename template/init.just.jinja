@@ -1,0 +1,25 @@
+# DELETE THIS FILE IF GIT IS ALREADY INITIALIZED
+{% raw %}
+# initialize a git repo and setup venv
+init: venv
+    git init
+    @just hooks
+    git add .
+    @just _run_hooks
+    @just _remove_init
+    git add .
+    git commit -m "initial commit"
+    @echo "{{ GREEN }}{{ BOLD }}Git has been initialized{{ NORMAL }}"
+
+
+_remove_init:
+    find . -name 'init.just' -exec rm -f {} +
+    - sed '5,6d' Justfile > Justfile.tmp && mv Justfile.tmp Justfile
+
+{% endraw %}
+_run_hooks:
+    {%- if pre_commit == "prek" %}
+    - uvx prek run --all-files
+    {%- elif pre_commit == "pre-commit" %}
+    - uvx pre-commit run --all-files
+    {%- endif %}
