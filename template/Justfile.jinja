@@ -2,7 +2,8 @@
 _default:
     @just --list --unsorted
 
-alias b := bump
+import? "init.just"
+
 alias c := clean
 alias d := dist
 alias h := hooks
@@ -121,15 +122,6 @@ docs:
     {%- endif -%}
 {% endif -%}
 {% raw %}
-
-# initialize a git repo and add all files
-[group("chore")]
-init: venv
-    git init
-    just hooks
-    git add .
-    git commit -m "initial commit"
-    @echo "{{ GREEN }}{{ BOLD }}Git has been initialized{{ NORMAL }}"
 
 # write the changelog
 [group("chore")]
