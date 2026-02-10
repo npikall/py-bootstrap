@@ -1,4 +1,5 @@
 # Default command lists all available recipes
+[default]
 _default:
     @just --list --unsorted
 
@@ -9,9 +10,15 @@ alias d := dist
 alias h := hooks
 alias q := check
 alias t := test
-
-PROJ := `uv version --short`
-
+{% raw %}
+# display the system/project information
+[group("chore")]
+info:
+    @echo "{{ CYAN }}Arch{{ NORMAL }}: {{ arch() }}"
+    @echo "{{ CYAN }}OS{{ NORMAL }}: {{ os_family() }}, {{ os() }}"
+    @echo "{{ CYAN }}Num CPU's{{ NORMAL }}: {{ num_cpus() }}"
+    @echo "{{ CYAN }}Project{{ NORMAL }}: `uv version`"
+{% endraw %}
 # lint python code using ruff
 [group("style")]
 check-lint:
@@ -45,11 +52,11 @@ testall:
 {% raw %}
 # run all the formatting, linting, and testing commands
 [group("test")]
-ci PYTHON="3.12":
-    uv run --python={{ PYTHON }} ruff format .
-    uv run --python={{ PYTHON }} ruff check . --fix
-    uv run --python={{ PYTHON }} ty check .
-    uv run --python={{ PYTHON }} pytest tests/
+ci python="3.12":
+    uv run --python={{ python }} ruff format .
+    uv run --python={{ python }} ruff check . --fix
+    uv run --python={{ python }} ty check .
+    uv run --python={{ python }} pytest tests/
 {% endraw %}
 # setup the pre-commit hooks
 [group("repo")]
@@ -60,12 +67,6 @@ hooks:
     uvx pre-commit install
     {%- endif %}
 {% raw %}
-# print the current status of the project
-[group("repo")]
-status:
-    @echo "Project Version: {{ PROJ }}"
-    @echo "Running on: `uname`"
-
 # clean all python build/compilation files and directories
 [group("repo")]
 clean: clean-build clean-pyc clean-test
@@ -123,33 +124,35 @@ docs:
 {% endif -%}
 {% raw %}
 
-# write the changelog
-[group("chore")]
-changelog VERSION="auto":
-    uvx git-changelog -Tio CHANGELOG.md -B="{{VERSION}}" -c conventional
+_ensure_clean:
+    @git diff --quiet
+    @git diff --cached --quiet
 
-
-# bump the version, commit and tag (<major, minor, patch> or semver)
-[group("chore")]
-bump VERSION: && tag
-    uv version  {{ VERSION }}
+_set_version target:
+    case "{{ target }}" in \
+        [0-9]*.[0-9]*.[0-9]*) \
+            uv version {{ target }} ;; \
+        *) \
+            uv version --bump {{ target }} ;; \
+    esac
     uv lock
 
-# tag the latest version
+# write the changelog (using "github.com/pawamoy/git-changelog")
 [group("chore")]
-[private]
-tag VERSION=`uv version --short`:
-    git add pyproject.toml
-    git add uv.lock
-    git commit -m "chore: bumped version to {{VERSION}}"
-    git tag -a "v{{VERSION}}"
+changelog version="auto":
+    uvx git-changelog -Tio CHANGELOG.md -B="{{ version }}" -c conventional
 
-# make a new release (e.g. "just release 0.1.2") (repo must be clean)
+_commit_and_tag version=`uv version --short`:
+    git add pyproject.toml uv.lock CHANGELOG.md
+    git commit -m "chore(release): bumped version to {{ version }}"
+    git tag -a "v{{ version }}"
+
+# make a new release (target can be <major,minor,patch,...> or semver)
 [group("chore")]
-release VERSION: test
-    @just changelog "v{{VERSION}}"
-    git add CHANGELOG.md
-    git commit -m "chore: updated Changelog"
-    @just bump "{{VERSION}}"
-    @echo "{{GREEN}}Success! Run 'git push && git push --tags' now.{{NORMAL}}"
+release target:
+    @just _ensure_clean
+    @just _set_version {{ target }}
+    @just changelog
+    @just _commit_and_tag
+    @echo "{{ GREEN }}Release complete. Run 'git push && git push --tags'.{{ NORMAL }}"
 {% endraw -%}
