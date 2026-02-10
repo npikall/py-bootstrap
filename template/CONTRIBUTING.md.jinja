@@ -8,11 +8,11 @@ You can contribute in many ways:
 
 ### Report Bugs
 
-Report bugs at https://github.com/{{ author_username }}/{{ repo_name }}/issues.
+Report bugs at [`github.com/{{ author_username }}/{{ repo_name }}`][repo].
 
 If you are reporting a bug, please include:
 
-- Your operating system name and version.
+- Your operating system name and version. (run `just info`)
 - Any details about your local setup that might be helpful in troubleshooting.
 - Detailed steps to reproduce the bug.
 
@@ -26,11 +26,11 @@ Look through the GitHub issues for features. Anything tagged with "enhancement" 
 
 ### Write Documentation
 
-{{ project_name }} could always use more documentation, whether as part of the official docs, in docstrings, or even on the web in blog posts, articles, and such.
+`{{ project_name }}` could always use more documentation, whether as part of the official docs, in docstrings, or even on the web in blog posts, articles, and such.
 
 ### Submit Feedback
 
-The best way to send feedback is to file an issue at https://github.com/{{ author_username }}/{{ repo_name }}/issues.
+The best way to send feedback is to file an issue at [`github.com/{{ author_username }}/{{ repo_name }}`][repo].
 
 If you are proposing a feature:
 
@@ -48,11 +48,22 @@ Ready to contribute? Here's how to set up `{{ project_name }}` for local develop
    ```sh
    git clone git@github.com:{{ author_username }}/{{ repo_name }}.git
    ```
-
-3. Install your local copy into a virtualenv. Assuming you have [uv] and [Just] installed, this is how you set up your fork for local development:
+3. Install the dependencies. This project only needs `uv`, install it like so:
 
    ```sh
-   # to setup the virtual environment (or use just)
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+
+4. Install Tools. All tools can be installed via PyPI, the most important is the taskrunner `just`.
+
+   ```sh
+   uv tool install rust-just
+   ```
+
+3. Create a virtualenv. Assuming you have [uv] and [Just] installed, this is how you set up your fork for local development:
+
+   ```sh
+   # to setup the virtual environment (or use just venv)
    uv sync
 
    # to install the pre-commit hooks
@@ -102,7 +113,8 @@ Before you submit a pull request, check that it meets these guidelines:
 A reminder for the maintainers on how to deploy. Make sure all your changes are committed. Then run:
 
 ```sh
-just bump minor  # possible: major / minor / patch and others
+just release patch # target can be semver or bump incrementation
+git push
 git push --tags
 ```
 
@@ -110,3 +122,4 @@ You can set up a [GitHub Actions workflow](https://docs.github.com/en/actions/us
 
 [uv]: https://docs.astral.sh/uv/
 [Just]: https://github.com/casey/just
+[repo]: https://github.com/{{ author_username }}/{{ repo_name }}/issues
