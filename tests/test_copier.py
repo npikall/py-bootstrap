@@ -119,8 +119,8 @@ def test_python_version_renders_correct(session_tmp_path: Path):
 def test_contributing_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / "CONTRIBUTING.md").read_text()
     cases: list[str] = [
-        "Report bugs at https://github.com/jdoe/example/issues.",
-        "example could always use more documentation",
+        "Report bugs at [`github.com/jdoe/example`][repo].",
+        "`example` could always use more documentation",
     ]
     for want in cases:
         assert want in got
