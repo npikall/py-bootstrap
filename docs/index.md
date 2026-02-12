@@ -33,7 +33,7 @@ It comes filled with a bunch of modern features from the python ecosystem.
 - :lucide-wrench: CI pipelines for `Github Actions` and `Gitlab`
 - :lucide-zap: Fast environment and project management with [uv]
 
-## Useage
+## Usage
 
 To install the `copier` tool with [uv] run:
 

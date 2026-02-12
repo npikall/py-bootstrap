@@ -45,6 +45,7 @@ Under `.github/workflows`, the configuration is split into focused pipelines:
 - running tests with coverage (also produces a coverage badge)
 - validating the package across multiple platforms and Python versions
 - publishing the documentation to GitHub Pages
+- creating GitHub releases with version tagging
 - releasing the package to PyPI
 
 Together, these workflows provide a lightweight but complete CI/CD setup that supports the project from development through distribution.
@@ -52,11 +53,12 @@ Together, these workflows provide a lightweight but complete CI/CD setup that su
 ```bash
 └── .github -------------------- # Github CI Config
     ├── actions/setup ---------- #
-    │   └── setup.yml ---------- #
+    │   └── action.yml --------- #
     └── workflows -------------- #
         ├── code_quality.yml --- # Lint, Format and Typechecking
         ├── docs.yml ----------- # Documentation on Github Pages
         ├── publish.yml -------- # Publish to PyPi
+        ├── release.yml -------- # GitHub release workflow
         ├── test_coverage.yml -- # Run tests with coverage
         └── test_platform.yml -- # Test different platforms and versions
 ```
@@ -70,18 +72,32 @@ The template uses a `Justfile` to provide a simple and consistent interface for 
 Here are some of the core tasks provided:
 
 - `just` Lists all available tasks and aliases.
+- `just info` Display system and project information.
 - `just check` or `just q` Run linting and formatting with ruff and type checking with ty.
 - `just test` or `just t` Run the test suite.
-- `just testall` Run the test suite against all supported Python versions.
-  just ci
-- `just ci` Execute formatting, linting, type checks, and tests in a single command, mirroring the CI pipeline locally.
+- `just testall` Run the test suite against all supported Python versions (3.10, 3.12, 3.14).
+- `just ci [python]` Execute formatting, linting, type checks, and tests in a single command, mirroring the CI pipeline locally. Optional `python` parameter specifies the Python version (default: 3.12).
 - `just clean` or `just c` Remove build artifacts, caches, and test outputs.
 - `just venv` Install and synchronize all project dependencies into the local virtual environment.
+- `just update` Update all dependencies and upgrade the lockfile.
 - `just hooks` or `just h` Install the pre-commit hooks.
-- `just bump <major|minor|patch>` or `just b` Bump the project version with confirmation and create a corresponding Git tag.
+- `just changelog` Write the changelog using git-changelog.
+- `just release <target>` Make a new release. The target can be `major`, `minor`, `patch`, or a specific semver version.
 - `just dist` or `just d` Build the source distribution and wheel.
 - `just docs` Serve the documentation locally.
 - `just init` Initialize a Git repository, install dependencies and hooks, and create the initial commit.
+
+!!! tip "One-time Initialization"
+
+    The `just init` command is a one-time initialization recipe that:
+
+    1. Initializes the git repository
+    2. Installs dependencies (`venv`)
+    3. Runs pre-commit hooks on all files to ensure code quality
+    4. Removes itself (`init.just`) from the project
+    5. Creates the initial commit
+
+    After running `just init`, the recipe file is automatically deleted since git is now initialized.
 
 ---
 
@@ -171,8 +187,6 @@ Overall, this configuration provides a concise yet effective CI setup for GitLab
 ## Licenses
 
 The template allows you to choose between several widely used open-source licenses. Each option provides a different balance between permissiveness, attribution requirements, and legal protection. Selecting an appropriate license early helps set clear expectations for users and contributors of your project.
-
-<!-- TODO: Verify table, as it might be faulty -->
 
 ??? note "Choose a License"
 

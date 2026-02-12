@@ -33,14 +33,35 @@ These Questions will look something like this:
 ```
 
 ```bash
--> Set the project's license:
-   - MIT
-   - Apache 2.0
-   - The Unlicense
+-> Set the authors full name:
+   Your Name
 ```
 
 ```bash
--> Include Docs from Zensical
+-> Set the authors email:
+   your.email@example.com
+```
+
+```bash
+-> Use GitHub CI?
+   (Y/n)
+```
+
+```bash
+-> Use GitLab CI?
+   (Y/n)
+```
+
+```bash
+-> Set the project's license:
+   - Apache License 2.0
+   - MIT License
+   - The Unlicense
+   - None
+```
+
+```bash
+-> Include Docs
    (Y/n)
 ```
 

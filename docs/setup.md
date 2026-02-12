@@ -6,9 +6,9 @@ tags:
 
 # Setup
 
-## Prerequistes
+## Prerequisites
 
-In order to have no issues useing this Template make sure the following software is installed.
+In order to have no issues using this Template make sure the following software is installed.
 
 - [ ] [`Git v2`](https://git-scm.com), a version control system
 - [ ] [`Python 3`][Python], which can be managed with [uv]
@@ -29,6 +29,15 @@ And install [`Python`][Python] with [`uv`][uv] by running
 ```bash
 uv python install 3.12
 ```
+
+!!! note
+
+    This template supports Testing in Github Actions for Python 3.10, 3.12, and 3.14 (assuming the versions inbetween will work aswell).
+    You can install multiple versions if needed:
+
+    ```bash
+    uv python install 3.10 3.12 3.14
+    ```
 
 ## Install Copier
 
