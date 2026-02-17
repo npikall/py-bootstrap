@@ -1,9 +1,16 @@
+# Default command lists all available recipes
 [default]
 _default:
     @just --list
 
-alias t := test
+alias c := clean
 alias d := docs
+alias h := hooks
+alias i := info
+alias l := lint
+alias q := check
+alias t := test
+alias fmt := format
 
 # display the system/project information
 [group("chore")]
@@ -13,27 +20,52 @@ info:
     @echo "{{ CYAN }}Num CPU's{{ NORMAL }}: {{ num_cpus() }}"
     @echo "{{ CYAN }}Project{{ NORMAL }}: `uv version`"
 
-# setup the python virtual environment (with uv)
-[group("dev")]
-setup:
-    uv sync --all-groups
+# run the linter [arg:<full|concise|...>]
+[group("style")]
+lint arg="concise":
+    uv run ruff check . --fix --output-format="{{ arg }}"
 
-# update pre-commit hooks
-[group("dev")]
-update:
-    uvx prek autoupdate
-    uv lock --upgrade
+# run the formatter
+[group("style")]
+format:
+    uv run ruff format .
 
-# serve the documentation
-[group("dev")]
-docs:
-    uv sync --group dev
-    uv run zensical serve
+# run the type checker [arg:<full|concise|...>]
+[group("style")]
+types arg="concise":
+    uv run ty check --output-format="{{ arg }}"
+
+# lint, format and type-check [arg:<full|concise|...>]
+[group("style")]
+check *arg="concise":
+    -@just lint "{{ arg }}"
+    -@just format
+    -@just types "{{ arg }}"
 
 # run the tests
 [group("test")]
-test:
-    uv run pytest tests/ -rsx --verbose --color=yes
+test *args:
+    uv run pytest tests/
+
+# run the tests in different Python versions
+[group("test")]
+testall *args:
+    uv run --python=3.10 pytest {{ args }}
+    uv run --python=3.12 pytest {{ args }}
+    uv run --python=3.14 pytest {{ args }}
+
+# run the formatter, linter, typechecker and the tests
+[group("test")]
+ci python="3.12":
+    uv run --python={{ python }} ruff format .
+    uv run --python={{ python }} ruff check . --fix
+    uv run --python={{ python }} ty check .
+    uv run --python={{ python }} pytest tests/
+
+# install the pre-commit hooks
+[group("dev")]
+hooks:
+    uvx prek install
 
 # remove build artifacts
 [group("chore")]
@@ -53,13 +85,26 @@ clean:
     rm -fr htmlcov/
     rm -fr .pytest_cache
 
-# run all the formatting, linting, and testing commands
-[group("test")]
-ci:
-    uv run ruff format .
-    uv run ruff check . --fix
-    uv run ty check .
-    uv run pytest tests/
+# install dependencies in local venv
+[group("dev")]
+venv:
+    uv sync --all-groups --all-extras
+
+# update dependencies in the lock file
+[group("dev")]
+update:
+    uv lock --upgrade
+
+# build the source distribution and wheel file
+[group("dev")]
+dist:
+    uv build
+
+# serve the documentation on localhost
+[group("dev")]
+docs:
+    uv sync --group docs
+    uv run zensical serve
 
 _ensure_clean:
     @git diff --quiet
@@ -74,7 +119,7 @@ _set_version target:
     esac
     uv lock
 
-# write the changelog (using "github.com/pawamoy/git-changelog")
+# write the changelog from commit messages (gh:pawamoy/git-changelog)
 [group("chore")]
 changelog version=`uv version --short`:
     uvx git-changelog -Tio CHANGELOG.md -B="{{ version }}" -c conventional
@@ -84,7 +129,7 @@ _commit_and_tag version=`uv version --short`:
     git commit -m "chore(release): bumped version to {{ version }}"
     git tag -a "v{{ version }}"
 
-# make a new release (target can be <major,minor,patch,...> or semver)
+# make a new release [target:<major|minor|patch|...> or semver]
 [group("chore")]
 release target: test
     @just _ensure_clean
