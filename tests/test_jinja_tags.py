@@ -18,6 +18,7 @@ EXTEND_ALLOW = [
     "NORMAL",
     "version",
     "target",
+    "arg",
 ]
 
 

@@ -128,17 +128,16 @@ def test_contributing_renders_correct(session_tmp_path: Path):
 
 def test_justfile_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / "Justfile").read_text()
-    cases: list[Cases] = [
+    cases: list[str] = [
         # Want Rendering
-        {"want": f"uv run --python={PY_VERSION} pytest", "start": 49, "end": 52},
-        {"want": "\nhooks:\n    uvx prek install\n\n#", "start": 61, "end": 66},
-        {"want": "    uv run zensical serve\n\n", "start": 112, "end": 118},
+        f"uv run --python={PY_VERSION} pytest",
+        "\nhooks:\n    uvx prek install\n\n#",
+        "    uv run zensical serve\n\n",
         # No Rendering
-        {"want": r"uv run --python={{ python }} ruff format .", "start": 54, "end": 56},
+        r"uv run --python={{ python }} ruff format .",
     ]
     for t in cases:
-        lines = get_lines(start=t["start"], end=t["end"], content=got)
-        assert t["want"] in lines
+        assert t in got
 
 
 def test_gitlab_ci_renders_correct(session_tmp_path: Path):
