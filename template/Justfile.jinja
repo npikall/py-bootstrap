@@ -6,10 +6,13 @@ _default:
 import? "init.just"
 
 alias c := clean
-alias d := dist
+alias d := docs
 alias h := hooks
+alias i := info
+alias l := lint
 alias q := check
 alias t := test
+alias fmt := format
 {% raw %}
 # display the system/project information
 [group("chore")]
@@ -19,38 +22,41 @@ info:
     @echo "{{ CYAN }}Num CPU's{{ NORMAL }}: {{ num_cpus() }}"
     @echo "{{ CYAN }}Project{{ NORMAL }}: `uv version`"
 {% endraw %}
-# lint python code using ruff
+# run the linter [arg:<full|concise|...>]
 [group("style")]
-check-lint:
-    uv run ruff check . --fix
+lint arg="concise":
+    uv run ruff check . --fix --output-format={{ arg }}
 
-# format python code using ruff
+# run the formatter
 [group("style")]
-check-format:
+format:
     uv run ruff format .
 
-# run the type checker ty
+# run the type checker [arg:<full|concise|...>]
 [group("style")]
-check-types:
-    uv run ty check
+types arg="concise":
+    uv run ty check --output-format={{ arg }}
 
-# lint, format with ruff and type-check with ty
+# lint, format and type-check [arg:<full|concise|...>]
 [group("style")]
-check: check-lint check-format check-types
+check arg="concise":
+    -@just lint {{ arg }}
+    -@just format 
+    -@just types {{ arg }}
 
-# run tests with coverage
+# run the tests
 [group("test")]
 test:
     uv run pytest tests/
 
-# run tests for all the supported Python versions
+# run the tests in different Python versions
 [group("test")]
 testall:
-    uv run --python={{py_version_past}} pytest
-    uv run --python={{py_version_current}} pytest
-    uv run --python={{py_version_future}} pytest
+    uv run --python={{ py_version_past }} pytest
+    uv run --python={{ py_version_current }} pytest
+    uv run --python={{ py_version_future }} pytest
 {% raw %}
-# run all the formatting, linting, and testing commands
+# run the formatter, linter, typechecker and the tests
 [group("test")]
 ci python="3.12":
     uv run --python={{ python }} ruff format .
@@ -58,8 +64,8 @@ ci python="3.12":
     uv run --python={{ python }} ty check .
     uv run --python={{ python }} pytest tests/
 {% endraw %}
-# setup the pre-commit hooks
-[group("repo")]
+# install the pre-commit hooks
+[group("dev")]
 hooks:
     {%- if pre_commit == "prek" %}
     uvx prek install
@@ -67,8 +73,8 @@ hooks:
     uvx pre-commit install
     {%- endif %}
 {% raw %}
-# clean all python build/compilation files and directories
-[group("repo")]
+# clean all build/compilation files and directories
+[group("dev")]
 clean: clean-build clean-pyc clean-test
 
 # remove build artifacts
@@ -97,23 +103,23 @@ clean-test:
     rm -fr .pytest_cache
 
 # install dependencies in local venv
-[group("repo")]
+[group("dev")]
 venv:
     uv sync --all-groups --all-extras
 
-# update dependencies
-[group("repo")]
+# update dependencies in the lock file
+[group("dev")]
 update:
     uv lock --upgrade
 
-# build the source distribution and wheel file with uv (bump version first)
-[group("repo")]
+# build the source distribution and wheel file
+[group("dev")]
 dist:
     uv build
 {% endraw %}
 {% if include_docs -%}
-# serve the documentation
-[group("repo")]
+# serve the documentation on localhost
+[group("dev")]
 docs:
     uv sync --group docs
     {% if docs_engine == "zensical" -%}
@@ -137,7 +143,7 @@ _set_version target:
     esac
     uv lock
 
-# write the changelog (using "github.com/pawamoy/git-changelog")
+# write the changelog from commit messages (gh:pawamoy/git-changelog)
 [group("chore")]
 changelog version=`uv version --short`:
     uvx git-changelog -Tio CHANGELOG.md -B="{{ version }}" -c conventional
@@ -147,7 +153,7 @@ _commit_and_tag version=`uv version --short`:
     git commit -m "chore(release): bumped version to {{ version }}"
     git tag -a "v{{ version }}"
 
-# make a new release (target can be <major,minor,patch,...> or semver)
+# make a new release [target:<major|minor|patch|...> or semver]
 [group("chore")]
 release target: test
     @just _ensure_clean
