@@ -103,7 +103,7 @@ dist:
 # serve the documentation on localhost
 [group("dev")]
 docs:
-    uv sync --group docs
+    uv sync --dev
     uv run zensical serve
 
 _ensure_clean:
