@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.2.3](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.3) - 2026-02-17
+
+<small>[Compare with v0.2.2](https://github.com/npikall/py-bootstrap/compare/v0.2.2...v0.2.3)</small>
+
+### Features
+
+- add optional flags to the test recipes ([efccad0](https://github.com/npikall/py-bootstrap/commit/efccad00e5c60724aace474c4def03750f6427bb) by npikall).
+- cleaner justfile ([dd498b0](https://github.com/npikall/py-bootstrap/commit/dd498b0c59c48da7f1bc66c39981cfc5591d4575) by npikall).
+
 ## [v0.2.2](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.2) - 2026-02-11
 
 <small>[Compare with v0.2.1](https://github.com/npikall/py-bootstrap/compare/v0.2.1...v0.2.2)</small>
