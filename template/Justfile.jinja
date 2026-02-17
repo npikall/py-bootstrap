@@ -1,7 +1,7 @@
 # Default command lists all available recipes
 [default]
 _default:
-    @just --list --unsorted
+    @just --list
 
 import? "init.just"
 
@@ -21,7 +21,7 @@ info:
     @echo "{{ CYAN }}OS{{ NORMAL }}: {{ os_family() }}, {{ os() }}"
     @echo "{{ CYAN }}Num CPU's{{ NORMAL }}: {{ num_cpus() }}"
     @echo "{{ CYAN }}Project{{ NORMAL }}: `uv version`"
-{% endraw %}
+
 # run the linter [arg:<full|concise|...>]
 [group("style")]
 lint arg="concise":
@@ -43,18 +43,18 @@ check arg="concise":
     -@just lint {{ arg }}
     -@just format 
     -@just types {{ arg }}
-
+{% endraw %}
 # run the tests
 [group("test")]
-test:
-    uv run pytest tests/
+test *args:
+    uv run pytest tests/ {{ args }}
 
 # run the tests in different Python versions
 [group("test")]
-testall:
-    uv run --python={{ py_version_past }} pytest
-    uv run --python={{ py_version_current }} pytest
-    uv run --python={{ py_version_future }} pytest
+testall *args:
+    uv run --python={{ py_version_past }} pytest {{ args }}
+    uv run --python={{ py_version_current }} pytest {{ args }}
+    uv run --python={{ py_version_future }} pytest {{ args }}
 {% raw %}
 # run the formatter, linter, typechecker and the tests
 [group("test")]
