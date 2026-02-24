@@ -10,7 +10,7 @@ It comes filled with a bunch of modern features from the python ecosystem.
 > [!NOTE]
 > This template tries to follow the [Python Developer Tooling Handbook][Handbook]
 
-![casette](assets/casette.gif)
+![casette](docs/assets/casette.gif)
 
 ## :battery: All Batteries included
 
