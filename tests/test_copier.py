@@ -69,11 +69,20 @@ def test_copier_links_all_files_correct(
         "tests/test_meta.py",
         # DOCS DIRECTORY
         "docs/index.md",
+        "docs/license.md",
+        "docs/contributing.md",
+        "docs/changelog.md",
+        "docs/reference/api.md",
         # GITHUB DIRECTORY
         ".github/actions/setup/action.yml",
+        ".github/ISSUE_TEMPLATE/1-bug.md",
+        ".github/ISSUE_TEMPLATE/2-feature.md",
+        ".github/ISSUE_TEMPLATE/3-docs.md",
+        ".github/ISSUE_TEMPLATE/4-change.md",
         ".github/workflows/code_quality.yml",
         ".github/workflows/docs.yml",
         ".github/workflows/publish.yml",
+        ".github/workflows/release.yml",
         ".github/workflows/test_coverage.yml",
         ".github/workflows/test_platform.yml",
         # COPIER METADATA
@@ -85,7 +94,7 @@ def test_copier_links_all_files_correct(
         assert (session_tmp_path / file).exists()
 
     # Check if more than expected number of files got copied
-    for file in session_tmp_path.iterdir():
+    for file in session_tmp_path.rglob("*"):
         if file.is_dir():
             continue
         rel_path = str(file.relative_to(session_tmp_path))
