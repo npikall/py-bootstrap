@@ -1,3 +1,5 @@
+set windows-shell := ["powershell"]
+
 # Default command lists all available recipes
 [default]
 _default:

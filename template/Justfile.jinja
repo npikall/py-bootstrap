@@ -1,3 +1,5 @@
+set windows-shell := ["powershell"]
+
 # Default command lists all available recipes
 [default]
 _default:
@@ -41,7 +43,7 @@ types arg="concise":
 [group("style")]
 check arg="concise":
     -@just lint {{ arg }}
-    -@just format 
+    -@just format
     -@just types {{ arg }}
 {% endraw %}
 # run the tests
