@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.2.4](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.4) - 2026-03-08
+
+<small>[Compare with v0.2.3](https://github.com/npikall/py-bootstrap/compare/v0.2.3...v0.2.4)</small>
+
+### Features
+
+- update build backend version ([477cba3](https://github.com/npikall/py-bootstrap/commit/477cba3d70fd5882596ec960b831a39eb392c2e6) by Nikolas Pikall).
+- update pre-commit hooks ([660b456](https://github.com/npikall/py-bootstrap/commit/660b4565271e63efe01f78801f8851b61b51068b) by Nikolas Pikall).
+- set powershell in justfile for windows users ([cc47f61](https://github.com/npikall/py-bootstrap/commit/cc47f6176c42bbfe2d4be7c1887ea4cf863a2dcb) by Nikolas Pikall).
+
 ## [v0.2.3](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.3) - 2026-02-17
 
 <small>[Compare with v0.2.2](https://github.com/npikall/py-bootstrap/compare/v0.2.2...v0.2.3)</small>
