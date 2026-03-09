@@ -57,7 +57,7 @@ testall *args:
 
 # run the formatter, linter, typechecker and the tests
 [group("test")]
-ci python="3.12":
+ci python="3.13":
     uv run --python={{ python }} ruff format .
     uv run --python={{ python }} ruff check . --fix
     uv run --python={{ python }} ty check .
