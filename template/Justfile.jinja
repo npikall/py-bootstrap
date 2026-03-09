@@ -57,10 +57,10 @@ testall *args:
     uv run --python={{ py_version_past }} pytest {{ args }}
     uv run --python={{ py_version_current }} pytest {{ args }}
     uv run --python={{ py_version_future }} pytest {{ args }}
-{% raw %}
+
 # run the formatter, linter, typechecker and the tests
 [group("test")]
-ci python="3.12":
+ci python="{{ py_version_current }}":{% raw %}
     uv run --python={{ python }} ruff format .
     uv run --python={{ python }} ruff check . --fix
     uv run --python={{ python }} ty check .
