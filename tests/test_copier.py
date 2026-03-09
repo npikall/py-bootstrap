@@ -154,6 +154,7 @@ def test_justfile_renders_correct(session_tmp_path: Path):
         f"uv run --python={PY_VERSION} pytest",
         "\nhooks:\n    uvx prek install\n\n#",
         "    uv run zensical serve\n\n",
+        f'ci python="{PY_VERSION}":\n    uv',
         # No Rendering
         r"uv run --python={{ python }} ruff format .",
     ]
