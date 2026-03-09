@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import TypedDict
@@ -23,6 +24,14 @@ class Cases(TypedDict):
     want: str
     start: int
     end: int
+
+
+def get_linenumbers_to_delete_in_justfile(content: str) -> tuple[int, int]:
+    result = re.findall(r"sed\s+'([^']+)'", content)[0]
+    assert isinstance(result, str)
+    result = result.rstrip("d")
+    parts = result.split(",")
+    return int(parts[0]), int(parts[1])
 
 
 @pytest.fixture(scope="session")
@@ -196,3 +205,12 @@ def test_publish_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / ".github/workflows/publish.yml").read_text()
     want = f"run: uv python install {PY_VERSION}"
     assert want in got
+
+
+def test_init_just_deletes_correct_content_in_justfile(session_tmp_path: Path):
+    init_just_content = (session_tmp_path / "init.just").read_text()
+    just_content = (session_tmp_path / "Justfile").read_text()
+    start_line, end_line = get_linenumbers_to_delete_in_justfile(init_just_content)
+    got = get_lines(start_line, end_line, just_content)
+    want = 'import? "init.just"'
+    assert got == want
