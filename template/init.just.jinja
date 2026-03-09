@@ -14,7 +14,7 @@ init: venv
 
 _remove_init:
     find . -name 'init.just' -exec rm -f {} +
-    - sed '5,6d' Justfile > Justfile.tmp && mv Justfile.tmp Justfile
+    - sed '7,8d' Justfile > Justfile.tmp && mv Justfile.tmp Justfile
 
 {% endraw %}
 _run_hooks:
