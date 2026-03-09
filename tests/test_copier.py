@@ -1,17 +1,20 @@
 import re
 from datetime import datetime
 from pathlib import Path
-from typing import TypedDict
+from typing import Any, TypedDict
 
 import pytest
+import yaml
 from conftest import FullUserAnswers as UserAnswers
 from copier import run_copy
 
-# NOTE: Keep synced with 'copier.yml'
-PY_VERSION = "3.12"
-PY_VERSION_PAST = "3.10"
-PY_VERSION_FUTURE = "3.14"
-CUR_YEAR = datetime.today().year  # noqa: DTZ002
+COPIER_CONFIG_PATH: Path = Path(__file__).resolve().parent.parent / "copier.yml"
+COPIER_CONFIG: dict[Any, Any] = yaml.safe_load(COPIER_CONFIG_PATH.read_text())
+
+PY_VERSION: str = COPIER_CONFIG["py_version_current"]["default"]
+PY_VERSION_PAST: str = COPIER_CONFIG["py_version_past"]["default"]
+PY_VERSION_FUTURE: str = COPIER_CONFIG["py_version_future"]["default"]
+CUR_YEAR: int = datetime.today().year  # noqa: DTZ002
 
 
 def get_lines(start: int, end: int, content: str) -> str:
