@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.2.5](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.5) - 2026-03-09
+
+<small>[Compare with v0.2.4](https://github.com/npikall/py-bootstrap/compare/v0.2.4...v0.2.5)</small>
+
+### Features
+
+- ci recipe uses current python version ([33f828d](https://github.com/npikall/py-bootstrap/commit/33f828dd1edbf883983d37699bf1c0ea7dbf2f36) by npikall).
+
+### Bug Fixes
+
+- linenumbers to delete in justfile ([4ccf573](https://github.com/npikall/py-bootstrap/commit/4ccf573b5a7db0194b99662759cba31d35e226d9) by npikall).
+
+### Reverts
+
+- remove dependabot as its job is redundant ([7993734](https://github.com/npikall/py-bootstrap/commit/7993734e202cf74619402cdf3214a6eedfe2f97c) by npikall).
+- remove claude file as no ai is used in the repo ([2cfe636](https://github.com/npikall/py-bootstrap/commit/2cfe63645c83369d8b127bb99fbd12a23d2f3e58) by npikall).
+
 ## [v0.2.4](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.4) - 2026-03-08
 
 <small>[Compare with v0.2.3](https://github.com/npikall/py-bootstrap/compare/v0.2.3...v0.2.4)</small>
