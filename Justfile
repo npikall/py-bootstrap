@@ -47,12 +47,11 @@ check *arg="concise":
 # run the tests
 [group("test")]
 test *args:
-    uv run pytest tests/
+    uv run pytest tests/ {{ args }}
 
 # run the tests in different Python versions
 [group("test")]
 testall *args:
-    uv run --python=3.10 pytest {{ args }}
     uv run --python=3.12 pytest {{ args }}
     uv run --python=3.14 pytest {{ args }}
 
