@@ -1,7 +1,6 @@
 import re
 import subprocess
 import unicodedata
-from datetime import UTC, datetime
 
 from jinja2.ext import Extension
 
@@ -37,9 +36,3 @@ class SlugifyExtension(Extension):
     def __init__(self, environment):  # noqa: ANN001, ANN204
         super().__init__(environment)
         environment.filters["slugify"] = slugify
-
-
-class CurrentYearExtension(Extension):
-    def __init__(self, environment):  # noqa: ANN001, ANN204
-        super().__init__(environment)
-        environment.globals["current_year"] = datetime.now(tz=UTC).year

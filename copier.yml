@@ -7,7 +7,6 @@ _subdirectory: template
 _templates_suffix: .jinja
 _jinja_extensions:
   - copier_template_extensions.TemplateExtensionLoader
-  - extensions.py:CurrentYearExtension
   - extensions.py:GitExtension
   - extensions.py:SlugifyExtension
 
@@ -117,7 +116,7 @@ copyright_date:
   qmark: "->"
   when: false
   help: The copyright date
-  default: "{{ current_year }}"
+  default: "{{ '%Y' | strftime }}"
 
 py_version_past:
   type: str
