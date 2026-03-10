@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v0.2.6](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.6) - 2026-03-11
+
+<small>[Compare with v0.2.5](https://github.com/npikall/py-bootstrap/compare/v0.2.5...v0.2.6)</small>
+
+### Bug Fixes
+
+- disallow whitespace characters in pyproject name ([bb58b3b](https://github.com/npikall/py-bootstrap/commit/bb58b3b4c91c839ac3231aadcebfca6aa0c64c8f) by Nikolas Pikall).
+- rendering of args in test recipe correctly ([35c4a98](https://github.com/npikall/py-bootstrap/commit/35c4a985752a05492e887d9fda258e93a830b96b) by Nikolas Pikall).
+
+### Code Refactoring
+
+- replace current year extensions with jinja function ([69403fa](https://github.com/npikall/py-bootstrap/commit/69403fa4c541ffb016d8548ea59060ff829a83fe) by Nikolas Pikall).
+
 ## [v0.2.5](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.5) - 2026-03-09
 
 <small>[Compare with v0.2.4](https://github.com/npikall/py-bootstrap/compare/v0.2.4...v0.2.5)</small>
