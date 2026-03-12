@@ -2,299 +2,617 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-<!-- insertion marker -->
-## [v0.2.6](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.6) - 2026-03-11
+## [0.2.7] - 2026-03-12
 
-<small>[Compare with v0.2.5](https://github.com/npikall/py-bootstrap/compare/v0.2.5...v0.2.6)</small>
+### 🚀 Features
 
-### Bug Fixes
+- add pyproject-fmt config
+- *(template)* trigger publish to pypi only on created release
+- *(template)* conditionally use the chosen changelog tool
+- *(template)* prompt for a changelog tool
+- *(template)* add git-cliff config if it gets chosen
+- *(template)* changelog recipe with two possible bodys
+- add git-cliff config
 
-- disallow whitespace characters in pyproject name ([bb58b3b](https://github.com/npikall/py-bootstrap/commit/bb58b3b4c91c839ac3231aadcebfca6aa0c64c8f) by Nikolas Pikall).
-- rendering of args in test recipe correctly ([35c4a98](https://github.com/npikall/py-bootstrap/commit/35c4a985752a05492e887d9fda258e93a830b96b) by Nikolas Pikall).
+### 🐛 Bug Fixes
 
-### Code Refactoring
+- rendering of justfile
+- rendering of pyproject toml
+- use elif correctly in workflow
+- rendering of whitespaces in justfile
+- remove pytest ini-options
 
-- replace current year extensions with jinja function ([69403fa](https://github.com/npikall/py-bootstrap/commit/69403fa4c541ffb016d8548ea59060ff829a83fe) by Nikolas Pikall).
+### 📚 Documentation
 
-## [v0.2.5](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.5) - 2026-03-09
+- show toc on changelog page
 
-<small>[Compare with v0.2.4](https://github.com/npikall/py-bootstrap/compare/v0.2.4...v0.2.5)</small>
+### 🚜 Refactor
 
-### Features
+- remove boilerplate from readme
+- use underscores to render scopes with git-cliff
 
-- ci recipe uses current python version ([33f828d](https://github.com/npikall/py-bootstrap/commit/33f828dd1edbf883983d37699bf1c0ea7dbf2f36) by npikall).
+### 🧪 Testing
 
-### Bug Fixes
+- add changelog-tool to the user answers
+- update test cases for rendering opitional changelog
+- rendering of release recipe
+- use underscores instead of stars
 
-- linenumbers to delete in justfile ([4ccf573](https://github.com/npikall/py-bootstrap/commit/4ccf573b5a7db0194b99662759cba31d35e226d9) by npikall).
+### 💼 Other
 
-### Reverts
+- use latest justfile from template
+- use git-cliff for release note generation
+- set fetch-depth to 0 in actions/checkout
 
-- remove dependabot as its job is redundant ([7993734](https://github.com/npikall/py-bootstrap/commit/7993734e202cf74619402cdf3214a6eedfe2f97c) by npikall).
-- remove claude file as no ai is used in the repo ([2cfe636](https://github.com/npikall/py-bootstrap/commit/2cfe63645c83369d8b127bb99fbd12a23d2f3e58) by npikall).
+## [0.2.6] - 2026-03-10
 
-## [v0.2.4](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.4) - 2026-03-08
+### 🐛 Bug Fixes
 
-<small>[Compare with v0.2.3](https://github.com/npikall/py-bootstrap/compare/v0.2.3...v0.2.4)</small>
+- rendering of args in test recipe correctly
+- disallow whitespace characters in pyproject name
 
-### Features
+### 🚜 Refactor
 
-- update build backend version ([477cba3](https://github.com/npikall/py-bootstrap/commit/477cba3d70fd5882596ec960b831a39eb392c2e6) by Nikolas Pikall).
-- update pre-commit hooks ([660b456](https://github.com/npikall/py-bootstrap/commit/660b4565271e63efe01f78801f8851b61b51068b) by Nikolas Pikall).
-- set powershell in justfile for windows users ([cc47f61](https://github.com/npikall/py-bootstrap/commit/cc47f6176c42bbfe2d4be7c1887ea4cf863a2dcb) by Nikolas Pikall).
+- replace current year extensions with jinja function
 
-## [v0.2.3](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.3) - 2026-02-17
+### 🧪 Testing
 
-<small>[Compare with v0.2.2](https://github.com/npikall/py-bootstrap/compare/v0.2.2...v0.2.3)</small>
+- copie args in test recipes correctly
 
-### Features
+### 💼 Other
 
-- add optional flags to the test recipes ([efccad0](https://github.com/npikall/py-bootstrap/commit/efccad00e5c60724aace474c4def03750f6427bb) by npikall).
-- cleaner justfile ([dd498b0](https://github.com/npikall/py-bootstrap/commit/dd498b0c59c48da7f1bc66c39981cfc5591d4575) by npikall).
+- *(release)* bumped version to 0.2.6
 
-## [v0.2.2](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.2) - 2026-02-11
+## [0.2.5] - 2026-03-09
 
-<small>[Compare with v0.2.1](https://github.com/npikall/py-bootstrap/compare/v0.2.1...v0.2.2)</small>
+### 🚀 Features
 
-### Features
+- ci recipe uses current python version
 
-- update contribugting guide ([1ad2504](https://github.com/npikall/py-bootstrap/commit/1ad25049f3c1adaee8a2e2ac4aaac948f223980b) by Nikolas Pikall).
+### 🐛 Bug Fixes
 
-### Bug Fixes
+- linenumbers to delete in justfile
 
-- init recipe runs hooks to incorporate changes into commit ([3771825](https://github.com/npikall/py-bootstrap/commit/37718258d1a03fb94808dee7d29968b862b59823) by Nikolas Pikall).
-- add init recipe to gitignore ([e454342](https://github.com/npikall/py-bootstrap/commit/e4543420454a89d2bed91fd682dd7faeaa71197d) by Nikolas Pikall).
+### 🧪 Testing
 
-## [v0.2.1](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.1) - 2026-02-10
+- self-destructive init recipe
+- read python versions from copier.yml
+- ci recipe has dynamic python version
 
-<small>[Compare with v0.2.0](https://github.com/npikall/py-bootstrap/compare/v0.2.0...v0.2.1)</small>
+### ◀️ Revert
 
-### Features
+- remove claude file as no ai is used in the repo
+- remove dependabot as its job is redundant
 
-- allow uv to set or bump the version in release ([496f1b9](https://github.com/npikall/py-bootstrap/commit/496f1b9a65ba6762727af79128421023b4c7893d) by npikall).
-- extract init recipe and make one-time only ([542ae84](https://github.com/npikall/py-bootstrap/commit/542ae840b1cf0b60780153695999c4ef0f460b59) by npikall).
+### 💼 Other
 
-### Bug Fixes
+- actually use args in justfile recipe
+- update python version in ci recipe
+- update dependencies
+- *(release)* bumped version to 0.2.5
 
-- release tag for changelog and add test ([d3104bc](https://github.com/npikall/py-bootstrap/commit/d3104bcc4233b843abea0abe3e0cf2e8d8d8ea14) by Nikolas Pikall).
-- init recipe removal for different platforms ([3b21957](https://github.com/npikall/py-bootstrap/commit/3b21957bf30be37f274e1ab7591732b7eb6f5bc1) by Nikolas Pikall).
-- changelog creation ([d2be4d8](https://github.com/npikall/py-bootstrap/commit/d2be4d8fda149de3ac54851e896679d0e18547b3) by npikall).
+## [0.2.4] - 2026-03-08
 
-## [v0.2.0](https://github.com/npikall/py-bootstrap/releases/tag/v0.2.0) - 2026-02-05
+### 🚀 Features
 
-<small>[Compare with v0.1.13](https://github.com/npikall/py-bootstrap/compare/v0.1.13...v0.2.0)</small>
+- set powershell in justfile for windows users
+- update pre-commit hooks
+- update build backend version
 
-### Features
+### 📚 Documentation
 
-- use just recipe to run test ([6d5d3c9](https://github.com/npikall/py-bootstrap/commit/6d5d3c95d2303ba4af1da804899a3727e942677c) by npikall).
-- use conventional-commits in release recipes ([8358ef5](https://github.com/npikall/py-bootstrap/commit/8358ef5d65415b55a2afc9d8515a0ee3822ddddf) by npikall).
-- add release workflow for gitlab ([903a173](https://github.com/npikall/py-bootstrap/commit/903a17363125696473a61e489db4df710522ee57) by npikall).
-- update pre-commit hooks ([10f82f9](https://github.com/npikall/py-bootstrap/commit/10f82f98dd999b8f6b90a3c6266d50693029b210) by npikall).
-- add dependencie updating recipe ([8a16230](https://github.com/npikall/py-bootstrap/commit/8a16230a768003b3382c7aa5330d3e0011f143d3) by npikall).
+- add vhs tape to the readme
+- move casette into docs directory
 
-## [v0.1.13](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.13) - 2026-02-03
+### 🧪 Testing
 
-<small>[Compare with v0.1.12](https://github.com/npikall/py-bootstrap/compare/v0.1.12...v0.1.13)</small>
+- iterate over temp dir recursively to find all files
 
-### Features
+### 💼 Other
 
-- improved release recipe ([0925864](https://github.com/npikall/py-bootstrap/commit/0925864bdaba5410b79c689d0103976c44321e40) by npikall).
-- add pyproject format hook ([4120c77](https://github.com/npikall/py-bootstrap/commit/4120c772741915d8799761c79b4ce2d6eb9623e9) by npikall).
+- fix documentation recipe
+- update pre-commit hooks versions
+- update dependencies
+- *(release)* bumped version to 0.2.4
 
-### Code Refactoring
+## [0.2.3] - 2026-02-17
 
-- set use_goreleaser default to false ([fb273b0](https://github.com/npikall/py-bootstrap/commit/fb273b0b269230b431c6ceadaa8f0bafea12f13c) by npikall).
-- set initial version to 0.0.0 ([052c203](https://github.com/npikall/py-bootstrap/commit/052c2036030a7723b202c05a83bd990c51b63d40) by npikall).
+### 🚀 Features
 
-## [v0.1.12](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.12) - 2026-02-02
+- *(template)* cleaner justfile
+- *(template)* add optional flags to the test recipes
 
-<small>[Compare with v0.1.11](https://github.com/npikall/py-bootstrap/compare/v0.1.11...v0.1.12)</small>
+### 📚 Documentation
 
-### Features
+- update content
 
-- group just recipes ([6cb2b3a](https://github.com/npikall/py-bootstrap/commit/6cb2b3a927ca28a4d345a166a9663aec40baa640) by npikall).
-- select individual workflows ([7d2e87f](https://github.com/npikall/py-bootstrap/commit/7d2e87f900b38a107daee1103402573454a50067) by npikall).
-- add github workflow question ([c868faa](https://github.com/npikall/py-bootstrap/commit/c868faa75c8765cfe872b6f012255283ee3c4f42) by npikall).
-- add github release workflow ([56bc9a9](https://github.com/npikall/py-bootstrap/commit/56bc9a963e5bc3e23b8c17d96e916a9fffdc6ca9) by npikall).
+### 🧪 Testing
 
-### Bug Fixes
+- update justfile rendering
+- update justfile rendering
 
-- rendering in release workflow ([a4d308f](https://github.com/npikall/py-bootstrap/commit/a4d308fa10c11d8b9cb4f32c5582ca277e93a73e) by npikall).
-- choices for github workflows ([43c039f](https://github.com/npikall/py-bootstrap/commit/43c039f9716ccd85eeab7e45c9f3bfe3d43f7f10) by npikall).
+### 💼 Other
 
-### Code Refactoring
+- *(claude)* add context for claude code
+- apply the template on it self
+- *(release)* bumped version to 0.2.3
 
-- make tests more readable ([91680bc](https://github.com/npikall/py-bootstrap/commit/91680bc19bea5d8080a3855c81582f3d6030740c) by npikall).
+## [0.2.2] - 2026-02-10
 
-## [v0.1.11](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.11) - 2026-01-30
+### 🚀 Features
 
-<small>[Compare with v0.1.10](https://github.com/npikall/py-bootstrap/compare/v0.1.10...v0.1.11)</small>
+- update contribugting guide
 
-### Bug Fixes
+### 🐛 Bug Fixes
 
-- exclude docs files when not used ([c327e69](https://github.com/npikall/py-bootstrap/commit/c327e698b2aed3fcf809ddcc776029fe71aa4d4c) by npikall).
+- add init recipe to gitignore
+- init recipe runs hooks to incorporate changes into commit
 
-## [v0.1.10](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.10) - 2026-01-09
+### 📚 Documentation
 
-<small>[Compare with v0.1.9](https://github.com/npikall/py-bootstrap/compare/v0.1.9...v0.1.10)</small>
+- add a contributing guide
+- add contributing guide to zensical
 
-### Features
+### 🧪 Testing
 
-- add mkdocstrings configuration for nicer api references ([535c8ac](https://github.com/npikall/py-bootstrap/commit/535c8ac242b67bffa02167f4a92319334a02c70b) by npikall).
+- update contributing rendering
 
-### Bug Fixes
+### 💼 Other
 
-- add v to version tag in changelog ([223ce3f](https://github.com/npikall/py-bootstrap/commit/223ce3f429362e85131bf4ff8a00a20e1d3f798b) by npikall).
+- update pre-commit hooks
+- add github issue templates
+- update dependencies
+- add cache to clean recipe
+- format pyproject toml
+- *(release)* bumped version to 0.2.2
 
+## [0.2.1] - 2026-02-10
 
-## [v0.1.9](https://github.com/npikall/py-bootstrap/releases/tag/0.1.9) - 2026-01-08
+### 🚀 Features
 
-<small>[Compare with v0.1.8](https://github.com/npikall/py-bootstrap/compare/v0.1.8...0.1.9)</small>
+- extract init recipe and make one-time only
+- allow uv to set or bump the version in release
 
-### Bug Fixes
+### 🐛 Bug Fixes
 
-- whitespaces at end of line ([0a93c72](https://github.com/npikall/py-bootstrap/commit/0a93c7238d64afe820c782f7c39f54ad34f587d3) by Nikolas Pikall).
-- changelog ([64b0293](https://github.com/npikall/py-bootstrap/commit/64b0293aacefa17e0b33f159a538dbc91def1541) by Nikolas Pikall).
+- changelog creation
+- init recipe removal for different platforms
+- release tag for changelog and add test
 
-## [v0.1.8](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.8) - 2026-01-08
+### 🧪 Testing
 
-<small>[Compare with v0.1.7](https://github.com/npikall/py-bootstrap/compare/v0.1.7...v0.1.8)</small>
+- update test cases
 
-### Features
+### 💼 Other
 
-- update docs index to use readme ([fbec801](https://github.com/npikall/py-bootstrap/commit/fbec801d50a206f60876945337a3be926f776bb9) by Nikolas Pikall).
-- add license to docs ([3c604a8](https://github.com/npikall/py-bootstrap/commit/3c604a8d10a7eaebd905cf8227d017fb95815ffd) by Nikolas Pikall).
-- add contributing to docs ([9aa598f](https://github.com/npikall/py-bootstrap/commit/9aa598fbfed7e39b5b6d6999f22e2a279d783d7b) by Nikolas Pikall).
-- add changelog to docs ([a92c32c](https://github.com/npikall/py-bootstrap/commit/a92c32ce4813bb8710f72899eb530398d61a7874) by Nikolas Pikall).
-- add mkdocstrings and api reference ([ce394e5](https://github.com/npikall/py-bootstrap/commit/ce394e5f8e3ac2107f3a8154db6b41983f107204) by Nikolas Pikall).
+- improve release recipes
+- *(release)* bumped version to 0.2.1
 
-### Code Refactoring
+## [0.2.0] - 2026-02-05
 
-- add default config of zensical ([8e54d1a](https://github.com/npikall/py-bootstrap/commit/8e54d1a65b42f1cb6809830298078d3836f1c6b4) by Nikolas Pikall).
+### 🚀 Features
 
-## [v0.1.7](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.7) - 2025-12-25
+- feat!(template): remove goreleaser
+- *(template)* add dependencie updating recipe
+- *(template)* update pre-commit hooks
+- *(template)* add release workflow for gitlab
+- use conventional-commits in release recipes
+- *(template)* use just recipe to run test
 
-<small>[Compare with v0.1.6](https://github.com/npikall/py-bootstrap/compare/v0.1.6...v0.1.7)</small>
+### 📚 Documentation
 
-### Bug Fixes
+- remove goreleaser
 
-- remove whitespace at end-of-line ([a81afd4](https://github.com/npikall/py-bootstrap/commit/a81afd477b3384d95fc8dd17cea93f57931ed7c0) by Nikolas Pikall).
+### 🧪 Testing
 
-## [v0.1.6](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.6) - 2025-12-25
+- update coverage test
+- remove goreleaser
+- update justfile lines
+- update gitlab rendering
 
-<small>[Compare with v0.1.5](https://github.com/npikall/py-bootstrap/compare/v0.1.5...v0.1.6)</small>
+### 💼 Other
 
-### Features
+- *(template)* use just taskrunner as entrypoint to tests
+- *(template)* update the trigger events
+- add dependencie update recipe
+- update pre-commit hooks and dependencies
+- updated changelog
+- bumped version to 0.2.0
 
-- added mkdocs ([7201e9d](https://github.com/npikall/py-bootstrap/commit/7201e9db31f33275f9d8544b48d6341cbf2975af) by Nikolas Pikall).
-- added changelog ([4870c0c](https://github.com/npikall/py-bootstrap/commit/4870c0cde7f4acc324951f76253ff09b9dd90e54) by Nikolas Pikall).
-- added changelog ([3151d31](https://github.com/npikall/py-bootstrap/commit/3151d31511fe35197a9c5bfc637b51f19b16e354) by Nikolas Pikall).
-- added mkdocs option ([36fc5f5](https://github.com/npikall/py-bootstrap/commit/36fc5f57aa7f2deb9c44fbcc5adc9a1ee6706aee) by Nikolas Pikall).
-- added a MIT License ([bdd5a21](https://github.com/npikall/py-bootstrap/commit/bdd5a2109d385c36861e075eedb7e4e07000e458) by Nikolas Pikall).
-- prompt for optional goreleaser ([088f8b0](https://github.com/npikall/py-bootstrap/commit/088f8b049b9e50e4879f26c960feced4fb98d1ba) by Nikolas Pikall).
-- added goreleaser config ([c07f5b0](https://github.com/npikall/py-bootstrap/commit/c07f5b0d8950db8f852742d764d3faf20d8597a5) by Nikolas Pikall).
+## [0.1.13] - 2026-02-03
 
-### Bug Fixes
+### 🚀 Features
 
-- run tests before release ([d41a3dd](https://github.com/npikall/py-bootstrap/commit/d41a3ddafc56fe46d58e59d1156acd8bf28343b0) by Nikolas Pikall).
-- actually push relase to remote ([6998bb9](https://github.com/npikall/py-bootstrap/commit/6998bb9fd7e9bc15ca2bbc66ff05807be5ef5204) by Nikolas Pikall).
+- add pyproject format hook
+- improved release recipe
 
-### Reverts
+### 🚜 Refactor
 
-- removed latest version from changelog ([02d1e0e](https://github.com/npikall/py-bootstrap/commit/02d1e0ed739d5161a11bf3ac623aab789c0e7305) by Nikolas Pikall).
+- set initial version to 0.0.0
+- set use_goreleaser default to false
 
-## [v0.1.5](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.5) - 2025-12-24
+### 🧪 Testing
 
-<small>[Compare with v0.1.4](https://github.com/npikall/py-bootstrap/compare/v0.1.4...v0.1.5)</small>
+- update test cases
+- update test case for justfile
 
-### Features
+### 💼 Other
 
-- switched to prek ([c6371c9](https://github.com/npikall/py-bootstrap/commit/c6371c9b655fbd9be2e4c091beecb2fc0a688a75) by Nikolas Pikall).
-- added optional prek as pre-commit ([268bbb5](https://github.com/npikall/py-bootstrap/commit/268bbb59a855bd984b5fa31b68fbb2f383cb4d08) by Nikolas Pikall).
-- added issue templates ([f2d8c6b](https://github.com/npikall/py-bootstrap/commit/f2d8c6bace54309c279e2b321a30837807d55213) by Nikolas Pikall).
-- update pre-commit config ([44d3e71](https://github.com/npikall/py-bootstrap/commit/44d3e71e3acc1f5bd152ec8c65dee083b3d02090) by Nikolas Pikall).
+- update pre-commit hooks
+- update recipes
+- format pyproject toml with hook
+- format template pyproject.toml
+- merge pull request #19 from npikall/dependabot/uv/zensical-0.0.19
+- merge pull request #20 from npikall/dependabot/uv/ruff-0.14.14
+- merge pull request #18 from npikall/dependabot/uv/ty-0.0.14
+- updated changelog
+- bumped version to 0.1.13
 
-## [v0.1.4](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.4) - 2025-12-18
+## [0.1.12] - 2026-02-02
 
-<small>[Compare with v0.1.3](https://github.com/npikall/py-bootstrap/compare/v0.1.3...v0.1.4)</small>
+### 🚀 Features
 
-### Features
+- *(template)* add github release workflow
+- *(copier)* add github workflow question
+- *(copier)* select individual workflows
+- *(template)* group just recipes
 
-- added pre-commit hook ([29e2587](https://github.com/npikall/py-bootstrap/commit/29e258774b8624e117226c6e7d6356cd0c68962d) by npikall).
+### 🐛 Bug Fixes
 
-### Bug Fixes
+- *(copier)* choices for github workflows
+- *(template)* rendering in release workflow
 
-- removed unused noqa ([24be300](https://github.com/npikall/py-bootstrap/commit/24be30052ad4bd47f811456664154770c5b790e3) by npikall).
-- typos and unused jinja tags ([2fa3dab](https://github.com/npikall/py-bootstrap/commit/2fa3dab49f55bc1a42df7d6eb47478eed3992cf7) by npikall).
+### 🚜 Refactor
 
-## [v0.1.3](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.3) - 2025-12-14
+- make tests more readable
 
-<small>[Compare with v0.1.2](https://github.com/npikall/py-bootstrap/compare/v0.1.2...v0.1.3)</small>
+### 🧪 Testing
 
-### Bug Fixes
+- add multiselect answer for github workflows
+- update line numbers for new justfile
 
-- None license case ([4a8f79a](https://github.com/npikall/py-bootstrap/commit/4a8f79a89b9aa6eb19c2571ca18c55e32c431e23) by Nikolas Pikall).
+### 💼 Other
 
-## [v0.1.2](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.2) - 2025-12-13
+- run deployment of docs only when changed
+- group just recipes
+- fix commit message in recipe
+- updated changelog
+- bumped version to 0.1.12
 
-<small>[Compare with v0.1.1](https://github.com/npikall/py-bootstrap/compare/v0.1.1...v0.1.2)</small>
+## [0.1.11] - 2026-01-30
 
-### Bug Fixes
+### 🐛 Bug Fixes
 
-- optinal files and directories ([0803dc5](https://github.com/npikall/py-bootstrap/commit/0803dc52998f3de332f034f6cb57f975d0146549) by Nikolas Pikall).
+- *(template)* exclude docs files when not used
 
-## [v0.1.1](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.1) - 2025-12-12
+### 📚 Documentation
 
-<small>[Compare with v0.1.0](https://github.com/npikall/py-bootstrap/compare/v0.1.0...v0.1.1)</small>
+- add just install guide
+- add clickable tasklist
 
-## [v0.1.0](https://github.com/npikall/py-bootstrap/releases/tag/v0.1.0) - 2025-12-12
+### 🧪 Testing
 
-<small>[Compare with first commit](https://github.com/npikall/py-bootstrap/compare/3827ccdf7318e9b5a48827623b08b3198956d6ed...v0.1.0)</small>
+- correct files get excluded when no docs defined
 
-### Features
+### 💼 Other
 
-- added updating capability ([27cc9db](https://github.com/npikall/py-bootstrap/commit/27cc9dbd0cb7d48f60035a70130c6f2af5bebd09) by npikall).
-- restructure for copier ([8a7046f](https://github.com/npikall/py-bootstrap/commit/8a7046f8883bdf49dcc94a2276f1b07f8ba04fd9) by npikall).
-- make recipe 'tag' public ([4c35231](https://github.com/npikall/py-bootstrap/commit/4c352315136a0b3daf27a757fc736296801848fc) by npikall).
-- add zensical as dependencie ([4b4f4ed](https://github.com/npikall/py-bootstrap/commit/4b4f4ed755292ad8bcee23889a64c3cd2c10bebc) by npikall).
-- added test coverage ([0d09c21](https://github.com/npikall/py-bootstrap/commit/0d09c21000a3a71582626b83df44aee78a5f11a8) by npikall).
-- add documentation serve recipe ([9259edb](https://github.com/npikall/py-bootstrap/commit/9259edbc0e07655a12e9fd289fe82d7a3a704409) by npikall).
-- added pre-commit hooks ([62d432a](https://github.com/npikall/py-bootstrap/commit/62d432ade88e2eaf34235522e574b8f310ca6695) by npikall).
-- add dependabot with uv ([4052599](https://github.com/npikall/py-bootstrap/commit/40525996bfbcdf78c11cbd950b1759d71b19d4fe) by Nikolas Pikall).
-- added dynamic python version ([cac7908](https://github.com/npikall/py-bootstrap/commit/cac7908b8249201edc03025d1f401c50bf2dd4c7) by npikall).
-- moved tagging into separate recipe ([58e86cf](https://github.com/npikall/py-bootstrap/commit/58e86cf2b16978382e5e1f303ae406fd18bba03f) by npikall).
-- added rich success message ([74427e8](https://github.com/npikall/py-bootstrap/commit/74427e8e61f11e39001429ad225e6eb3ccf8d414) by Nikolas Pikall).
-- added dev dependencies ([5a45f55](https://github.com/npikall/py-bootstrap/commit/5a45f55f607f491a14ffcde79f5b1824bb2cb649) by Nikolas Pikall).
-- added contributing guidelines ([2f494c2](https://github.com/npikall/py-bootstrap/commit/2f494c2b154a20d38aa14552ac596d65aa3458cb) by Nikolas Pikall).
-- pinned python version ([745c321](https://github.com/npikall/py-bootstrap/commit/745c321ece715d9db233b4a2210ff749769e36dd) by Nikolas Pikall).
-- added ci recipes ([13f343b](https://github.com/npikall/py-bootstrap/commit/13f343b54300f277e557f94c8f6c4c4b5981993e) by Nikolas Pikall).
-- added optional licenses ([05c80d9](https://github.com/npikall/py-bootstrap/commit/05c80d920e94ffe67e638d0401e6bce49ac33b51) by Nikolas Pikall).
-- added automated tests and publishing workflows ([2881da7](https://github.com/npikall/py-bootstrap/commit/2881da71b1b6af61b3fd3ef69a30672cb559df3d) by Niko Pikall).
-- updated prompts ([1733158](https://github.com/npikall/py-bootstrap/commit/1733158e8fdefa8497461dc7e8d646c964b66323) by Niko Pikall).
-- changed from conda to uv ([10efe50](https://github.com/npikall/py-bootstrap/commit/10efe50d967cab5065df06476f444efb7433186c) by Niko Pikall).
-- populated src and test dirs ([7c24061](https://github.com/npikall/py-bootstrap/commit/7c24061d1b4e8e4ac7278063c2aecf9f5e9f8275) by Niko Pikall).
-- added docs ([e1b216c](https://github.com/npikall/py-bootstrap/commit/e1b216cd3817f83167236b6c1f858f83945a3bdf) by Niko Pikall).
-- added pre/post hooks ([b2300da](https://github.com/npikall/py-bootstrap/commit/b2300dad13d6d563e267e769f25ea510341450a0) by Niko Pikall).
-- added ci workflows ([6164cf4](https://github.com/npikall/py-bootstrap/commit/6164cf4131b8ef40f903441b9ec87668faa105fa) by Niko Pikall).
+- merge pull request #13 from npikall/dependabot/uv/ruff-0.14.11
+- merge pull request #14 from npikall/dependabot/uv/ty-0.0.11
+- merge pull request #15 from npikall/dependabot/uv/ruff-0.14.13
+- merge pull request #16 from npikall/dependabot/uv/ty-0.0.12
+- merge pull request #17 from npikall/dependabot/uv/zensical-0.0.17
+- update recipe, for smoother release recipe
+- updated changelog
+- bumped version to 0.1.11
+- add release workflow
 
-### Bug Fixes
+## [0.1.10] - 2026-01-09
 
-- minor bugs ([965b020](https://github.com/npikall/py-bootstrap/commit/965b020b88cbaa7da6e9e462085ab7e374067bef) by npikall).
-- jinja variable of src/module ([bf92733](https://github.com/npikall/py-bootstrap/commit/bf92733838a0d31acad0e039cff1241017742f59) by npikall).
-- python version variables ([9560bdc](https://github.com/npikall/py-bootstrap/commit/9560bdcc9ad625cb21f0529e7df63528ee8b196f) by npikall).
-- jinja variables ([6e06295](https://github.com/npikall/py-bootstrap/commit/6e06295eb48ee15d308bf5f32d9d2871bdac4c33) by npikall).
-- python version ([ea0aff2](https://github.com/npikall/py-bootstrap/commit/ea0aff24c3d96bf4098accbc2f397decca17cdb8) by npikall).
-- jinja extensions ([502dd98](https://github.com/npikall/py-bootstrap/commit/502dd98bbe13a23a826edf04a467114b8056114f) by npikall).
-- copy without render ([29d11a6](https://github.com/npikall/py-bootstrap/commit/29d11a6cfefa3d4cb7ad7b3dfaac5bf0c23ca4bc) by npikall).
+### 🚀 Features
 
-### Reverts
+- *(template)* add mkdocstrings configuration for nicer api references
 
-- update python in template ([19686e5](https://github.com/npikall/py-bootstrap/commit/19686e5b155fe37d33a0eb84384546b62b0339e9) by npikall).
+### 🐛 Bug Fixes
 
-### Code Refactoring
+- *(release)* add v to version tag in changelog
 
-- simplified processes ([7c156a0](https://github.com/npikall/py-bootstrap/commit/7c156a0c57abc0cc41f510629074463439134770) by npikall).
-- moved to uv run ([900e872](https://github.com/npikall/py-bootstrap/commit/900e872d1326212c67d87d3c681a5b54a99455a2) by npikall).
+### 💼 Other
+
+- updated changelog
+- bumped version to 0.1.10
+
+## [0.1.9] - 2026-01-08
+
+### 🐛 Bug Fixes
+
+- changelog
+- whitespaces at end of line
+
+### 🧪 Testing
+
+- refactor to table driven test
+
+### 💼 Other
+
+- update changelog
+- updated changelog
+- bumped version to 0.1.9
+
+## [0.1.8] - 2026-01-08
+
+### 🚀 Features
+
+- *(template)* add mkdocstrings and api reference
+- add changelog to docs
+- add contributing to docs
+- add license to docs
+- update docs index to use readme
+
+### 📚 Documentation
+
+- added goreleaser, prek and changelog
+- update color scheme
+- fix index icon
+- update, add license and changelog
+
+### 🚜 Refactor
+
+- add default config of zensical
+
+### 🧪 Testing
+
+- add typehints to useranswer model
+- update for next version
+
+### 💼 Other
+
+- merge pull request #9 from npikall/feat-docs
+
+docs: added goreleaser, prek and changelog
+- merge pull request #11 from npikall/dependabot/uv/zensical-0.0.15
+
+chore(deps-dev): bump zensical from 0.0.14 to 0.0.15
+- merge pull request #10 from npikall/dependabot/uv/ty-0.0.8
+
+chore(deps-dev): bump ty from 0.0.6 to 0.0.8
+- update dev dependencies
+- change default docs engine
+
+## [0.1.7] - 2025-12-25
+
+### 🐛 Bug Fixes
+
+- remove whitespace at end-of-line
+
+### 💼 Other
+
+- updated changelog
+- bumped version to 0.1.7
+
+## [0.1.6] - 2025-12-25
+
+### 🚀 Features
+
+- *(template)* added goreleaser config
+- prompt for optional goreleaser
+- added a mit license
+- added mkdocs option
+- added changelog
+- *(template)* added changelog
+- *(template)* added mkdocs
+
+### 🐛 Bug Fixes
+
+- *(justfile)* actually push relase to remote
+- *(justfile)* run tests before release
+
+### 🧪 Testing
+
+- check for goreleaser file
+- added test for docs
+- added changelog to file list
+
+### ◀️ Revert
+
+- removed latest version from changelog
+
+### 💼 Other
+
+- update justfile
+- added release recipe
+- updated changelog
+- bumped version to 0.1.6
+
+## [0.1.5] - 2025-12-24
+
+### 🚀 Features
+
+- *(template)* update pre-commit config
+- *(template)* added issue templates
+- *(template)* added optional prek as pre-commit
+- switched to prek
+
+### 📚 Documentation
+
+- update to account for prek
+
+### 🧪 Testing
+
+- added jinja tags check
+- refactor answer model
+
+### 💼 Other
+
+- added other ci file
+- merge pull request #7 from npikall/dependabot/uv/ruff-0.14.10
+
+chore(deps-dev): bump ruff from 0.14.9 to 0.14.10
+- merge pull request #6 from npikall/dependabot/uv/ty-0.0.6
+
+chore(deps-dev): bump ty from 0.0.3 to 0.0.6
+- merge pull request #5 from npikall/dependabot/uv/zensical-0.0.14
+
+chore(deps-dev): bump zensical from 0.0.11 to 0.0.14
+- merge pull request #8 from npikall/feat-prek
+
+add jinja tag test and switch to prek
+
+## [0.1.4] - 2025-12-18
+
+### 🚀 Features
+
+- added pre-commit hook
+
+### 🐛 Bug Fixes
+
+- typos and unused jinja tags
+- removed unused noqa
+
+### 📚 Documentation
+
+- update and added 'update' section
+
+### 🧪 Testing
+
+- added initial tests
+- improved testing
+
+### 💼 Other
+
+- update files
+- added ci checks
+
+## [0.1.3] - 2025-12-14
+
+### 🐛 Bug Fixes
+
+- none license case
+
+## [0.1.2] - 2025-12-13
+
+### 🐛 Bug Fixes
+
+- optinal files and directories
+
+### 📚 Documentation
+
+- fix links
+- added documenatation
+- added docs config
+- added content
+
+### 💼 Other
+
+- added documentation publishing
+- update project files
+
+## [0.1.1] - 2025-12-12
+
+### 📚 Documentation
+
+- update readme
+- update both readme's
+
+## [0.1.0] - 2025-12-12
+
+### 🚀 Features
+
+- added files
+- added cookiecutter functionality
+- added cookiecutter json
+- added ci workflows
+- added pre/post hooks
+- added docs
+- populated src and test dirs
+- changed from conda to uv
+- updated prompts
+- *(ci)* added automated tests and publishing workflows
+- added optional licenses
+- added ci recipes
+- pinned python version
+- added contributing guidelines
+- added dev dependencies
+- added rich success message
+- moved tagging into separate recipe
+- [**breaking**] added automatic python version
+- added dynamic python version
+- add dependabot with uv
+- added pre-commit hooks
+- *(just)* add documentation serve recipe
+- added test coverage
+- add zensical as dependencie
+- make recipe 'tag' public
+- restructure for copier
+- added updating capability
+
+### 🐛 Bug Fixes
+
+- *(ci)* copy without render
+- jinja extensions
+- python version
+- jinja variables
+- jinja variables
+- python version variables
+- jinja variable of src/module
+- minor bugs
+
+### 📚 Documentation
+
+- updated readme
+- added default badges
+- added reference to python handbook
+- removed duplicated read more remarks
+- update readme
+- fix typos
+
+### 🚜 Refactor
+
+- moved to uv run
+- simplified processes
+
+### ◀️ Revert
+
+- update python in template
+- removed unused dependencies
+
+### 💼 Other
+
+- first commit
+- expanded justfile commands
+- excluded justfile from rendering
+- updated justfile
+- run pytest in uv venv
+- added trigger
+- disabled smoke-tests and publish
+- added major operating systems to matrix
+- added dependencies and configs
+- moved file ignores to pyproject.toml
+- pinned dev dependencies
+
+[0.2.7]: https://github.com/npikall/py-bootstrap/compare/v0.2.6..0.2.7
+[0.2.6]: https://github.com/npikall/py-bootstrap/compare/v0.2.5..v0.2.6
+[0.2.5]: https://github.com/npikall/py-bootstrap/compare/v0.2.4..v0.2.5
+[0.2.4]: https://github.com/npikall/py-bootstrap/compare/v0.2.3..v0.2.4
+[0.2.3]: https://github.com/npikall/py-bootstrap/compare/v0.2.2..v0.2.3
+[0.2.2]: https://github.com/npikall/py-bootstrap/compare/v0.2.1..v0.2.2
+[0.2.1]: https://github.com/npikall/py-bootstrap/compare/v0.2.0..v0.2.1
+[0.2.0]: https://github.com/npikall/py-bootstrap/compare/v0.1.13..v0.2.0
+[0.1.13]: https://github.com/npikall/py-bootstrap/compare/v0.1.12..v0.1.13
+[0.1.12]: https://github.com/npikall/py-bootstrap/compare/v0.1.11..v0.1.12
+[0.1.11]: https://github.com/npikall/py-bootstrap/compare/v0.1.10..v0.1.11
+[0.1.10]: https://github.com/npikall/py-bootstrap/compare/v0.1.9..v0.1.10
+[0.1.9]: https://github.com/npikall/py-bootstrap/compare/v0.1.8..v0.1.9
+[0.1.8]: https://github.com/npikall/py-bootstrap/compare/v0.1.7..v0.1.8
+[0.1.7]: https://github.com/npikall/py-bootstrap/compare/v0.1.6..v0.1.7
+[0.1.6]: https://github.com/npikall/py-bootstrap/compare/v0.1.5..v0.1.6
+[0.1.5]: https://github.com/npikall/py-bootstrap/compare/v0.1.4..v0.1.5
+[0.1.4]: https://github.com/npikall/py-bootstrap/compare/v0.1.3..v0.1.4
+[0.1.3]: https://github.com/npikall/py-bootstrap/compare/v0.1.2..v0.1.3
+[0.1.2]: https://github.com/npikall/py-bootstrap/compare/v0.1.1..v0.1.2
+[0.1.1]: https://github.com/npikall/py-bootstrap/compare/v0.1.0..v0.1.1
+[0.1.0]: https://github.com/npikall/py-bootstrap/tree/v0.1.0
+
+<!-- generated by git-cliff -->
