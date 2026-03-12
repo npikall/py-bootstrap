@@ -103,6 +103,15 @@ pre_commit:
     - pre-commit
     - prek
 
+changelog_tool:
+  type: str
+  qmark: "->"
+  help: Choose the tool to generate the Changelog with
+  default: git-cliff
+  choices:
+    - git-changelog
+    - git-cliff
+
 # NEVER PROMPT --------------------------
 copyright_holder:
   type: str
