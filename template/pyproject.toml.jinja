@@ -62,3 +62,7 @@ addopts = "--cov={{ py_dist_name }} --cov-report term-missing -rsx --verbose --c
 
 [tool.coverage.run]
 relative_files = true
+
+[tool.pyproject-fmt]
+table_format = "long"
+collapse_tables = ["project.authors"]
