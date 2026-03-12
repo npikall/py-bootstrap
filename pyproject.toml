@@ -58,8 +58,6 @@ filterwarnings = [
   "ignore::DeprecationWarning",
   "ignore:Dirty template changes included automatically",
 ]
-[tool.pytest.ini_options]
-addopts = "--cov=foobar --cov-report term-missing -rsx --color=yes"
 
 [tool.coverage.run]
 relative_files = true
