@@ -60,7 +60,8 @@ testall *args:
 
 # run the formatter, linter, typechecker and the tests
 [group("test")]
-ci python="{{ py_version_current }}":{% raw %}
+ci python="{{ py_version_current }}":
+{%- raw %}
     uv run --python={{ python }} ruff format .
     uv run --python={{ python }} ruff check . --fix
     uv run --python={{ python }} ty check .
@@ -165,7 +166,7 @@ _commit_and_tag version=`uv version --short`:
 release target: test
     @just _ensure_clean
     @just _set_version {{ target }}
-    @just changelog {%- if changelog_tool == "git-cliff" %} --tag `uv version --short` {% endif %}
+    @just changelog{% endraw %}{% if changelog_tool == "git-cliff" %} --tag `uv version --short`{% endif %}{% raw %}
     @just _commit_and_tag
     @echo "{{ GREEN }}Release complete. Run 'git push && git push --tags'.{{ NORMAL }}"
 {% endraw -%}
