@@ -15,16 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          version: "0.9.28"
+      - name: Install git-cliff
+        uses: taiki-e/install-action@git-cliff
 
-      - name: Install git-changelog
-        run: uv tool install git-changelog
-
-      - name: Prepare release notes
-        run: git-changelog --release-notes > release-notes.md
+      - name: Run git-cliff
+        run: git cliff -v --latest --no-exec --strip header --output release-notes.md
 
       - name: Create release
         env:
