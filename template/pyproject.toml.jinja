@@ -67,7 +67,7 @@ relative_files = true
 table_format = "long"
 collapse_tables = ["project.authors"]
 
-{% if changelog_tool == "git-cliff" %}
+{% if changelog_tool == "git-cliff" %}{% raw %}
 [tool.git-cliff.changelog]
 header = """
 # Changelog\n
@@ -125,7 +125,7 @@ commit_parsers = [
   { message = "^refactor", group = "<!-- 3 -->🚜 Refactor" },
   { message = "^style", group = "<!-- 3 -->🚜 Refactor" },
   { message = "^test", group = "<!-- 4 -->🧪 Testing" },
-  { message = "^chore\\(release\\): prepare for", skip = true },
+  { message = "^chore\\(release\\): bump version to", skip = true },
   { message = "^chore\\(deps.*\\)", skip = true },
   { message = "^chore\\(pr\\)", skip = true },
   { message = "^chore\\(pull\\)", skip = true },
@@ -139,4 +139,4 @@ commit_parsers = [
 filter_commits = false
 topo_order = false
 sort_commits = "oldest"
-{% endif %}
+{% endraw %}{% endif %}
