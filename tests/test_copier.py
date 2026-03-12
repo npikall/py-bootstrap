@@ -126,7 +126,7 @@ def test_pyproject_toml_renders_correct(session_tmp_path: Path):
         'authors = [ { name = "John Doe", email = "john.doe@mail.com" } ]',
         '\ndocs = [ "mkdocstrings-python>=2.0.1", "zensical>=0.0.20" ]',
         'addopts = "--cov=example',
-        "- {% if commit.scope %}*({{ commit.scope }})* {% endif %}",
+        "- {% if commit.scope %}_({{ commit.scope }})_ {% endif %}",
         r'{ message = "^chore\\(release\\): bump version to", skip = true },',
     ]
     for want in cases:
