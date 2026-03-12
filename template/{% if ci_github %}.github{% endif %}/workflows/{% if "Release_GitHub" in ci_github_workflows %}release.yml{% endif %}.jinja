@@ -1,7 +1,6 @@
 # yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
 name: Release
 {% raw %}
-
 on:
   push:
     tags:
@@ -15,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-
+{% if changelog_tool == "git-changelog" %}
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
@@ -26,7 +25,13 @@ jobs:
 
       - name: Prepare release notes
         run: git-changelog --release-notes > release-notes.md
+{% else if changelog_tool == "git-cliff" %}
+      - name: Install git-cliff
+        uses: taiki-e/install-action@git-cliff
 
+      - name: Run git-cliff
+        run: git cliff -v --latest --no-exec --strip header --output release-notes.md
+{% endif %}
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
