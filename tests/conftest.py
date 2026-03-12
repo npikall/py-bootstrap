@@ -5,6 +5,7 @@ from pydantic import BaseModel
 type CopyrightLicenseOptions = Literal["Apache-2.0", "MIT", "Unlicense", "None"]
 type DocsEngineOptions = Literal["zensical", "mkdocs"]
 type PreCommitOptions = Literal["pre-commit", "prek"]
+type ChangelogToolOptions = Literal["git-cliff", "git-changelog"]
 
 
 DEFAULT_CI_GITHUB_WORKFLOWS = (
@@ -29,6 +30,7 @@ class BaseUserAnswers(BaseModel):
     include_docs: bool = True
     docs_engine: DocsEngineOptions = "zensical"
     pre_commit: PreCommitOptions = "prek"
+    changelog_tool: ChangelogToolOptions = "git-cliff"
 
 
 class FullUserAnswers(BaseUserAnswers):
