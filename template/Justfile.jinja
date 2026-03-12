@@ -144,20 +144,20 @@ _set_version target:
             uv version --bump {{ target }} ;; \
     esac
     uv lock
-{% if changelog_tool == "git-cliff" %}
+{% endraw -%}{% if changelog_tool == "git-cliff" %}
 # write the changelog from commit messages (https://git-cliff.org/)
 [group("chore")]
 changelog *args:
-    uvx git-cliff -o {{ args }}
+    uvx git-cliff -o {{ "{{ args }}" }}
 {% elif changelog_tool == "git-changelog" %}
 # write the changelog from commit messages (gh:pawamoy/git-changelog)
 [group("chore")]
 changelog version=`uv version --short`:
     uvx git-changelog -Tio CHANGELOG.md -B="{{ version }}" -c conventional
-{% endif %}
+{% endif %}{% raw %}
 _commit_and_tag version=`uv version --short`:
     git add pyproject.toml uv.lock CHANGELOG.md
-    git commit -m "chore(release): bumped version to {{ version }}"
+    git commit -m "chore(release): bump version to {{ version }}"
     git tag -a "v{{ version }}"
 
 # make a new release [target:<major|minor|patch|...> or semver]
