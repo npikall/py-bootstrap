@@ -25,7 +25,7 @@ info:
 # run the linter [arg:<full|concise|...>]
 [group("style")]
 lint arg="concise":
-    uv run ruff check . --fix --output-format="{{ arg }}"
+    uv run ruff check . --fix --output-format={{ arg }}
 
 # run the formatter
 [group("style")]
@@ -35,14 +35,14 @@ format:
 # run the type checker [arg:<full|concise|...>]
 [group("style")]
 types arg="concise":
-    uv run ty check --output-format="{{ arg }}"
+    uv run ty check --output-format={{ arg }}
 
 # lint, format and type-check [arg:<full|concise|...>]
 [group("style")]
-check *arg="concise":
-    -@just lint "{{ arg }}"
+check arg="concise":
+    -@just lint {{ arg }}
     -@just format
-    -@just types "{{ arg }}"
+    -@just types {{ arg }}
 
 # run the tests
 [group("test")]
@@ -120,14 +120,14 @@ _set_version target:
     esac
     uv lock
 
-# write the changelog from commit messages (gh:pawamoy/git-changelog)
+# write the changelog from commit messages (https://git-cliff.org/)
 [group("chore")]
-changelog version=`uv version --short`:
-    uvx git-changelog -Tio CHANGELOG.md -B="{{ version }}" -c conventional
+changelog *args:
+    uvx git-cliff -o {{ args }}
 
 _commit_and_tag version=`uv version --short`:
     git add pyproject.toml uv.lock CHANGELOG.md
-    git commit -m "chore(release): bumped version to {{ version }}"
+    git commit -m "chore(release): bump version to {{ version }}"
     git tag -a "v{{ version }}"
 
 # make a new release [target:<major|minor|patch|...> or semver]
@@ -135,6 +135,6 @@ _commit_and_tag version=`uv version --short`:
 release target: test
     @just _ensure_clean
     @just _set_version {{ target }}
-    @just changelog "v`uv version --short`"
+    @just changelog --tag `uv version --short`
     @just _commit_and_tag
     @echo "{{ GREEN }}Release complete. Run 'git push && git push --tags'.{{ NORMAL }}"
