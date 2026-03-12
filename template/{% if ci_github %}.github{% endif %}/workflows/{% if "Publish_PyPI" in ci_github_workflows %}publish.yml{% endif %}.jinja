@@ -3,9 +3,8 @@
 name: "Publish"
 
 on:
-  push:
-    tags:
-      - v*
+  release:
+    types: [created]
 
 jobs:
   run:
