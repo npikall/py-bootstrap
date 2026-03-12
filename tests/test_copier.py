@@ -161,6 +161,7 @@ def test_justfile_renders_correct(session_tmp_path: Path):
         r"uv run --python={{ python }} ruff format .",
         r"uv run pytest tests/ {{ args }}",
         r"uvx git-cliff -o {{ args }}",
+        "@just changelog --tag `uv version --short`",
     ]
     for t in cases:
         assert t in got
