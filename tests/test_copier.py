@@ -126,6 +126,8 @@ def test_pyproject_toml_renders_correct(session_tmp_path: Path):
         'authors = [ { name = "John Doe", email = "john.doe@mail.com" } ]',
         '\ndocs = [ "mkdocstrings-python>=2.0.1", "zensical>=0.0.20" ]',
         'addopts = "--cov=example',
+        "- {% if commit.scope %}*({{ commit.scope }})* {% endif %}",
+        r'{ message = "^chore\\(release\\): bump version to", skip = true },',
     ]
     for want in cases:
         assert want in got
@@ -158,6 +160,7 @@ def test_justfile_renders_correct(session_tmp_path: Path):
         # No Rendering
         r"uv run --python={{ python }} ruff format .",
         r"uv run pytest tests/ {{ args }}",
+        r"uvx git-cliff -o {{ args }}",
     ]
     for t in cases:
         assert t in got
@@ -219,3 +222,9 @@ def test_init_just_deletes_correct_content_in_justfile(session_tmp_path: Path):
     got = get_lines(start_line, end_line, just_content)
     want = 'import? "init.just"'
     assert got == want
+
+
+def test_release_action_renders_correctly(session_tmp_path: Path):
+    got = (session_tmp_path / ".github/workflows/release.yml").read_text()
+    want = "uses: taiki-e/install-action@git-cliff"
+    assert want in got
