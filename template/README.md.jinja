@@ -2,52 +2,11 @@
 
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 
-> [!IMPORTANT]
-> This project uses [uv] for package management and [Just] for task automation.
-> To install [uv] check the [uv Docs][uv].
-> To install [Just], follow the instructions in the [Just Docs][Just].
+> [!NOTE]
+> This project uses [`uv`][uv] for package management and [`just`][just] for task automation.
+> To install [`uv`][uv] check the [uv Docs][uv].
+> To install [`just`][just], follow the instructions in the [Just Docs][just].
 
-## First Steps
-
-After you have just used the `copier` to create this repo, you might want to run the following commands:
-
-- `just init` to initialize a `git` repository
-- `just venv` to create a virtual environment
-
-## Development
-
-### Pre-Commit Hooks
-
-The Pre-commit Hooks will lint and format your code, aswell as running some checks.
-
-```console
-just hooks
-```
-
-### Quality Assurance
-
-By default cody quality checks (formatter, linter and type-checker) are inplace, via `Github Actions` and/or `GitLab CI/CD`,
-which does the same as the `pre-commit` hooks.
-
-Additionally the same code quality checks can be run manually via:
-
-```console
-just check
-```
-
-> [!IMPORTANT]
-> The configuration for the linter, the formatter and the typechecker can be done in the `pyproject.toml` file.
-> By default ALL Linting Rules are enabled. If some rule are not desired in the project use the `exclude` field to disregard them.
-
-### Docs
-
-Further more there are example `docs` in this repository, which you can use as a startingpoint for your code documentation.
-Run the following command to start serving your documentation locally:
-
-```console
-just docs
-```
-
-[Just]: https://github.com/casey/just
+[just]: https://github.com/casey/just
 [uv]: https://docs.astral.sh/uv/getting-started/installation/
 [Handbook]: https://pydevtools.com/handbook/explanation/modern-python-project-setup-guide-for-ai-assistants/
