@@ -8,7 +8,7 @@ _default:
 import? "init.just"
 
 alias c := clean
-alias d := docs
+{% if include_docs -%}alias d := docs{% endif %}
 alias h := hooks
 alias i := info
 alias l := lint
