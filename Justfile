@@ -68,6 +68,10 @@ ci python="3.13":
 hooks:
     uvx prek install
 
+# setup the workspace
+[group("dev")]
+dev: hooks venv
+
 # remove build artifacts
 [group("chore")]
 clean:
@@ -103,8 +107,7 @@ dist:
 
 # serve the documentation on localhost
 [group("dev")]
-docs:
-    uv sync --dev
+docs: venv
     uv run zensical serve
 
 _ensure_clean:
