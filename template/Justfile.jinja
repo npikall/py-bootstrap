@@ -76,6 +76,10 @@ hooks:
     uvx pre-commit install
     {%- endif %}
 {% raw %}
+# setup the workspace
+[group("dev")]
+dev: hooks venv
+
 # clean all build/compilation files and directories
 [group("dev")]
 clean: clean-build clean-pyc clean-test
