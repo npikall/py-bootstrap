@@ -54,9 +54,9 @@ test *args:
 # run the tests in different Python versions
 [group("test")]
 testall *args:
-    uv run --python={{ py_version_past }} pytest {% raw %}{{ args }}{% endraw %}
-    uv run --python={{ py_version_current }} pytest {% raw %}{{ args }}{% endraw %}
-    uv run --python={{ py_version_future }} pytest {% raw %}{{ args }}{% endraw %}
+    uv run --python={{ py_version_past }} pytest {{ "{{ args }}" }}
+    uv run --python={{ py_version_current }} pytest {{ "{{ args }}" }}
+    uv run --python={{ py_version_future }} pytest {{ "{{ args }}" }}
 
 # run the formatter, linter, typechecker and the tests
 [group("test")]
@@ -82,11 +82,10 @@ dev: hooks venv
 
 # clean all build/compilation files and directories
 [group("dev")]
-clean: clean-build clean-pyc clean-test
+clean: _clean-build _clean-pyc _clean-test
 
 # remove build artifacts
-[private]
-clean-build:
+_clean-build:
     rm -fr build/
     rm -fr site/
     rm -fr dist/
@@ -95,16 +94,14 @@ clean-build:
     find . -name '*.egg' -exec rm -f {} +
 
 # remove Python file artifacts
-[private]
-clean-pyc:
+_clean-pyc:
     find . -name '*.pyc' -exec rm -f {} +
     find . -name '*.pyo' -exec rm -f {} +
     find . -name '*~' -exec rm -f {} +
     find . -name '__pycache__' -exec rm -fr {} +
 
 # remove test and coverage artifacts
-[private]
-clean-test:
+_clean-test:
     rm -f .coverage
     rm -fr htmlcov/
     rm -fr .pytest_cache
@@ -127,8 +124,7 @@ dist:
 {% if include_docs -%}
 # serve the documentation on localhost
 [group("dev")]
-docs:
-    uv sync --group docs
+docs: venv
     {% if docs_engine == "zensical" -%}
     uv run zensical serve
     {%- elif docs_engine == "mkdocs" -%}
