@@ -14,6 +14,7 @@ alias i := info
 alias l := lint
 alias q := check
 alias t := test
+alias hi := hooks-install
 alias fmt := format
 {% raw %}
 # display the system/project information
@@ -69,16 +70,24 @@ ci python="{{ py_version_current }}":
 {% endraw %}
 # install the pre-commit hooks
 [group("dev")]
-hooks:
+hooks-install:
     {%- if pre_commit == "prek" %}
     uvx prek install
     {%- elif pre_commit == "pre-commit" %}
     uvx pre-commit install
     {%- endif %}
+# run the pre-commit hooks
+[group("dev")]
+hooks:
+    {%- if pre_commit == "prek" %}
+    uvx prek run --all-files
+    {%- elif pre_commit == "pre-commit" %}
+    uvx pre-commit run --all-files
+    {%- endif %}
 {% raw %}
 # setup the workspace
 [group("dev")]
-dev: hooks venv
+dev: hooks-install venv
 
 # clean all build/compilation and cache files and directories
 [group("dev")]
@@ -124,9 +133,7 @@ docs: venv
     uv run zensical serve
     {%- elif docs_engine == "mkdocs" -%}
     uv run mkdocs serve
-    {%- endif -%}
-{% endif -%}
-{% raw %}
+    {%- endif -%}{% endif -%}{% raw %}
 
 _ensure_clean:
     @git diff --quiet

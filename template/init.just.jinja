@@ -3,9 +3,9 @@
 # initialize a git repo and setup venv
 init: venv
     git init
-    @just hooks
+    @just hooks-install
     git add .
-    @just _run_hooks
+    @just hooks
     @just _remove_init
     git add .
     git commit -m "initial commit"
@@ -17,9 +17,3 @@ _remove_init:
     - sed '7,8d' Justfile > Justfile.tmp && mv Justfile.tmp Justfile
 
 {% endraw %}
-_run_hooks:
-    {%- if pre_commit == "prek" %}
-    - uvx prek run --all-files
-    {%- elif pre_commit == "pre-commit" %}
-    - uvx pre-commit run --all-files
-    {%- endif %}
