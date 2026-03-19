@@ -7,6 +7,7 @@ init: venv
     git add .
     - just hooks
     @just _remove_init
+    just --fmt --unstable
     git add .
     git commit -m "initial commit"
     @echo "{{ GREEN }}{{ BOLD }}Git has been initialized{{ NORMAL }}"
