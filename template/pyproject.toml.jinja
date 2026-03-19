@@ -22,7 +22,7 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Topic :: Software Development :: Libraries",
 ]
-dependencies = [  ]
+dependencies = []
 
 [dependency-groups]
 # Unlike optional dependencies, development dependencies are local-only
@@ -39,33 +39,34 @@ docs = [ {% if docs_engine == "zensical" -%}
 [tool.ruff]
 line-length = 88
 indent-width = 4
-
-format.indent-style = "space"
-format.quote-style = "double"
-format.line-ending = "auto"
-format.skip-magic-trailing-comma = false
-format.docstring-code-line-length = "dynamic"
-format.docstring-code-format = false
-lint.select = [ "ALL" ]
-lint.ignore = [
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "double"
+line-ending = "auto"
+skip-magic-trailing-comma = false
+docstring-code-line-length = "dynamic"
+docstring-code-format = false
+[tool.ruff.lint]
+select = [ "ALL" ]
+ignore = [
   "COM812", # missing-trailing-comma (may conflict with ruff formatter)
   "D203",   # incorrect-blank-line-before-class (conflicts with D211)
   "D213",   # multi-line-summary-second-line (conflicts with D212)
 ]
-lint.per-file-ignores."**/{tests}/*" = [ "ANN201", "D", "E402", "INP001", "S101" ]
-lint.per-file-ignores."__init__.py" = [ "E402" ]
-lint.fixable = [ "ALL" ]
-lint.unfixable = [  ]
-
-[tool.pytest.ini_options]
-addopts = "--cov={{ py_dist_name }} --cov-report term-missing -rsx --verbose --color=yes"
-
-[tool.coverage.run]
-relative_files = true
+per-file-ignores."**/{tests}/*" = [ "ANN201", "D", "E402", "INP001", "S101" ]
+per-file-ignores."__init__.py" = [ "E402" ]
+fixable = [ "ALL" ]
+unfixable = []
 
 [tool.pyproject-fmt]
 table_format = "long"
-collapse_tables = ["project.authors"]
+collapse_tables = [ "project.authors" ]
+
+[tool.pytest.ini_options]
+addopts = "--cov={{ py_dist_name }} --cov-report term-missing -rsx --color=yes"
+
+[tool.coverage.run]
+relative_files = true
 
 {% if changelog_tool == "git-cliff" %}{% raw %}
 [tool.git-cliff.changelog]
