@@ -80,31 +80,26 @@ hooks:
 [group("dev")]
 dev: hooks venv
 
-# clean all build/compilation files and directories
+# clean all build/compilation and cache files and directories
 [group("dev")]
-clean: _clean-build _clean-pyc _clean-test
-
-# remove build artifacts
-_clean-build:
+clean:
     rm -fr build/
     rm -fr site/
     rm -fr dist/
     rm -fr .eggs/
     find . -name '*.egg-info' -exec rm -fr {} +
     find . -name '*.egg' -exec rm -f {} +
-
-# remove Python file artifacts
-_clean-pyc:
     find . -name '*.pyc' -exec rm -f {} +
     find . -name '*.pyo' -exec rm -f {} +
     find . -name '*~' -exec rm -f {} +
     find . -name '__pycache__' -exec rm -fr {} +
-
-# remove test and coverage artifacts
-_clean-test:
+    find . -name '.DS_Store' -exec rm -fr {} +
     rm -f .coverage
     rm -fr htmlcov/
-    rm -fr .pytest_cache
+    rm -fr .pytest_cache/
+    rm -fr .ruff_cache/
+    rm -fr .cache/
+    rm -fr .venv/
 
 # install dependencies in local venv
 [group("dev")]
