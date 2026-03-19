@@ -5,7 +5,7 @@ init: venv
     git init
     @just hooks-install
     git add .
-    @just hooks
+    - just hooks
     @just _remove_init
     git add .
     git commit -m "initial commit"
