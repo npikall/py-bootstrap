@@ -152,12 +152,11 @@ def test_contributing_renders_correct(session_tmp_path: Path):
 def test_justfile_renders_correct(session_tmp_path: Path):
     got = (session_tmp_path / "Justfile").read_text()
     cases: list[str] = [
-        # Want Rendering
         f"uv run --python={PY_VERSION} pytest {{{{ args }}}}",
-        "\nhooks:\n    uvx prek install\n\n#",
+        "\nhooks:\n    uvx prek run --all-files\n\n#",
+        "\nhooks-install:\n    uvx prek install\n\n#",
         "    uv run zensical serve\n\n",
         f'ci python="{PY_VERSION}":\n    uv',
-        # No Rendering
         r"uv run --python={{ python }} ruff format .",
         r"uv run pytest tests/ {{ args }}",
         r"uvx git-cliff -o {{ args }}",
