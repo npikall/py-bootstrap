@@ -12,6 +12,7 @@ alias i := info
 alias l := lint
 alias q := check
 alias t := test
+alias hi := hooks-install
 alias fmt := format
 
 # display the system/project information
@@ -65,15 +66,20 @@ ci python="3.13":
 
 # install the pre-commit hooks
 [group("dev")]
-hooks:
+hooks-install:
     uvx prek install
+
+# run the pre-commit hooks
+[group("dev")]
+hooks:
+    uvx prek run --all-files
 
 # setup the workspace
 [group("dev")]
-dev: hooks venv
+dev: hooks-install venv
 
-# remove build artifacts
-[group("chore")]
+# clean all build/compilation and cache files and directories
+[group("dev")]
 clean:
     rm -fr build/
     rm -fr site/
@@ -85,10 +91,13 @@ clean:
     find . -name '*.pyo' -exec rm -f {} +
     find . -name '*~' -exec rm -f {} +
     find . -name '__pycache__' -exec rm -fr {} +
-    find . -name '.cache' -exec rm -fr {} +
+    find . -name '.DS_Store' -exec rm -fr {} +
     rm -f .coverage
     rm -fr htmlcov/
-    rm -fr .pytest_cache
+    rm -fr .pytest_cache/
+    rm -fr .ruff_cache/
+    rm -fr .cache/
+    rm -fr .venv/
 
 # install dependencies in local venv
 [group("dev")]
