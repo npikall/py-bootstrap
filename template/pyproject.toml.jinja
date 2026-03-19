@@ -67,7 +67,6 @@ addopts = "--cov={{ py_dist_name }} --cov-report term-missing -rsx --color=yes"
 
 [tool.coverage.run]
 relative_files = true
-
 {% if changelog_tool == "git-cliff" %}{% raw %}
 [tool.git-cliff.changelog]
 header = """
@@ -139,5 +138,4 @@ commit_parsers = [
 ]
 filter_commits = false
 topo_order = false
-sort_commits = "oldest"
-{% endraw %}{% endif %}
+sort_commits = "oldest"{% endraw %}{% endif %}
