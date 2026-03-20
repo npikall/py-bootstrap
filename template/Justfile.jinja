@@ -93,23 +93,24 @@ dev: hooks-install venv
 # clean all build/compilation and cache files and directories
 [group("dev")]
 clean:
-    rm -fr build/
-    rm -fr site/
-    rm -fr dist/
+    rm -fr .cache/
+    rm -fr .coverage
     rm -fr .eggs/
-    find . -name '*.egg-info' -exec rm -fr {} +
+    rm -fr .pytest_cache/
+    rm -fr .ruff_cache/
+    rm -fr .venv/
+    rm -fr build/
+    rm -fr dist/
+    rm -fr htmlcov/
+    rm -fr init.just
+    rm -fr site/
     find . -name '*.egg' -exec rm -f {} +
+    find . -name '*.egg-info' -exec rm -fr {} +
     find . -name '*.pyc' -exec rm -f {} +
     find . -name '*.pyo' -exec rm -f {} +
     find . -name '*~' -exec rm -f {} +
-    find . -name '__pycache__' -exec rm -fr {} +
     find . -name '.DS_Store' -exec rm -fr {} +
-    rm -f .coverage
-    rm -fr htmlcov/
-    rm -fr .pytest_cache/
-    rm -fr .ruff_cache/
-    rm -fr .cache/
-    rm -fr .venv/
+    find . -name '__pycache__' -exec rm -fr {} +
 
 # install dependencies in local venv
 [group("dev")]
