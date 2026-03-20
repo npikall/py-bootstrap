@@ -84,15 +84,6 @@ include_docs:
   help: Include Docs
   default: true
 
-pre_commit:
-  type: str
-  qmark: "->"
-  help: Set the pre-commit engine
-  default: prek
-  choices:
-    - pre-commit
-    - prek
-
 changelog_tool:
   type: str
   qmark: "->"
