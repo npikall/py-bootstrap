@@ -28,7 +28,6 @@ class BaseUserAnswers(BaseModel):
     ci_gitlab: bool = True
     repo_name: str = "example"
     include_docs: bool = True
-    docs_engine: DocsEngineOptions = "zensical"
     pre_commit: PreCommitOptions = "prek"
     changelog_tool: ChangelogToolOptions = "git-cliff"
 

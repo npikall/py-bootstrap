@@ -28,13 +28,14 @@ dependencies = []
 # Unlike optional dependencies, development dependencies are local-only
 # and will not be included in the project requirements when
 # published to PyPI or other indexes
-dev = [ "pytest>=9.0.1", "pytest-cov>=7", "ruff>=0.14.14", "ty>=0.0.14" ]
-{% if include_docs -%}
-docs = [ {% if docs_engine == "zensical" -%}
-    "mkdocstrings-python>=2.0.1", "zensical>=0.0.20"
-    {%- elif docs_engine == "mkdocs" -%}
-    "mdx-include>=1.4.2", "mkdocs-material>=9.7.0", "mkdocstrings-python>=2.0.1"
-    {%- endif %} ]{% endif %}
+dev = [
+  {% if include_docs %}"mkdocstrings-python>=2.0.1",{% endif %}
+  "pytest>=9.0.1",
+  "pytest-cov>=7",
+  "ruff>=0.15.7",
+  "ty>=0.0.24",
+  {% if include_docs %}"zensical>=0.0.28",{% endif %}
+]
 
 [tool.ruff]
 line-length = 88

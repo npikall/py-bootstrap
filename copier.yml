@@ -84,16 +84,6 @@ include_docs:
   help: Include Docs
   default: true
 
-docs_engine:
-  type: str
-  qmark: "->"
-  help: Set the documentation generator
-  when: "{{ include_docs }}"
-  default: zensical
-  choices:
-    - zensical
-    - mkdocs
-
 pre_commit:
   type: str
   qmark: "->"

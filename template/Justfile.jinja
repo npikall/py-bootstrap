@@ -126,17 +126,12 @@ update:
 [group("dev")]
 dist:
     uv build
-{% endraw %}
-{% if include_docs -%}
+{% endraw %}{% if include_docs %}
 # serve the documentation on localhost
 [group("dev")]
 docs: venv
-    {% if docs_engine == "zensical" -%}
     uv run zensical serve
-    {%- elif docs_engine == "mkdocs" -%}
-    uv run mkdocs serve
-    {%- endif -%}{% endif -%}{% raw %}
-
+{% endif %}{% raw %}
 _ensure_clean:
     @git diff --quiet
     @git diff --cached --quiet
