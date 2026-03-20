@@ -9,6 +9,8 @@ _jinja_extensions:
   - copier_template_extensions.TemplateExtensionLoader
   - extensions.py:GitExtension
   - extensions.py:SlugifyExtension
+_exclude:
+  - "{% if _copier_operation == 'update' -%}init.just{% endif %}"
 
 # PROMPT --------------------------------
 project_name:
