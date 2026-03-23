@@ -114,10 +114,11 @@ venv:
 update:
     uv lock --upgrade
 
-# build the source distribution and wheel file
+# build the source distribution and wheel file and create attestations
 [group("dev")]
 dist:
     uv build
+    uvx pypi-attestations sign dist/*
 {% if include_docs %}
 # serve the documentation on localhost
 [group("dev")]
