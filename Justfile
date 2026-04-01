@@ -13,6 +13,7 @@ alias l := lint
 alias q := check
 alias t := test
 alias hi := hooks-install
+alias ua := update-all
 alias fmt := format
 
 # display the system/project information
@@ -109,6 +110,13 @@ venv:
 [group("dev")]
 update:
     uv lock --upgrade
+
+# update all dependencies in the repo and the template
+[group("dev")]
+update-all:
+    uv lock --upgrade
+    uvx prek auto-update
+    uv run scripts/update_template_dependencies.py
 
 # build the source distribution and wheel file
 [group("dev")]
