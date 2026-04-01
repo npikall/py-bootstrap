@@ -11,6 +11,11 @@ log = logging.getLogger(__name__)
 
 
 class Resolver(Enum):
+    PYPI = auto()
+    GITHUB = auto()
+
+
+class Formatting(Enum):
     DEFAULT = auto()
     UPPER_BOUND = auto()
     GITHUB_ACTION = auto()
@@ -22,6 +27,7 @@ class DependencyRule:
     package: str
     pattern: str
     resolver: Resolver
+    formatter: Formatting = Formatting.DEFAULT
 
 
 def pattern_greater_equal_semver(package: str) -> str:
@@ -33,86 +39,95 @@ RULES = [
         file_glob="**/pyproject.toml.jinja",
         package="pytest",
         pattern=pattern_greater_equal_semver("pytest"),
-        resolver=Resolver.DEFAULT,
+        resolver=Resolver.PYPI,
     ),
-    # TODO: missing PyTest-cov  # noqa: FIX002, TD002, TD003
+    # TODO: missing PyTest-cov  # noqa: FIX002
     DependencyRule(
         file_glob="**/pyproject.toml.jinja",
         package="ruff",
         pattern=pattern_greater_equal_semver("ruff"),
-        resolver=Resolver.DEFAULT,
+        resolver=Resolver.PYPI,
     ),
     DependencyRule(
         file_glob="**/pyproject.toml.jinja",
         package="ty",
         pattern=pattern_greater_equal_semver("ty"),
-        resolver=Resolver.DEFAULT,
+        resolver=Resolver.PYPI,
     ),
     DependencyRule(
         file_glob="**/pyproject.toml.jinja",
         package="mkdocstrings-python",
         pattern=pattern_greater_equal_semver("mkdocstrings-python"),
-        resolver=Resolver.DEFAULT,
+        resolver=Resolver.PYPI,
     ),
     DependencyRule(
         file_glob="**/pyproject.toml.jinja",
         package="zensical",
         pattern=pattern_greater_equal_semver("zensical"),
-        resolver=Resolver.DEFAULT,
+        resolver=Resolver.PYPI,
     ),
     DependencyRule(
         file_glob="**/pyproject.toml.jinja",
         package="uv-build",
         pattern=r"\"uv-build>=([0-9]*.[0-9]*.[0-9]*),<[0-9]*.[0-9]*\"",
-        resolver=Resolver.UPPER_BOUND,
+        resolver=Resolver.PYPI,
+        formatter=Formatting.UPPER_BOUND,
     ),
     DependencyRule(
         file_glob="**/*.github*/workflows/*docs.yml*",
         package="actions/configure-pages",
         pattern=r"actions/configure-pages@v[0-9]*",
-        resolver=Resolver.GITHUB_ACTION,
+        resolver=Resolver.GITHUB,
+        formatter=Formatting.GITHUB_ACTION,
     ),
     DependencyRule(
         file_glob="**/*.github*/workflows/*.yml*.jinja",
         package="actions/checkout",
         pattern=r"actions/checkout@v[0-9]*",
-        resolver=Resolver.GITHUB_ACTION,
+        resolver=Resolver.GITHUB,
+        formatter=Formatting.GITHUB_ACTION,
     ),
     DependencyRule(
         file_glob="**/*.github*/workflows/*docs.yml*",
         package="actions/setup-python",
         pattern=r"actions/setup-python@v[0-9]*",
-        resolver=Resolver.GITHUB_ACTION,
+        resolver=Resolver.GITHUB,
+        formatter=Formatting.GITHUB_ACTION,
     ),
     DependencyRule(
         file_glob="**/*.github*/workflows/*docs.yml*",
         package="actions/upload-pages-artifact",
         pattern=r"actions/upload-pages-artifact@v[0-9]*",
-        resolver=Resolver.GITHUB_ACTION,
+        resolver=Resolver.GITHUB,
+        formatter=Formatting.GITHUB_ACTION,
     ),
     DependencyRule(
         file_glob="**/*.github*/workflows/*docs.yml*",
         package="actions/deploy-pages",
         pattern=r"actions/deploy-pages@v[0-9]*",
-        resolver=Resolver.GITHUB_ACTION,
+        resolver=Resolver.GITHUB,
+        formatter=Formatting.GITHUB_ACTION,
     ),
     DependencyRule(
         file_glob="**/*.github*/**/*.yml*",
         package="astral-sh/setup-uv",
         pattern=r"astral-sh/setup-uv@v[0-9]*",
-        resolver=Resolver.GITHUB_ACTION,
+        resolver=Resolver.GITHUB,
+        formatter=Formatting.GITHUB_ACTION,
     ),
     DependencyRule(
         file_glob="**/*.github*/workflows/*test_coverage.yml*",
         package="py-cov-action/python-coverage-comment-action@v3",
         pattern=r"py-cov-action/python-coverage-comment-action@v[0-9]*",
-        resolver=Resolver.GITHUB_ACTION,
+        resolver=Resolver.GITHUB,
+        formatter=Formatting.GITHUB_ACTION,
     ),
     DependencyRule(
         file_glob="**/*.github*/actions/setup/action.yml",
         package="astral-sh/uv",
         pattern=r"version: \"([0-9]*.[0-9]*.[0-9]*)\"",
-        resolver=Resolver.GITHUB_ACTION,
+        resolver=Resolver.GITHUB,
+        formatter=Formatting.GITHUB_ACTION,  # TODO: needs another formatter
     ),
 ]
 
@@ -131,69 +146,32 @@ def process_rule(rule: DependencyRule, root: Path) -> None:
 
 
 def process_file(rule: DependencyRule, file: Path) -> None:
-    log.debug("process file: %s, exists: %s", file, file.is_file())
-    log.debug("using %s for %s", rule.resolver, rule.package)
-    match rule.resolver:
-        case Resolver.DEFAULT:
-            resolve_default(rule, file)
-        case Resolver.UPPER_BOUND:
-            resolve_upper_bound(rule, file)
-        case Resolver.GITHUB_ACTION:
-            resolve_github_action(rule, file)
-
-
-def resolve_default(rule: DependencyRule, file: Path) -> None:
+    log.debug("process file: %s, exists: %s", file.name, file.is_file())
     pattern = re.compile(rule.pattern)
     current = get_current_version(pattern, file.read_text())
     if current is None:
+        log.debug("current not found in %s for %s", file.name, rule.package)
         return
-    latest = get_latest_version_from_pypi(rule.package)
+    latest = fetch_latest_version(rule)
     if latest is None:
+        log.debug("latest not found for %s", rule.package)
         return
     if current != latest:
-        log.info("update %s in %s: %s -> %s", rule.package, file.name, current, latest)
-        package_declaration = get_dependency_string(rule.package, latest)
-        update_file(file, pattern, package_declaration)
+        apply_update_to_file(rule, file, current, latest)
     else:
         log.info("package %s already at latest version", rule.package)
 
 
-def resolve_upper_bound(rule: DependencyRule, file: Path) -> None:
+def apply_update_to_file(
+    rule: DependencyRule,
+    file: Path,
+    current: str,
+    latest: str,
+) -> None:
+    log.info("update %s in %s: %s -> %s", rule.package, file.name, current, latest)
     pattern = re.compile(rule.pattern)
-    current = get_current_version(pattern, file.read_text())
-    if current is None:
-        return
-    latest = get_latest_version_from_pypi(rule.package)
-    if latest is None:
-        return
-    if current != latest:
-        log.info("update %s in %s: %s -> %s", rule.package, file.name, current, latest)
-        upper = get_next_minor_version(latest)
-        package_declaration = get_dependency_string_with_upper(
-            rule.package, latest, upper
-        )
-        update_file(file, pattern, package_declaration)
-    else:
-        log.info("package %s already at latest version", rule.package)
-
-
-def resolve_github_action(rule: DependencyRule, file: Path) -> None:
-    pattern = re.compile(rule.pattern)
-    current = get_current_version(pattern, file.read_text())
-    if current is None:
-        return
-    latest = get_latest_version_from_github(rule.package)
-    if latest is None:
-        return
-    latest_major = latest.split(".")[0].lstrip("v")
-    if current != latest_major:
-        log.info(
-            "update %s in %s: %s -> %s", rule.package, file.name, current, latest_major
-        )
-        package_declaration = f"{rule.package}@v{latest_major}"
-        update_file(file, pattern, package_declaration)
-    else:
-        log.info("package %s already at latest_major version", rule.package)
+    replacement = format_version_replacement(rule, latest)
+    update_file(file, pattern, replacement)
 
 
 def update_file(file: Path, pattern: re.Pattern, repl: str) -> None:
@@ -208,12 +186,23 @@ def get_next_minor_version(version: str) -> str:
     return f"{parts[0]}.{minor}"
 
 
-@lru_cache(maxsize=128)
-def get_dependency_string(package: str, version: str) -> str:
+def format_version_replacement(rule: DependencyRule, version: str) -> str:
+    match rule.formatter:
+        case Formatting.GITHUB_ACTION:
+            latest_major = version.split(".", maxsplit=1)[0].lstrip("v")
+            return f"{rule.package}@v{latest_major}"
+        case Formatting.UPPER_BOUND:
+            upper = get_next_minor_version(version)
+            return format_dependency_string_with_upper(rule.package, version, upper)
+        case Formatting.DEFAULT:
+            return format_dependency_string(rule.package, version)
+
+
+def format_dependency_string(package: str, version: str) -> str:
     return f'"{package}>={version}"'
 
 
-def get_dependency_string_with_upper(package: str, version: str, upper: str) -> str:
+def format_dependency_string_with_upper(package: str, version: str, upper: str) -> str:
     return f'"{package}>={version},<{upper}"'
 
 
@@ -232,8 +221,17 @@ def get_current_version(pattern: re.Pattern, content: str) -> str | None:
     return sorted_versions[0]
 
 
+def fetch_latest_version(rule: DependencyRule) -> str | None:
+    log.debug("fetching latest for %s", rule.package)
+    match rule.resolver:
+        case Resolver.PYPI:
+            return fetch_latest_version_from_pypi(rule.package)
+        case Resolver.GITHUB:
+            return fetch_latest_version_from_github(rule.package)
+
+
 @lru_cache(maxsize=128)
-def get_latest_version_from_pypi(package: str) -> str | None:
+def fetch_latest_version_from_pypi(package: str) -> str | None:
     resp = httpx.get(f"https://pypi.org/pypi/{package}/json", timeout=10)
     if resp.status_code != httpx.codes.OK:
         return None
@@ -241,7 +239,7 @@ def get_latest_version_from_pypi(package: str) -> str | None:
 
 
 @lru_cache(maxsize=128)
-def get_latest_version_from_github(repo: str) -> str | None:
+def fetch_latest_version_from_github(repo: str) -> str | None:
     resp = httpx.get(f"https://api.github.com/repos/{repo}/releases/latest", timeout=10)
     if resp.status_code != httpx.codes.OK:
         return None
@@ -253,7 +251,7 @@ def setup_logging() -> None:
         format="{asctime} {levelname} {message}",
         style="{",
         datefmt="%Y/%m/%d %H:%M:%S",
-        level=logging.WARNING,
+        level=logging.INFO,
     )
     log.setLevel(logging.INFO)
 
