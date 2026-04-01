@@ -18,7 +18,9 @@ dev = [
   "ruff>=0.14.9",
   "ty>=0.0.3",
   "zensical>=0.0.15",
+  { include-group = "scripts" },
 ]
+scripts = [ "httpx>=0.28.1" ]
 
 [tool.ruff]
 line-length = 88
@@ -44,6 +46,16 @@ per-file-ignores."**/{tests}/*" = [
   "E402",
   "INP001",
   "S101",
+  "T201",
+]
+per-file-ignores."**/{scripts}/*" = [
+  "ANN001",
+  "D",
+  "E402",
+  "INP001",
+  "S101",
+  "T201",
+  "TD",
 ]
 per-file-ignores."extensions.py" = [ "D" ]
 fixable = [ "ALL" ]
