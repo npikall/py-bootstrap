@@ -43,7 +43,13 @@ RULES = [
         pattern=pattern_greater_equal_semver("pytest"),
         resolver=Resolver.PYPI,
     ),
-    # TODO: missing PyTest-cov  # noqa: FIX002
+    DependencyRule(
+        file_glob="**/pyproject.toml.jinja",
+        package="pytest-cov",
+        pattern=r"\"pytest-cov>=([0-9]*)\"",
+        resolver=Resolver.PYPI,
+        formatter=Formatting.MAJOR_ONLY,
+    ),
     DependencyRule(
         file_glob="**/pyproject.toml.jinja",
         package="ruff",
