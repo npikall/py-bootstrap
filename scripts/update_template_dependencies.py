@@ -119,7 +119,7 @@ RULES = [
     ),
     DependencyRule(
         file_glob="**/*.github*/workflows/*test_coverage.yml*",
-        package="py-cov-action/python-coverage-comment-action@v3",
+        package="py-cov-action/python-coverage-comment-action",
         pattern=r"py-cov-action/python-coverage-comment-action@v[0-9]*",
         resolver=Resolver.GITHUB,
         formatter=Formatting.GITHUB_ACTION,
@@ -129,7 +129,7 @@ RULES = [
         package="astral-sh/uv",
         pattern=r"version: \"([0-9]*.[0-9]*.[0-9]*)\"",
         resolver=Resolver.GITHUB,
-        formatter=Formatting.GITHUB_ACTION,  # TODO: needs another formatter
+        formatter=Formatting.SIMPLE,
     ),
 ]
 
