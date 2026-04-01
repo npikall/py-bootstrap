@@ -18,7 +18,9 @@ class Resolver(Enum):
 class Formatting(Enum):
     DEFAULT = auto()
     UPPER_BOUND = auto()
+    MAJOR_ONLY = auto()
     GITHUB_ACTION = auto()
+    SIMPLE = auto()
 
 
 @dataclass(frozen=True)
@@ -194,8 +196,13 @@ def format_version_replacement(rule: DependencyRule, version: str) -> str:
         case Formatting.UPPER_BOUND:
             upper = get_next_minor_version(version)
             return format_dependency_string_with_upper(rule.package, version, upper)
+        case Formatting.MAJOR_ONLY:
+            major = version.split(".", maxsplit=1)[0].lstrip("v")
+            return format_dependency_string(rule.package, major)
         case Formatting.DEFAULT:
             return format_dependency_string(rule.package, version)
+        case Formatting.SIMPLE:
+            return f'version: "{version}"'
 
 
 def format_dependency_string(package: str, version: str) -> str:
