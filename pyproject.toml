@@ -18,7 +18,9 @@ dev = [
   "ruff>=0.14.9",
   "ty>=0.0.3",
   "zensical>=0.0.15",
+  { include-group = "scripts" },
 ]
+scripts = [ "httpx>=0.28.1" ]
 
 [tool.ruff]
 line-length = 88
@@ -37,9 +39,17 @@ ignore = [
   "D203",   # incorrect-blank-line-before-class (conflicts with D211)
   "D213",   # multi-line-summary-second-line (conflicts with D212)
 ]
-per-file-ignores."**/{tests,scripts}/*" = [
+per-file-ignores."**/{tests}/*" = [
   "ANN001",
   "ANN201",
+  "D",
+  "E402",
+  "INP001",
+  "S101",
+  "T201",
+]
+per-file-ignores."**/{scripts}/*" = [
+  "ANN001",
   "D",
   "E402",
   "INP001",
