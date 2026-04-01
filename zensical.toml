@@ -9,14 +9,15 @@ copyright = """
 Copyright &copy; 2025 Niko Pikall
 """
 nav = [
-  { "Home" = "index.md" },
-  { "Setup" = "setup.md" },
-  { "Create new Project" = "create.md" },
-  { "Template" = "template.md" },
-  { "Update a Project" = "update.md" },
-  { "License" = "license.md" },
-  { "Changelog" = "changelog.md" },
-  { "Contributing" = "contributing.md" },
+	{ "Home" = "index.md" },
+	{ "Setup" = "setup.md" },
+	{ "Create new Project" = "create.md" },
+	{ "Template" = "template.md" },
+	{ "Update a Project" = "update.md" },
+	{ "Migrate a Project" = "migrate.md" },
+	{ "License" = "license.md" },
+	{ "Changelog" = "changelog.md" },
+	{ "Contributing" = "contributing.md" },
 ]
 #extra_css = ["assets/stylesheets/extra.css"]
 #extra_javascript = ["assets/javascript/extra.js"]
@@ -32,23 +33,23 @@ language = "en"
 logo = "assets/rocket.svg"
 
 features = [
-    "announce.dismiss",
-    "content.code.annotate",
-    "content.code.copy",
-    "content.code.select",
-    "content.footnote.tooltips",
-    "content.tabs.link",
-    "content.tooltips",
-    "navigation.footer",
-    "navigation.indexes",
-    "navigation.instant",
-    "navigation.instant.prefetch",
-    "navigation.path",
-    "navigation.sections",
-    # "navigation.tabs",
-    "navigation.top",
-    "navigation.tracking",
-    "search.highlight",
+	"announce.dismiss",
+	"content.code.annotate",
+	"content.code.copy",
+	"content.code.select",
+	"content.footnote.tooltips",
+	"content.tabs.link",
+	"content.tooltips",
+	"navigation.footer",
+	"navigation.indexes",
+	"navigation.instant",
+	"navigation.instant.prefetch",
+	"navigation.path",
+	"navigation.sections",
+	# "navigation.tabs",
+	"navigation.top",
+	"navigation.tracking",
+	"search.highlight",
 ]
 
 # Palette toggle for automatic mode

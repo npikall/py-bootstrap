@@ -27,7 +27,7 @@ For more in-depth explanations visit [`copier`](https://copier.readthedocs.io/en
 To update a project from the template, run the following command in the root of your project:
 
 ```bash
-copier update
+copier update --trust
 ```
 
 Copier will fetch the latest version of the template, compare it against your current project state, and apply any new or changed files. If conflicts arise, Copier will prompt you to resolve them interactively, similar to a Git merge.
@@ -35,7 +35,7 @@ Copier will fetch the latest version of the template, compare it against your cu
 If you want to update from a specific template revision, you can pin the update explicitly:
 
 ```bash
-copier update --vcs-ref <tag-or-commit>
+copier update --vcs-ref <tag-or-commit> --trust
 ```
 
 This workflow makes it possible to continuously adopt template improvements in a controlled and transparent manner, without losing project-specific changes.

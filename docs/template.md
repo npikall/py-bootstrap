@@ -28,7 +28,6 @@ The template generates a package structure that reflects common best practices f
 ├── docs ----------------------- # Documentation pages
 │   └── index.md --------------- #
 ├── zensical.toml -------------- #
-├── mkdocs.yml ----------------- #
 └── .github -------------------- # Github CI Config
     └── ... -------------------- #
 ```
@@ -105,10 +104,6 @@ Here are some of the core tasks provided:
 
 The template comes with a curated set of _pre-commit hooks_ that enforce code quality and repository hygiene before changes are committed. These hooks run automatically on each commit, providing fast feedback and preventing common issues from entering the codebase. They are designed to align with the checks performed in CI, ensuring consistency between local development and automated pipelines.
 
-!!! tip
-
-    You can choose between the original `python` based [`Pre-Commit`][Pre-Commit] or the `rust` based [`Prek`][Prek]
-
 Provided hooks include:
 
 - **Ruff linting and formatting**
@@ -126,20 +121,6 @@ Provided hooks include:
 Together, these hooks act as a first line of defense, catching errors early and reducing friction during code review and continuous integration.
 
 Pre-commit hook versions are pinned in `.pre-commit-config.yaml` and should be updated periodically. To upgrade all hooks to their latest compatible versions, run:
-
-=== "`pre-commit`"
-
-    If the `pre-commit` tool is installed.
-    ```console
-    pre-commit autoupdate
-    ```
-
-=== "`uvx pre-commit`"
-
-    If the `pre-commit` tool is not installed.
-    ```console
-    uvx pre-commit autoupdate
-    ```
 
 === "`prek`"
 
