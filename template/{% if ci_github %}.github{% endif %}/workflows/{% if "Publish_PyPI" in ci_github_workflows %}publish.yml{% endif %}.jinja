@@ -16,9 +16,9 @@ jobs:
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@v8
       - name: Install Python {{py_version_current}}
         run: uv python install {{ py_version_current }}
       - name: Build

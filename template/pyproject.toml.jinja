@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "uv_build"
-requires = [ "uv-build>=0.10.9,<0.11" ]
+requires = [ "uv-build>=0.11.2,<0.12" ]
 
 [project]
 name = "{{ project_name | slugify("-") }}"
@@ -29,12 +29,12 @@ dependencies = []
 # and will not be included in the project requirements when
 # published to PyPI or other indexes
 dev = [
-  {% if include_docs %}"mkdocstrings-python>=2.0.1",{% endif %}
-  "pytest>=9.0.1",
+  {% if include_docs %}"mkdocstrings-python>=2.0.3",{% endif %}
+  "pytest>=9.0.2",
   "pytest-cov>=7",
-  "ruff>=0.15.7",
-  "ty>=0.0.24",
-  {% if include_docs %}"zensical>=0.0.28",{% endif %}
+  "ruff>=0.15.8",
+  "ty>=0.0.27",
+  {% if include_docs %}"zensical>=0.0.31",{% endif %}
 ]
 
 [tool.ruff]
