@@ -55,6 +55,7 @@ per-file-ignores."**/{scripts}/*" = [
   "INP001",
   "S101",
   "T201",
+  "TD",
 ]
 per-file-ignores."extensions.py" = [ "D" ]
 fixable = [ "ALL" ]
