@@ -151,10 +151,16 @@ _commit_and_tag version=`uv version --short`:
     git commit -m "chore(release): bump version to {{ version }}"
     git tag -a "v{{ version }}"
 
+_update_template_and_commit:
+    uv run scripts/update_template_dependencies.py
+    git add .
+    git commit -m "chore(template): update template dependencies"
+
 # make a new release [target:<major|minor|patch|...> or semver]
 [group("chore")]
 release target: ci
     @just _ensure_clean
+    @just _update_template_and_commit
     @just _set_version {{ target }}
     @just changelog --tag `uv version --short`
     @just _commit_and_tag
