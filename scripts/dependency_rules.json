@@ -1,0 +1,107 @@
+[
+  {
+    "file_glob": "**/pyproject.toml.jinja",
+    "package": "pytest",
+    "pattern": "\\\"pytest>=([0-9]*.[0-9]*.[0-9]*)\\\"",
+    "resolver": "pypi",
+    "formatter": "default"
+  },
+  {
+    "file_glob": "**/pyproject.toml.jinja",
+    "package": "pytest-cov",
+    "pattern": "\\\"pytest-cov>=([0-9]*)\\\"",
+    "resolver": "pypi",
+    "formatter": "major_only"
+  },
+  {
+    "file_glob": "**/pyproject.toml.jinja",
+    "package": "ruff",
+    "pattern": "\\\"ruff>=([0-9]*.[0-9]*.[0-9]*)\\\"",
+    "resolver": "pypi",
+    "formatter": "default"
+  },
+  {
+    "file_glob": "**/pyproject.toml.jinja",
+    "package": "ty",
+    "pattern": "\\\"ty>=([0-9]*.[0-9]*.[0-9]*)\\\"",
+    "resolver": "pypi",
+    "formatter": "default"
+  },
+  {
+    "file_glob": "**/pyproject.toml.jinja",
+    "package": "mkdocstrings-python",
+    "pattern": "\\\"mkdocstrings-python>=([0-9]*.[0-9]*.[0-9]*)\\\"",
+    "resolver": "pypi",
+    "formatter": "default"
+  },
+  {
+    "file_glob": "**/pyproject.toml.jinja",
+    "package": "zensical",
+    "pattern": "\\\"zensical>=([0-9]*.[0-9]*.[0-9]*)\\\"",
+    "resolver": "pypi",
+    "formatter": "default"
+  },
+  {
+    "file_glob": "**/pyproject.toml.jinja",
+    "package": "uv-build",
+    "pattern": "\\\"uv-build>=([0-9]*.[0-9]*.[0-9]*),<[0-9]*.[0-9]*\\\"",
+    "resolver": "pypi",
+    "formatter": "upper_bound"
+  },
+  {
+    "file_glob": "**/*.github*/workflows/*docs.yml*",
+    "package": "actions/configure-pages",
+    "pattern": "actions/configure-pages@v[0-9]*",
+    "resolver": "github",
+    "formatter": "github_action"
+  },
+  {
+    "file_glob": "**/*.github*/workflows/*.yml*.jinja",
+    "package": "actions/checkout",
+    "pattern": "actions/checkout@v[0-9]*",
+    "resolver": "github",
+    "formatter": "github_action"
+  },
+  {
+    "file_glob": "**/*.github*/workflows/*docs.yml*",
+    "package": "actions/setup-python",
+    "pattern": "actions/setup-python@v[0-9]*",
+    "resolver": "github",
+    "formatter": "github_action"
+  },
+  {
+    "file_glob": "**/*.github*/workflows/*docs.yml*",
+    "package": "actions/upload-pages-artifact",
+    "pattern": "actions/upload-pages-artifact@v[0-9]*",
+    "resolver": "github",
+    "formatter": "github_action"
+  },
+  {
+    "file_glob": "**/*.github*/workflows/*docs.yml*",
+    "package": "actions/deploy-pages",
+    "pattern": "actions/deploy-pages@v[0-9]*",
+    "resolver": "github",
+    "formatter": "github_action"
+  },
+  {
+    "file_glob": "**/*.github*/**/*.yml*",
+    "package": "astral-sh/setup-uv",
+    "pattern": "astral-sh/setup-uv@v[0-9]*",
+    "resolver": "github",
+    "formatter": "github_action"
+  },
+  {
+    "file_glob": "**/*.github*/workflows/*test_coverage.yml*",
+    "package": "py-cov-action/python-coverage-comment-action",
+    "pattern": "py-cov-action/python-coverage-comment-action@v[0-9]*",
+    "resolver": "github",
+    "formatter": "github_action"
+  },
+  {
+    "file_glob": "**/*.github*/actions/setup/action.yml",
+    "package": "astral-sh/uv",
+    "pattern": "version: \\\"([0-9]*.[0-9]*.[0-9]*)\\\"",
+    "resolver": "github",
+    "formatter": "simple"
+  }
+]

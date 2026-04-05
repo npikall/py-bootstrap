@@ -1,21 +1,21 @@
 import logging
 import re
-from dataclasses import dataclass
-from enum import Enum, auto
+from enum import StrEnum, auto
 from functools import lru_cache
 from pathlib import Path
 
 import httpx
+from pydantic import BaseModel, TypeAdapter
 
 log = logging.getLogger(__name__)
 
 
-class Resolver(Enum):
+class Resolver(StrEnum):
     PYPI = auto()
     GITHUB = auto()
 
 
-class Formatting(Enum):
+class Formatting(StrEnum):
     DEFAULT = auto()
     UPPER_BOUND = auto()
     MAJOR_ONLY = auto()
@@ -23,8 +23,7 @@ class Formatting(Enum):
     SIMPLE = auto()
 
 
-@dataclass(frozen=True)
-class DependencyRule:
+class DependencyRule(BaseModel):
     file_glob: str
     package: str
     pattern: str
@@ -32,119 +31,19 @@ class DependencyRule:
     formatter: Formatting = Formatting.DEFAULT
 
 
-def pattern_greater_equal_semver(package: str) -> str:
-    return rf"\"{package}>=([0-9]*.[0-9]*.[0-9]*)\""
-
-
-RULES = [
-    DependencyRule(
-        file_glob="**/pyproject.toml.jinja",
-        package="pytest",
-        pattern=pattern_greater_equal_semver("pytest"),
-        resolver=Resolver.PYPI,
-    ),
-    DependencyRule(
-        file_glob="**/pyproject.toml.jinja",
-        package="pytest-cov",
-        pattern=r"\"pytest-cov>=([0-9]*)\"",
-        resolver=Resolver.PYPI,
-        formatter=Formatting.MAJOR_ONLY,
-    ),
-    DependencyRule(
-        file_glob="**/pyproject.toml.jinja",
-        package="ruff",
-        pattern=pattern_greater_equal_semver("ruff"),
-        resolver=Resolver.PYPI,
-    ),
-    DependencyRule(
-        file_glob="**/pyproject.toml.jinja",
-        package="ty",
-        pattern=pattern_greater_equal_semver("ty"),
-        resolver=Resolver.PYPI,
-    ),
-    DependencyRule(
-        file_glob="**/pyproject.toml.jinja",
-        package="mkdocstrings-python",
-        pattern=pattern_greater_equal_semver("mkdocstrings-python"),
-        resolver=Resolver.PYPI,
-    ),
-    DependencyRule(
-        file_glob="**/pyproject.toml.jinja",
-        package="zensical",
-        pattern=pattern_greater_equal_semver("zensical"),
-        resolver=Resolver.PYPI,
-    ),
-    DependencyRule(
-        file_glob="**/pyproject.toml.jinja",
-        package="uv-build",
-        pattern=r"\"uv-build>=([0-9]*.[0-9]*.[0-9]*),<[0-9]*.[0-9]*\"",
-        resolver=Resolver.PYPI,
-        formatter=Formatting.UPPER_BOUND,
-    ),
-    DependencyRule(
-        file_glob="**/*.github*/workflows/*docs.yml*",
-        package="actions/configure-pages",
-        pattern=r"actions/configure-pages@v[0-9]*",
-        resolver=Resolver.GITHUB,
-        formatter=Formatting.GITHUB_ACTION,
-    ),
-    DependencyRule(
-        file_glob="**/*.github*/workflows/*.yml*.jinja",
-        package="actions/checkout",
-        pattern=r"actions/checkout@v[0-9]*",
-        resolver=Resolver.GITHUB,
-        formatter=Formatting.GITHUB_ACTION,
-    ),
-    DependencyRule(
-        file_glob="**/*.github*/workflows/*docs.yml*",
-        package="actions/setup-python",
-        pattern=r"actions/setup-python@v[0-9]*",
-        resolver=Resolver.GITHUB,
-        formatter=Formatting.GITHUB_ACTION,
-    ),
-    DependencyRule(
-        file_glob="**/*.github*/workflows/*docs.yml*",
-        package="actions/upload-pages-artifact",
-        pattern=r"actions/upload-pages-artifact@v[0-9]*",
-        resolver=Resolver.GITHUB,
-        formatter=Formatting.GITHUB_ACTION,
-    ),
-    DependencyRule(
-        file_glob="**/*.github*/workflows/*docs.yml*",
-        package="actions/deploy-pages",
-        pattern=r"actions/deploy-pages@v[0-9]*",
-        resolver=Resolver.GITHUB,
-        formatter=Formatting.GITHUB_ACTION,
-    ),
-    DependencyRule(
-        file_glob="**/*.github*/**/*.yml*",
-        package="astral-sh/setup-uv",
-        pattern=r"astral-sh/setup-uv@v[0-9]*",
-        resolver=Resolver.GITHUB,
-        formatter=Formatting.GITHUB_ACTION,
-    ),
-    DependencyRule(
-        file_glob="**/*.github*/workflows/*test_coverage.yml*",
-        package="py-cov-action/python-coverage-comment-action",
-        pattern=r"py-cov-action/python-coverage-comment-action@v[0-9]*",
-        resolver=Resolver.GITHUB,
-        formatter=Formatting.GITHUB_ACTION,
-    ),
-    DependencyRule(
-        file_glob="**/*.github*/actions/setup/action.yml",
-        package="astral-sh/uv",
-        pattern=r"version: \"([0-9]*.[0-9]*.[0-9]*)\"",
-        resolver=Resolver.GITHUB,
-        formatter=Formatting.SIMPLE,
-    ),
-]
-
-
 def main() -> None:
     setup_logging()
+    rules = load_rules()
     root = get_project_root()
-    for rule in RULES:
-        process_rule(rule, root / "template")
+    template_dir = root / "template"
+    for rule in rules:
+        process_rule(rule, template_dir)
+
+
+def load_rules() -> list[DependencyRule]:
+    json_file = Path(__file__).parent / "dependency_rules.json"
+    rules_model = TypeAdapter(list[DependencyRule])
+    return rules_model.validate_json(json_file.read_bytes())
 
 
 def process_rule(rule: DependencyRule, root: Path) -> None:
