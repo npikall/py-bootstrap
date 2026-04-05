@@ -340,6 +340,7 @@ dev = [
 ]
 scripts = [
     { name = "httpx" },
+    { name = "pydantic" },
 ]
 
 [package.metadata]
@@ -357,7 +358,10 @@ dev = [
     { name = "ty", specifier = ">=0.0.3" },
     { name = "zensical", specifier = ">=0.0.15" },
 ]
-scripts = [{ name = "httpx", specifier = ">=0.28.1" }]
+scripts = [
+    { name = "httpx", specifier = ">=0.28.1" },
+    { name = "pydantic", specifier = ">=2.12.5" },
+]
 
 [[package]]
 name = "pydantic"

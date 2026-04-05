@@ -20,7 +20,10 @@ dev = [
   "zensical>=0.0.15",
   { include-group = "scripts" },
 ]
-scripts = [ "httpx>=0.28.1" ]
+scripts = [
+  "httpx>=0.28.1",
+  "pydantic>=2.12.5",
+]
 
 [tool.ruff]
 line-length = 88
