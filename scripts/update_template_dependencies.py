@@ -1,13 +1,21 @@
+import asyncio
 import logging
 import re
 from enum import StrEnum, auto
 from functools import lru_cache
 from pathlib import Path
+from typing import TYPE_CHECKING, Any
 
 import httpx
 from pydantic import BaseModel, TypeAdapter
 
+if TYPE_CHECKING:
+    from types import CoroutineType
+
 log = logging.getLogger(__name__)
+
+
+type VersionMapping = dict[str, str | None]
 
 
 class Resolver(StrEnum):
@@ -36,8 +44,9 @@ def main() -> None:
     rules = load_rules()
     root = get_project_root()
     template_dir = root / "template"
+    latest_versions = collect_latest_versions(rules)
     for rule in rules:
-        process_rule(rule, template_dir)
+        process_rule(rule, template_dir, latest_versions)
 
 
 def load_rules() -> list[DependencyRule]:
@@ -46,19 +55,25 @@ def load_rules() -> list[DependencyRule]:
     return rules_model.validate_json(json_file.read_bytes())
 
 
-def process_rule(rule: DependencyRule, root: Path) -> None:
+def process_rule(
+    rule: DependencyRule, root: Path, fetched_versions: VersionMapping
+) -> None:
     files = root.rglob(rule.file_glob)
     for file in files:
-        process_file(rule, file)
+        process_file(rule, file, fetched_versions)
 
 
-def process_file(rule: DependencyRule, file: Path) -> None:
+def process_file(
+    rule: DependencyRule, file: Path, fetched_versions: VersionMapping
+) -> None:
     log.debug(
         "process file: %s, exists: %s",
         remove_jinja_tags_from_filename(file.name),
         file.is_file(),
     )
-    versions = get_versions_if_available(rule, file)
+    versions = get_latest_and_current_versions_if_available(
+        rule, file, fetched_versions
+    )
     if versions is None:
         return
     current, latest = versions
@@ -73,8 +88,8 @@ def remove_jinja_tags_from_filename(name: str) -> str:
     return jinja_tags.sub("", name)
 
 
-def get_versions_if_available(
-    rule: DependencyRule, file: Path
+def get_latest_and_current_versions_if_available(
+    rule: DependencyRule, file: Path, fetched_versions: VersionMapping
 ) -> tuple[str, str] | None:
     pattern = re.compile(rule.pattern)
     current = get_current_version(pattern, file.read_text())
@@ -85,7 +100,7 @@ def get_versions_if_available(
             rule.package,
         )
         return None
-    latest = fetch_latest_version(rule)
+    latest = fetched_versions.get(rule.package)
     if latest is None:
         log.debug("latest not found for %s", rule.package)
         return None
@@ -162,26 +177,54 @@ def get_current_version(pattern: re.Pattern, content: str) -> str | None:
     return sorted_versions[0]
 
 
-def fetch_latest_version(rule: DependencyRule) -> str | None:
+def collect_latest_versions(rules: list[DependencyRule]) -> VersionMapping:
+    latest_versions: VersionMapping = {}
+    all_versions = asyncio.run(fetch_all_latest_versions(rules))
+    for package, version in all_versions:
+        latest_versions[package] = version
+    return latest_versions
+
+
+async def fetch_all_latest_versions(
+    rules: list[DependencyRule],
+) -> list[tuple[str, str | None]]:
+    async with httpx.AsyncClient() as client:
+        tasks: list[CoroutineType[Any, Any, tuple[str, str | None]]] = [
+            fetch_latest_version(rule, client) for rule in rules
+        ]
+        return await asyncio.gather(*tasks)
+
+
+async def fetch_latest_version(
+    rule: DependencyRule, client: httpx.AsyncClient
+) -> tuple[str, str | None]:
     log.debug("fetching latest for %s", rule.package)
     match rule.resolver:
         case Resolver.PYPI:
-            return fetch_latest_version_from_pypi(rule.package)
+            latest = await fetch_latest_version_from_pypi(rule.package, client)
+            return rule.package, latest
         case Resolver.GITHUB:
-            return fetch_latest_version_from_github(rule.package)
+            latest = await fetch_latest_version_from_github(rule.package, client)
+            return rule.package, latest
 
 
 @lru_cache(maxsize=128)
-def fetch_latest_version_from_pypi(package: str) -> str | None:
-    resp = httpx.get(f"https://pypi.org/pypi/{package}/json", timeout=10)
+async def fetch_latest_version_from_pypi(
+    package: str, client: httpx.AsyncClient
+) -> str | None:
+    url = f"https://pypi.org/pypi/{package}/json"
+    resp = await client.get(url, timeout=10)
     if resp.status_code != httpx.codes.OK:
         return None
     return resp.json().get("info", {}).get("version")
 
 
 @lru_cache(maxsize=128)
-def fetch_latest_version_from_github(repo: str) -> str | None:
-    resp = httpx.get(f"https://api.github.com/repos/{repo}/releases/latest", timeout=10)
+async def fetch_latest_version_from_github(
+    repo: str, client: httpx.AsyncClient
+) -> str | None:
+    url = f"https://api.github.com/repos/{repo}/releases/latest"
+    resp = await client.get(url, timeout=10)
     if resp.status_code != httpx.codes.OK:
         return None
     return resp.json().get("tag_name", "")
