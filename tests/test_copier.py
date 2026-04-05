@@ -76,6 +76,7 @@ def test_copier_links_all_files_correct(
         "zensical.toml",
         # SRC DIRECTORY
         "src/example/__init__.py",
+        "src/example/py.typed",
         # TEST DIRECTORY
         "tests/smoke_test.py",
         "tests/test_meta.py",
