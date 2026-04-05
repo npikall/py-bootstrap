@@ -155,19 +155,29 @@ def process_rule(rule: DependencyRule, root: Path) -> None:
 
 def process_file(rule: DependencyRule, file: Path) -> None:
     log.debug("process file: %s, exists: %s", file.name, file.is_file())
-    pattern = re.compile(rule.pattern)
-    current = get_current_version(pattern, file.read_text())
-    if current is None:
-        log.debug("current not found in %s for %s", file.name, rule.package)
+    versions = get_versions_if_available(rule, file)
+    if versions is None:
         return
-    latest = fetch_latest_version(rule)
-    if latest is None:
-        log.debug("latest not found for %s", rule.package)
-        return
+    current, latest = versions
     if current != latest:
         apply_update_to_file(rule, file, current, latest)
     else:
         log.info("package %s already at latest version", rule.package)
+
+
+def get_versions_if_available(
+    rule: DependencyRule, file: Path
+) -> tuple[str, str] | None:
+    pattern = re.compile(rule.pattern)
+    current = get_current_version(pattern, file.read_text())
+    if current is None:
+        log.debug("current not found in %s for %s", file.name, rule.package)
+        return None
+    latest = fetch_latest_version(rule)
+    if latest is None:
+        log.debug("latest not found for %s", rule.package)
+        return None
+    return current, latest
 
 
 def apply_update_to_file(
