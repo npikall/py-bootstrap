@@ -53,7 +53,11 @@ def process_rule(rule: DependencyRule, root: Path) -> None:
 
 
 def process_file(rule: DependencyRule, file: Path) -> None:
-    log.debug("process file: %s, exists: %s", file.name, file.is_file())
+    log.debug(
+        "process file: %s, exists: %s",
+        remove_jinja_tags_from_filename(file.name),
+        file.is_file(),
+    )
     versions = get_versions_if_available(rule, file)
     if versions is None:
         return
@@ -64,13 +68,22 @@ def process_file(rule: DependencyRule, file: Path) -> None:
         log.info("package %s already at latest version", rule.package)
 
 
+def remove_jinja_tags_from_filename(name: str) -> str:
+    jinja_tags = re.compile(r"({%.*?%}|{{.*?}}|{#.*?#})")
+    return jinja_tags.sub("", name)
+
+
 def get_versions_if_available(
     rule: DependencyRule, file: Path
 ) -> tuple[str, str] | None:
     pattern = re.compile(rule.pattern)
     current = get_current_version(pattern, file.read_text())
     if current is None:
-        log.debug("current not found in %s for %s", file.name, rule.package)
+        log.debug(
+            "current not found in %s for %s",
+            remove_jinja_tags_from_filename(file.name),
+            rule.package,
+        )
         return None
     latest = fetch_latest_version(rule)
     if latest is None:
@@ -85,7 +98,13 @@ def apply_update_to_file(
     current: str,
     latest: str,
 ) -> None:
-    log.info("update %s in %s: %s -> %s", rule.package, file.name, current, latest)
+    log.info(
+        "update %s in %s: %s -> %s",
+        rule.package,
+        remove_jinja_tags_from_filename(file.name),
+        current,
+        latest,
+    )
     pattern = re.compile(rule.pattern)
     replacement = format_version_replacement(rule, latest)
     update_file(file, pattern, replacement)
@@ -135,7 +154,7 @@ def update_file_content(file: Path, pattern: re.Pattern[str], repl: str) -> str:
 def get_current_version(pattern: re.Pattern, content: str) -> str | None:
     matched_stmts = pattern.findall(content)
     if not matched_stmts:
-        log.warning("no match found for pattern: %s", pattern)
+        log.debug("no match found for pattern: %s", pattern)
         return None
     if len(matched_stmts) > 1:
         log.warning("multiple matches found: %s", matched_stmts)
@@ -175,7 +194,7 @@ def setup_logging() -> None:
         datefmt="%Y/%m/%d %H:%M:%S",
         level=logging.INFO,
     )
-    log.setLevel(logging.INFO)
+    log.setLevel(logging.WARNING)
 
 
 def get_project_root(root_marker_file: str = "pyproject.toml") -> Path:
