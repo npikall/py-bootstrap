@@ -2,7 +2,7 @@ from datetime import datetime
 from pathlib import Path
 
 import pytest
-from conftest import ChooseLicense
+from conftest import DefaultUserAnswer
 from copier import run_copy
 
 CUR_YEAR = datetime.today().year  # noqa: DTZ002
@@ -12,7 +12,7 @@ def test_license_MIT_renders_correct(  # noqa: N802
     tmp_path: Path,
     capsys: pytest.CaptureFixture,
 ):
-    given = ChooseLicense(copyright_license="MIT")
+    given = DefaultUserAnswer(copyright_license="MIT")
     cwd = Path(__file__).resolve().parent.parent
 
     # Run copier with the given context
@@ -37,7 +37,7 @@ def test_license_apache_renders_correct(
     tmp_path: Path,
     capsys: pytest.CaptureFixture,
 ):
-    given = ChooseLicense(copyright_license="Apache-2.0")
+    given = DefaultUserAnswer(copyright_license="Apache-2.0")
     cwd = Path(__file__).resolve().parent.parent
 
     # Run copier with the given context
@@ -63,7 +63,7 @@ def test_license_unlicense_renders_correct(
     tmp_path: Path,
     capsys: pytest.CaptureFixture,
 ):
-    given = ChooseLicense(copyright_license="Unlicense")
+    given = DefaultUserAnswer(copyright_license="Unlicense")
     cwd = Path(__file__).resolve().parent.parent
 
     # Run copier with the given context

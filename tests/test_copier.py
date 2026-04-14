@@ -3,10 +3,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, TypedDict
 
-import pytest
 import yaml
-from conftest import FullUserAnswers as UserAnswers
-from copier import run_copy
 
 COPIER_CONFIG_PATH: Path = Path(__file__).resolve().parent.parent / "copier.yml"
 COPIER_CONFIG: dict[Any, Any] = yaml.safe_load(COPIER_CONFIG_PATH.read_text())
@@ -37,28 +34,7 @@ def get_linenumbers_to_delete_in_justfile(content: str) -> tuple[int, int]:
     return int(parts[0]), int(parts[1])
 
 
-@pytest.fixture(scope="session")
-def session_tmp_path(tmp_path_factory):
-    return tmp_path_factory.mktemp("main")
-
-
-def test_copier_links_all_files_correct(
-    session_tmp_path: Path,
-    capsys: pytest.CaptureFixture,
-):
-    given = UserAnswers()
-    cwd = Path(__file__).resolve().parent.parent
-
-    # Run copier with the given context
-    run_copy(
-        src_path=str(cwd),
-        dst_path=session_tmp_path,
-        unsafe=True,
-        data=given.model_dump(),
-        vcs_ref="HEAD",
-    )
-    _ = capsys.readouterr()
-
+def test_copier_links_all_files_correct(copied_project: Path):
     want: list[str] = [
         # DOTFILES
         ".gitignore",
@@ -104,24 +80,24 @@ def test_copier_links_all_files_correct(
 
     # Check all expected files get copied
     for file in want:
-        assert (session_tmp_path / file).exists()
+        assert (copied_project / file).exists()
 
     # Check if more than expected number of files got copied
-    for file in session_tmp_path.rglob("*"):
+    for file in copied_project.rglob("*"):
         if file.is_dir():
             continue
-        rel_path = str(file.relative_to(session_tmp_path))
+        rel_path = str(file.relative_to(copied_project))
         assert rel_path in want
 
 
-def test_readme_renders_correct(session_tmp_path: Path):
-    got = (session_tmp_path / "README.md").read_text()
+def test_readme_renders_correct(copied_project: Path):
+    got = (copied_project / "README.md").read_text()
     want = "# example"
     assert want in got
 
 
-def test_pyproject_toml_renders_correct(session_tmp_path: Path):
-    got = (session_tmp_path / "pyproject.toml").read_text()
+def test_pyproject_toml_renders_correct(copied_project: Path):
+    got = (copied_project / "pyproject.toml").read_text()
     cases = [
         '[project]\nname = "example"',
         'authors = [ { name = "John Doe", email = "john.doe@mail.com" } ]',
@@ -135,14 +111,14 @@ def test_pyproject_toml_renders_correct(session_tmp_path: Path):
         assert want in got
 
 
-def test_python_version_renders_correct(session_tmp_path: Path):
-    got = (session_tmp_path / ".python-version").read_text()
+def test_python_version_renders_correct(copied_project: Path):
+    got = (copied_project / ".python-version").read_text()
     want = PY_VERSION
     assert want in got
 
 
-def test_contributing_renders_correct(session_tmp_path: Path):
-    got = (session_tmp_path / "CONTRIBUTING.md").read_text()
+def test_contributing_renders_correct(copied_project: Path):
+    got = (copied_project / "CONTRIBUTING.md").read_text()
     cases: list[str] = [
         "Report bugs at [`github.com/jdoe/example`][repo].",
         "`example` could always use more documentation",
@@ -151,8 +127,8 @@ def test_contributing_renders_correct(session_tmp_path: Path):
         assert want in got
 
 
-def test_justfile_renders_correct(session_tmp_path: Path):
-    got = (session_tmp_path / "Justfile").read_text()
+def test_justfile_renders_correct(copied_project: Path):
+    got = (copied_project / "Justfile").read_text()
     cases: list[str] = [
         f"uv run --python={PY_VERSION} pytest {{{{ args }}}}",
         "\nhooks:\n    uvx prek run --all-files\n\n#",
@@ -168,24 +144,24 @@ def test_justfile_renders_correct(session_tmp_path: Path):
         assert t in got
 
 
-def test_gitlab_ci_renders_correct(session_tmp_path: Path):
-    got = (session_tmp_path / ".gitlab-ci.yml").read_text()
+def test_gitlab_ci_renders_correct(copied_project: Path):
+    got = (copied_project / ".gitlab-ci.yml").read_text()
     want = f'PYTHON_VERSION: "{PY_VERSION}"'
     assert want in got
 
 
-def test_license_MIT_renders_correct(session_tmp_path: Path):  # noqa: N802
-    got = (session_tmp_path / "LICENSE").read_text()
+def test_license_MIT_renders_correct(copied_project: Path):  # noqa: N802
+    got = (copied_project / "LICENSE").read_text()
     want = f"Copyright (c) {CUR_YEAR} John Doe"
     assert want in got
 
 
-def test_zensical_renders_correct(session_tmp_path: Path):
-    got = (session_tmp_path / "zensical.toml").read_text()
+def test_zensical_renders_correct(copied_project: Path):
+    got = (copied_project / "zensical.toml").read_text()
     cases: list[str] = [
         'site_name = "Example - Documentation"',
         'site_author = "John Doe"',
-        'copyright = """\nCopyright &copy; 2025 John Doe\n"""',
+        f'copyright = """\nCopyright &copy; {CUR_YEAR} John Doe\n"""',
         'media = "(prefers-color-scheme)"',
         'media = "(prefers-color-scheme: light)"',
         'media = "(prefers-color-scheme: dark)"',
@@ -194,8 +170,8 @@ def test_zensical_renders_correct(session_tmp_path: Path):
         assert want in got
 
 
-def test_test_platform_renders_correct(session_tmp_path: Path):
-    got = (session_tmp_path / ".github/workflows/test_platform.yml").read_text()
+def test_test_platform_renders_correct(copied_project: Path):
+    got = (copied_project / ".github/workflows/test_platform.yml").read_text()
     want_1 = (
         "python-version:\n"
         f'          - "{PY_VERSION_PAST}"\n'
@@ -205,28 +181,28 @@ def test_test_platform_renders_correct(session_tmp_path: Path):
     assert want_1 in got
 
 
-def test_test_coverage_renders_correct(session_tmp_path: Path):
-    got = (session_tmp_path / ".github/workflows/test_coverage.yml").read_text()
+def test_test_coverage_renders_correct(copied_project: Path):
+    got = (copied_project / ".github/workflows/test_coverage.yml").read_text()
     want = "GITHUB_TOKEN: ${{ github.token }}"
     assert want in got
 
 
-def test_publish_renders_correct(session_tmp_path: Path):
-    got = (session_tmp_path / ".github/workflows/publish.yml").read_text()
+def test_publish_renders_correct(copied_project: Path):
+    got = (copied_project / ".github/workflows/publish.yml").read_text()
     want = f"run: uv python install {PY_VERSION}"
     assert want in got
 
 
-def test_init_just_deletes_correct_content_in_justfile(session_tmp_path: Path):
-    init_just_content = (session_tmp_path / "init.just").read_text()
-    just_content = (session_tmp_path / "Justfile").read_text()
+def test_init_just_deletes_correct_content_in_justfile(copied_project: Path):
+    init_just_content = (copied_project / "init.just").read_text()
+    just_content = (copied_project / "Justfile").read_text()
     start_line, end_line = get_linenumbers_to_delete_in_justfile(init_just_content)
     got = get_lines(start_line, end_line, just_content)
     want = 'import? "init.just"'
     assert got == want
 
 
-def test_release_action_renders_correctly(session_tmp_path: Path):
-    got = (session_tmp_path / ".github/workflows/release.yml").read_text()
+def test_release_action_renders_correctly(copied_project: Path):
+    got = (copied_project / ".github/workflows/release.yml").read_text()
     want = "uses: taiki-e/install-action@git-cliff"
     assert want in got
