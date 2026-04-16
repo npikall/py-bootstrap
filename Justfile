@@ -110,6 +110,7 @@ venv:
 [group("dev")]
 update:
     uv lock --upgrade
+    uvx prek auto-update
 
 # update all dependencies in the repo and the template
 [group("dev")]
