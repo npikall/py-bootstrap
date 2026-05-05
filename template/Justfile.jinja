@@ -1,9 +1,9 @@
 set windows-shell := ["powershell"]
 
-# Default command lists all available recipes
+# default command lists all available recipes
 [default]
 _default:
-    @just --list
+    @just --list --unsorted
 
 import? "init.just"
 
@@ -15,52 +15,52 @@ alias l := lint
 alias q := check
 alias t := test
 alias hi := hooks-install
+alias ty := types
 alias fmt := format
 {% raw %}
 # display the system/project information
-[group("chore")]
 info:
-    @echo "{{ CYAN }}Arch{{ NORMAL }}: {{ arch() }}"
-    @echo "{{ CYAN }}OS{{ NORMAL }}: {{ os_family() }}, {{ os() }}"
-    @echo "{{ CYAN }}Num CPU's{{ NORMAL }}: {{ num_cpus() }}"
-    @echo "{{ CYAN }}Project{{ NORMAL }}: `uv version`"
+    @echo "Architecture: {{ arch() }}"
+    @echo "Operating Sys: {{ os_family() }}, {{ os() }}"
+    @echo "Number of CPU: {{ num_cpus() }}"
+    @echo "Project: `uv version`"
 
-# run the linter [arg:<full|concise|...>]
-[group("style")]
-lint arg="concise":
-    uv run ruff check . --fix --output-format={{ arg }}
+# setup the virtualenv
+venv *args:
+    uv sync --all-extras {{ args }}
+
+# setup virtualenv and install pre-commit hooks
+dev: venv hooks-install
 
 # run the formatter
-[group("style")]
 format:
     uv run ruff format .
 
+# run the linter [arg:<full|concise|...>]
+lint arg="concise":
+    uv run ruff check . --fix --output-format={{ arg }}
+
 # run the type checker [arg:<full|concise|...>]
-[group("style")]
 types arg="concise":
     uv run ty check --output-format={{ arg }}
 
 # lint, format and type-check [arg:<full|concise|...>]
-[group("style")]
 check arg="concise":
-    -@just lint {{ arg }}
     -@just format
+    -@just lint {{ arg }}
     -@just types {{ arg }}
 
-# run the tests
-[group("test")]
+# run the tests (useful flags: -v, --pdb, -k)
 test *args:
     uv run pytest tests/ {{ args }}
 {% endraw %}
 # run the tests in different Python versions
-[group("test")]
 testall *args:
     uv run --python={{ py_version_past }} pytest {{ "{{ args }}" }}
     uv run --python={{ py_version_current }} pytest {{ "{{ args }}" }}
     uv run --python={{ py_version_future }} pytest {{ "{{ args }}" }}
 
 # run the formatter, linter, typechecker and the tests
-[group("test")]
 ci python="{{ py_version_current }}":
 {%- raw %}
     uv run --python={{ python }} ruff format .
@@ -69,31 +69,22 @@ ci python="{{ py_version_current }}":
     uv run --python={{ python }} pytest tests/
 {% endraw %}
 # install the pre-commit hooks
-[group("dev")]
 hooks-install:
     uvx prek install
 
 # run the pre-commit hooks
-[group("dev")]
 hooks:
     uvx prek run --all-files
 
-# setup the workspace
-[group("dev")]
-dev: hooks-install venv
-
 # clean all build/compilation and cache files and directories
-[group("dev")]
 clean:
     rm -fr .cache/
     rm -fr .coverage
-    rm -fr .eggs/
     rm -fr .pytest_cache/
     rm -fr .ruff_cache/
     rm -fr .venv/
     rm -fr build/
     rm -fr dist/
-    rm -fr htmlcov/
     rm -fr init.just
     rm -fr site/
     find . -name '*.egg' -exec rm -f {} +
@@ -104,25 +95,8 @@ clean:
     find . -name '.DS_Store' -exec rm -fr {} +
     find . -name '__pycache__' -exec rm -fr {} +
 
-# install dependencies in local venv
-[group("dev")]
-venv:
-    uv sync --all-groups --all-extras
-
-# update dependencies in the lock file
-[group("dev")]
-update:
-    uv lock --upgrade
-    uvx prek auto-update
-
-# build the source distribution and wheel file and create attestations
-[group("dev")]
-dist:
-    uv build
-    uvx pypi-attestations sign dist/*
 {% if include_docs %}
 # serve the documentation on localhost
-[group("dev")]
 docs: venv
     uv run zensical serve
 {% endif %}{% raw %}
@@ -140,7 +114,6 @@ _set_version target:
     uv lock
 {% endraw -%}{% if changelog_tool == "git-cliff" %}
 # write the changelog from commit messages (https://git-cliff.org/)
-[group("chore")]
 changelog *args:
     uvx git-cliff -o {{ "{{ args }}" }}
 {% elif changelog_tool == "git-changelog" %}
@@ -155,7 +128,6 @@ _commit_and_tag version=`uv version --short`:
     git tag -a "v{{ version }}"
 
 # make a new release [target:<major|minor|patch|...> or semver]
-[group("chore")]
 release target: ci
     @just _ensure_clean
     @just _set_version {{ target }}
