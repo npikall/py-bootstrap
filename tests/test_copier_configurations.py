@@ -94,7 +94,7 @@ def test_justfile_excludes_docs_commands_when_no_docs(
 ):
     given = DefaultUserAnswer(include_docs=False)
     setup_test(given, tmp_path, capsys)
-    justfile = tmp_path / "Justfile"
+    justfile = tmp_path / "justfile"
     just_content = justfile.read_text()
     assert "alias d := docs" not in just_content
     assert "docs: venv" not in just_content
@@ -107,7 +107,7 @@ def test_justfile_includes_git_changelog_changelog_command(
 ):
     given = DefaultUserAnswer(changelog_tool="git-changelog")
     setup_test(given, tmp_path, capsys)
-    justfile = tmp_path / "Justfile"
+    justfile = tmp_path / "justfile"
     just_content = justfile.read_text()
     assert "uvx git-cliff" not in just_content
     assert "uvx git-changelog" in just_content

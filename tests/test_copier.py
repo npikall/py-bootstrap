@@ -44,7 +44,7 @@ def test_copier_links_all_files_correct(copied_project: Path):
         # REGULAR FILES
         "CONTRIBUTING.md",
         "CHANGELOG.md",
-        "Justfile",
+        "justfile",
         "init.just",
         "README.md",
         "pyproject.toml",
@@ -128,7 +128,7 @@ def test_contributing_renders_correct(copied_project: Path):
 
 
 def test_justfile_renders_correct(copied_project: Path):
-    got = (copied_project / "Justfile").read_text()
+    got = (copied_project / "justfile").read_text()
     cases: list[str] = [
         f"uv run --python={PY_VERSION} pytest {{{{ args }}}}",
         "\nhooks:\n    uvx prek run --all-files\n\n#",
@@ -195,7 +195,7 @@ def test_publish_renders_correct(copied_project: Path):
 
 def test_init_just_deletes_correct_content_in_justfile(copied_project: Path):
     init_just_content = (copied_project / "init.just").read_text()
-    just_content = (copied_project / "Justfile").read_text()
+    just_content = (copied_project / "justfile").read_text()
     start_line, end_line = get_linenumbers_to_delete_in_justfile(init_just_content)
     got = get_lines(start_line, end_line, just_content)
     want = 'import? "init.just"'
