@@ -16,6 +16,7 @@ _exclude:
 project_name:
   type: str
   qmark: "->"
+  default: "{{ read_target_from_args() }}"
   help: Set the project name
 
 author_fullname:
