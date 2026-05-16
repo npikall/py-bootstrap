@@ -18,7 +18,7 @@ $ copier copy --trust "gh:npikall/py-bootstrap" path/to/project/
 If you don't have `copier` installed, you can also use the [`uv`][uv] tool runner:
 
 ```console
-$ uvx --with copier-templates-extensions copier copy --trust "gh:npikall/py-bootstrap" /path/to/new/project
+$ uvx --with copier-template-extensions copier copy --trust "gh:npikall/py-bootstrap" /path/to/new/project
 ```
 
 ## Prompt

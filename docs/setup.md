@@ -46,14 +46,14 @@ Run the following commands to install [`Copier`][Copier] as a `CLI` Tool.
 === "`uv`"
 
     ```bash
-    uv tool install copier --with copier-templates-extensions
+    uv tool install copier --with copier-template-extensions
     ```
 
 === "`pipx`"
 
     ```bash
     pipx install copier
-    pipx inject copier copier-templates-extensions
+    pipx inject copier copier-template-extensions
     ```
 
 ## Install Just

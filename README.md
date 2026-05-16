@@ -30,7 +30,7 @@ It comes filled with a bunch of modern features from the python ecosystem.
 To install the `copier` tool with [uv] run:
 
 ```console
-uv tool install copier --with copier-templates-extensions
+uv tool install copier --with copier-template-extensions
 ```
 
 To initialize a new repository with the `copier` template run the following command:
