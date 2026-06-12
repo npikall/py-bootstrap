@@ -79,6 +79,7 @@ clean:
     rm -fr dist/
     rm -fr htmlcov/
     rm -fr init.just
+    rm -fr rendered/
     rm -fr site/
     find . -name '*.egg' -exec rm -f {} +
     find . -name '*.egg-info' -exec rm -fr {} +
@@ -95,6 +96,22 @@ venv:
 # serve the documentation on localhost
 docs: venv
     uv run zensical serve
+
+
+# render template to a temp dir for manual inspection
+render:
+    copier copy . ./rendered --overwrite --trust --defaults -r HEAD \
+        --data project_name=example \
+        --data author_fullname="John Doe" \
+        --data author_email=john.doe@mail.com \
+        --data author_username=jdoe \
+        --data ci_github=true \
+        --data 'ci_github_workflows=["Lint_Format", "Documentation", "Publish_PyPI", "Release_GitHub", "Test_Coverage", "Test_Platforms"]' \
+        --data ci_gitlab=true \
+        --data repo_name=example \
+        --data include_docs=true \
+        --data changelog_tool=git-cliff \
+        --data copyright_license=MIT
 
 _ensure_clean:
     @git diff --quiet
