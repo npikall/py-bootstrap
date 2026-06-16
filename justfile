@@ -138,6 +138,7 @@ _commit_and_tag version=`uv version --short`:
 _update_template_and_commit:
     uvx prek auto-update
     uv run scripts/update_template_dependencies.py
+    -just hooks
     git add .
     git commit -m "chore(template): update template dependencies"
 
