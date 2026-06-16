@@ -6,7 +6,7 @@ site_author = "Niko Pikall"
 repo_url = "https://github.com/npikall/py-bootstrap"
 repo_name = "npikall/py-bootstrap"
 copyright = """
-Copyright &copy; 2025 Niko Pikall
+Copyright &copy; 2025-2026 Niko Pikall
 """
 nav = [
 	{ "Home" = "index.md" },
