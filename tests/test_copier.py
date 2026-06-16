@@ -44,6 +44,7 @@ def test_copier_links_all_files_correct(copied_project: Path):
         # REGULAR FILES
         "CONTRIBUTING.md",
         "CHANGELOG.md",
+        "cliff.toml",
         "justfile",
         "init.just",
         "README.md",
@@ -104,8 +105,6 @@ def test_pyproject_toml_renders_correct(copied_project: Path):
         "mkdocstrings-python>=",
         "zensical>=",
         'addopts = "--cov=example',
-        "- {% if commit.scope %}_({{ commit.scope }})_ {% endif %}",
-        r'{ message = "^chore\\(release\\): bump version to", skip = true },',
     ]
     for want in cases:
         assert want in got
