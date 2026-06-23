@@ -60,6 +60,13 @@ testall *args:
     uv run --python={{ py_version_current }} pytest {{ "{{ args }}" }}
     uv run --python={{ py_version_future }} pytest {{ "{{ args }}" }}
 
+
+# inspect the test coverage in a browser
+cover:
+    uv run pytest --cov-report=html --cov={{ py_import_name }}
+    uv run python -m webbrowser htmlcov/index.html
+
+
 # run the formatter, linter, typechecker and the tests
 ci python="{{ py_version_current }}":
 {%- raw %}
