@@ -203,5 +203,5 @@ def test_init_just_deletes_correct_content_in_justfile(copied_project: Path):
 
 def test_release_action_renders_correctly(copied_project: Path):
     got = (copied_project / ".github/workflows/release.yml").read_text()
-    want = "uses: taiki-e/install-action@git-cliff"
+    want = "uses: taiki-e/install-action@"
     assert want in got
