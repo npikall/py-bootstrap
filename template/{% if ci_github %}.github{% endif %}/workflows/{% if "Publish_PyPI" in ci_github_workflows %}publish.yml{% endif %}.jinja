@@ -6,19 +6,31 @@ on:
   release:
     types: [published]
 
+permissions: {}
+{% raw %}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+{% endraw %}
+
 jobs:
   run:
+    name: Publish to PyPI
     runs-on: ubuntu-latest
     environment:
       name: pypi
     permissions:
-      id-token: write
+      id-token: write  # for OIDC trusted publishing to PyPI
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
       - name: Install uv
         uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
+        with:
+          enable-cache: false
       - name: Install Python {{py_version_current}}
         run: uv python install {{ py_version_current }}
       - name: Build
