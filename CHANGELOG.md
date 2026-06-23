@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.6] - 2026-06-23
+
+### 🧪 Testing
+
+- remove version tag from ci test
+
+### 💼 Other
+
+- harden workflows with zizmor
+- update actions versions
+- *(template)* harden github action workflows
+- *(template)* update template dependencies
+
 ## [0.3.5] - 2026-06-16
 
 ### 🚀 Features
@@ -757,7 +770,8 @@ add jinja tag test and switch to prek
 - moved file ignores to pyproject.toml
 - pinned dev dependencies
 
-[0.3.5]: https://github.com/npikall/py-bootstrap/compare/v0.3.4..0.3.5
+[0.3.6]: https://github.com/npikall/py-bootstrap/compare/v0.3.5..0.3.6
+[0.3.5]: https://github.com/npikall/py-bootstrap/compare/v0.3.4..v0.3.5
 [0.3.4]: https://github.com/npikall/py-bootstrap/compare/v0.3.3..v0.3.4
 [0.3.3]: https://github.com/npikall/py-bootstrap/compare/v0.3.2..v0.3.3
 [0.3.2]: https://github.com/npikall/py-bootstrap/compare/v0.3.1..v0.3.2
