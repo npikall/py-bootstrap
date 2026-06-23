@@ -140,7 +140,7 @@ _update_template_and_commit:
     uv run scripts/update_template_dependencies.py
     -just hooks
     git add .
-    git commit -m "chore(template): update template dependencies"
+    -git commit -m "chore(template): update template dependencies"
 
 # make a new release [target:<major|minor|patch|...> or semver]
 release target: ci
