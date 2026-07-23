@@ -1,0 +1,25 @@
+{
+	"editor.formatOnSave": true,
+	"notebook.lineNumbers": "on",
+	"python.testing.pytestEnabled": true,
+	"autoDocstring.docstringFormat": "numpy",
+	"[python]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll": "explicit",
+			"source.organizeImports": "explicit"
+		},
+		"editor.defaultFormatter": "charliermarsh.ruff",
+		"editor.formatOnSave": true
+	},
+	"notebook.formatOnSave.enabled": true,
+	"notebook.codeActionsOnSave": {
+		"notebook.source.organizeImports.ruff": "explicit",
+		"notebook.source.fixAll": "explicit",
+	},
+	"jupyter.askForKernelRestart": false,
+	"[markdown]": {
+		"editor.formatOnSave": true,
+		"editor.formatOnSaveMode": "file",
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}

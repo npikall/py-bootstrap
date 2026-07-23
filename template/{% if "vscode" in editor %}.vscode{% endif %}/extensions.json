@@ -1,0 +1,18 @@
+{
+    "recommendations": [
+        "astral-sh.ty",
+        "charliermarsh.ruff",
+        "gruntfuggly.todo-tree",
+        "ms-python.debugpy",
+        "ms-python.python",
+        "ms-python.vscode-python-envs",
+        "ms-toolsai.jupyter",
+        "nefrob.vscode-just-syntax",
+        "njpwerner.autodocstring",
+        "redhat.vscode-yaml",
+        "tamasfe.even-better-toml",
+        "zainchen.json",
+        "editorconfig.editorconfig",
+        "ms-python.python"
+    ]
+}
