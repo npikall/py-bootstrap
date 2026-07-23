@@ -1,7 +1,7 @@
 import contextlib
 import io
 from pathlib import Path
-from typing import Literal
+from typing import Final, Literal
 
 import pytest
 from copier import run_copy
@@ -11,7 +11,7 @@ type CopyrightLicenseOptions = Literal["Apache-2.0", "MIT", "Unlicense", "None"]
 type ChangelogToolOptions = Literal["git-cliff", "git-changelog"]
 
 
-DEFAULT_CI_GITHUB_WORKFLOWS = (
+DEFAULT_CI_GITHUB_WORKFLOWS: Final = (
     ' ["Lint_Format",'
     ' "Documentation",'
     ' "Publish_PyPI",'
@@ -20,7 +20,8 @@ DEFAULT_CI_GITHUB_WORKFLOWS = (
     ' "Test_Platforms"]'
 )
 
-SINGLE_CI_GITHUB_WORKFLOW = ' ["Test_Coverage"]'
+SINGLE_CI_GITHUB_WORKFLOW: Final = ' ["Test_Coverage"]'
+DEFAULT_EDITOR_OPTIONS: Final = ' ["editorconfig", "vscode"]'
 
 
 class DefaultUserAnswer(BaseModel):
@@ -37,6 +38,7 @@ class DefaultUserAnswer(BaseModel):
     copyright_license: CopyrightLicenseOptions = "MIT"
     py_dist_name: str = "example"
     py_import_name: str = "example"
+    editor: str = DEFAULT_EDITOR_OPTIONS
 
 
 @pytest.fixture(scope="module")
