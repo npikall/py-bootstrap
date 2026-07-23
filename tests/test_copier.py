@@ -41,6 +41,9 @@ def test_copier_links_all_files_correct(copied_project: Path):
         ".python-version",
         ".pre-commit-config.yaml",
         ".gitlab-ci.yml",
+        ".editorconfig",
+        ".vscode/settings.json",
+        ".vscode/extensions.json",
         # REGULAR FILES
         "CONTRIBUTING.md",
         "CHANGELOG.md",

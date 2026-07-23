@@ -96,6 +96,15 @@ changelog_tool:
     - git-changelog
     - git-cliff
 
+editor:
+  type: str
+  qmark: "->"
+  help: Choose editor configurations the project should use
+  multiselect: true
+  choices:
+    - editorconfig
+    - vscode
+
 # NEVER PROMPT --------------------------
 copyright_holder:
   type: str
