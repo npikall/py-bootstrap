@@ -1,0 +1,136 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+vars:
+  PY_SRC: '{{.ROOT_DIR}}/**/*.py'
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+
+  qa:lint:
+    desc: Run the Linter [OUTPUT_FMT=full/concise]
+    aliases: [l]
+    sources:
+      - '{{.PY_SRC}}'
+    cmds:
+      - uv run ruff check {{.ROOT_DIR}} --fix --output-format={{.OUTPUT_FMT | default "concise"}}
+
+  qa:format:
+    desc: Run the Formatter
+    aliases: [fmt]
+    sources:
+      - '{{.PY_SRC}}'
+    cmds:
+      - uv run ruff format {{.ROOT_DIR}}
+
+  qa:types:
+    desc: Run the Typechecker [OUTPUT_FMT=full/concise]
+    aliases: [ty]
+    sources:
+      - '{{.PY_SRC}}'
+    cmds:
+      - uv run ty check {{.ROOT_DIR}} --output-format={{.OUTPUT_FMT | default "concise"}}
+
+  qa:check:
+    desc: Run Formatter, Linter and Typechecker
+    aliases: [q]
+    cmds:
+      - task: qa:format
+      - task: qa:lint
+      - task: qa:types
+
+  test:
+    desc: Run the Tests
+    aliases: [t]
+    cmds:
+      - uv run pytest {{.CLI_ARGS}}
+
+  test-all:
+    desc: Run the Tests with all supported Python versions
+    cmds:
+      - for: ["3.13", "3.14"]
+        cmd: uv run --python={{.ITEM}} pytest {{.CLI_ARGS}}
+
+  test-ci:
+    desc: Run Linter, Formatter, Typechecker and the Tests
+    deps: [qa:format, qa:lint, qa:types, test]
+
+  hooks-install:
+    internal: true
+    desc: Install the pre-commit hooks
+    cmds:
+      - uvx prek install
+    status:
+      - test -f .git/hooks/pre-commit
+
+  hooks:
+    desc: Install (if needed) and run the pre-commit hooks
+    deps: [hooks-install]
+    cmds:
+      - uvx prek run --all-files
+
+  venv:
+    desc: Install dependencies in local venv
+    sources:
+      - uv.lock
+      - pyproject.toml
+    generates:
+      - .venv/**/*
+    cmds:
+      - uv sync --all-groups --all-extras
+
+  dev:
+    desc: Set up the workspace
+    deps: [venv, hooks-install]
+
+  clean:
+    desc: Clean all build/compilation and cache files and directories
+    vars:
+      CLEAN_PATHS:
+        - .cache/
+        - .coverage
+        - .pytest_cache/
+        - .ruff_cache/
+        - .venv/
+        - build/
+        - dist/
+        - htmlcov/
+        - rendered/
+        - site/
+      CLEAN_PATTERNS:
+        - '*.pyc'
+        - '*~'
+        - '.DS_Store'
+        - '__pycache__'
+    cmds:
+      - for: { var: CLEAN_PATHS }
+        cmd: rm -fr {{.ITEM}}
+      - for: { var: CLEAN_PATTERNS }
+        cmd: find . -name '{{.ITEM}}' -exec rm -fr {} +
+
+  docs:
+    desc: Serve the Documentation on Localhost
+    cmds:
+      - uv run zensical serve
+
+  render:
+    desc: Render the Template into a tmpdir for manual inspection
+    cmds:
+      - >
+        copier copy . ./rendered --overwrite --trust --defaults -r HEAD
+        --data project_name=example
+        --data author_fullname="John Doe"
+        --data author_email=john.doe@mail.com
+        --data author_username=jdoe
+        --data ci_github=true
+        --data 'ci_github_workflows=["Lint_Format", "Documentation", "Publish_PyPI", "Release_GitHub", "Test_Coverage", "Test_Platforms"]'
+        --data ci_gitlab=true
+        --data repo_name=example
+        --data include_docs=true
+        --data changelog_tool=git-cliff
+        --data copyright_license=MIT
+        --data 'editor=["editorconfig", "vscode"]'
