@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "uv_build"
-requires = [ "uv-build>=0.11.23,<0.12" ]
+requires = [ "uv-build>=0.12.1,<0.13" ]
 
 [project]
 name = "{{ project_name | slugify("-") }}"
@@ -32,9 +32,9 @@ dev = [
   {% if include_docs %}"mkdocstrings-python>=2.0.5",{% endif %}
   "pytest>=9.1.1",
   "pytest-cov>=7",
-  "ruff>=0.15.18",
-  "ty>=0.0.52",
-  {% if include_docs %}"zensical>=0.0.46",{% endif %}
+  "ruff>=0.16.1",
+  "ty>=0.0.66",
+  {% if include_docs %}"zensical>=0.0.52",{% endif %}
 ]
 
 [tool.ruff]
