@@ -12,12 +12,12 @@ tasks:
     silent: true
 
   qa:lint:
-    desc: Run the Linter [OUTPUT_FMT=full/concise]
+    desc: Run the Linter [FMT=full/concise]
     aliases: [l]
     sources:
       - '{{.PY_SRC}}'
     cmds:
-      - uv run ruff check {{.ROOT_DIR}} --fix --output-format={{.OUTPUT_FMT | default "concise"}}
+      - uv run ruff check {{.ROOT_DIR}} --fix --output-format={{.FMT | default "concise"}}
 
   qa:format:
     desc: Run the Formatter
@@ -28,12 +28,12 @@ tasks:
       - uv run ruff format {{.ROOT_DIR}}
 
   qa:types:
-    desc: Run the Typechecker [OUTPUT_FMT=full/concise]
+    desc: Run the Typechecker [FMT=full/concise]
     aliases: [ty]
     sources:
       - '{{.PY_SRC}}'
     cmds:
-      - uv run ty check {{.ROOT_DIR}} --output-format={{.OUTPUT_FMT | default "concise"}}
+      - uv run ty check {{.ROOT_DIR}} --output-format={{.FMT | default "concise"}}
 
   qa:check:
     desc: Run Formatter, Linter and Typechecker
@@ -46,11 +46,16 @@ tasks:
   test:
     desc: Run the Tests
     aliases: [t]
+    sources:
+      - 'tests/**/test_*.py'
+      - extensions.py
     cmds:
       - uv run pytest {{.CLI_ARGS}}
 
   test-all:
     desc: Run the Tests with all supported Python versions
+    sources:
+      - 'tests/**/test_*.py'
     cmds:
       - for: ["3.13", "3.14"]
         cmd: uv run --python={{.ITEM}} pytest {{.CLI_ARGS}}
