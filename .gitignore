@@ -64,3 +64,4 @@ site/
 /**/*.zarr
 /**/*.tif
 data/
+.task/*
